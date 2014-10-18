@@ -5,15 +5,22 @@
  *      Author: Sofia
  */
 
+#include <string>
+#include "App.h"
+
+using namespace std;
+
 #ifndef DEVELOPER_H_
 #define DEVELOPER_H_
 
 class Developer {
 	string name;
 	string adress;
+	// Todas as apps publicadas pelo developer
+	vector<App> appsPublished;
 public:
 	Developer();
-	virtual ~Developer();
+	~Developer();
 };
 
 
@@ -21,7 +28,6 @@ class Individual: public Developer
 {
 public:
 	Individual();
-	~Individual();
 };
 
 class Business: public Developer
@@ -32,7 +38,6 @@ class Business: public Developer
 public:
 	Business();
 	Business(string business_name, int code);
-	~Business();
 };
 
 #endif /* DEVELOPER_H_ */

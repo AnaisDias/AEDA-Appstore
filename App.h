@@ -7,6 +7,7 @@
 
 
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -18,9 +19,13 @@ class App {
 	int price;
 	string type;
 	string description;
+	// acrescentar mais membros
+	int classification; //1 NAO GOSTO - 5 ESPETACULAR
+
 public:
 	App();
-	virtual ~App();
+	App(int price, string type, string description);
+	~App();
 };
 
 #endif /* APP_H_ */

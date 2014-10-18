@@ -5,6 +5,7 @@
  *      Author: Sofia
  */
 
+#include "AppStore.h"
 #include "App.h"
 #include "Client.h"
 #include "Sale.h"
@@ -18,6 +19,11 @@ using namespace std;
 
 int main()
 {
+	// Fazer load dos ficheiros;
+	AppStore store = AppStore();
+
+	// AppStore Panel
+
 	cout << "caralho";
 	return 0;
 }

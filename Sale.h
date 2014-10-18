@@ -11,7 +11,7 @@
 class Sale {
 public:
 	Sale();
-	virtual ~Sale();
+	//virtual ~Sale();
 };
 
 #endif /* SALE_H_ */

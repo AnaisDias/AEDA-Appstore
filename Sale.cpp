@@ -12,7 +12,4 @@ Sale::Sale() {
 
 }
 
-Sale::~Sale() {
-	// TODO Auto-generated destructor stub
-}
 
