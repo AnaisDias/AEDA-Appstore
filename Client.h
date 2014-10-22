@@ -16,6 +16,10 @@ using namespace std;
 
 
 class Client {
+	string username;
+	int id;
+	static int allIDs;
+	int age;
 	vector<Transaction> transactions;
 public:
 	Client();

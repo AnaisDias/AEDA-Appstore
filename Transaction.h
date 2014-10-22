@@ -13,7 +13,12 @@ using namespace std;
 #define TRANSACTION_H_
 
 class Transaction {
+	Client *client;
+	// data formato???
 	vector<App> apps;
+	string usedVoucher;
+	static vector<string> workingVouchers;
+
 public:
 	Transaction();
 	virtual ~Transaction();

@@ -16,6 +16,7 @@ using namespace std;
 class Developer {
 	string name;
 	string adress;
+	int nif;
 	// Todas as apps publicadas pelo developer
 	vector<App> appsPublished;
 public:
@@ -30,14 +31,14 @@ public:
 	Individual();
 };
 
-class Business: public Developer
+class Company: public Developer
 {
 	string business_name;
 	int code;
 
 public:
-	Business();
-	Business(string business_name, int code);
+	Company();
+	Company(string business_name, int code, string name, string address);
 };
 
 #endif /* DEVELOPER_H_ */

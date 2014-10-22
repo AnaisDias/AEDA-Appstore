@@ -16,11 +16,13 @@ using namespace std;
 
 
 class App {
-	int price;
+	float price;
 	string type;
 	string description;
+	Developer *developer;
 	// acrescentar mais membros
-	int classification; //1 NAO GOSTO - 5 ESPETACULAR
+	float classification; //1 NAO GOSTO - 5 ESPETACULAR float porque vai ser a media das classificaçoes atribuidas
+	vector<string> comments;
 
 public:
 	App();
