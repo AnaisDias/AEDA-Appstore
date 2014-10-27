@@ -33,6 +33,8 @@ public:
 	void addClient(Client cli);
 	void addDeveloper(Developer dev);
 
+	vector<string> removeApp(string name);
+
 	// Saves AND Loads
 
 	//Menus

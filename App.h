@@ -16,18 +16,30 @@ using namespace std;
 
 
 class App {
+	string name;
 	float price;
 	string type;
 	string description;
 	Developer *developer;
 	// acrescentar mais membros
-	float classification; //1 NAO GOSTO - 5 ESPETACULAR float porque vai ser a media das classificaçoes atribuidas
+	float ratings; //1 NAO GOSTO - 5 ESPETACULAR float porque vai ser a media das classificaï¿½oes atribuidas
 	vector<string> comments;
 
 public:
 	App();
-	App(int price, string type, string description);
+	App(string name, int price, string type, string description);
 	~App();
+
+
+
+	/////////////////////
+	string getName();
+	float getPrice();
+	string getType();
+	string getDescription();
+	float getRatings();
+	/////////////////////
+
 };
 
 #endif /* APP_H_ */

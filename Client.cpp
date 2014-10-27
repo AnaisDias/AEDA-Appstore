@@ -12,7 +12,20 @@ Client::Client() {
 
 }
 
+Client::Client(string username, int id, int age) {
+	this->username = username;
+	this->id = id;
+	this->age = age;
+}
+
 Client::~Client() {
 	// TODO Auto-generated destructor stub
 }
 
+string Client::getUsername() {
+	return username;
+}
+
+int Client::getAge() {
+	return age;
+}

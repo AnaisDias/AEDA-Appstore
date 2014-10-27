@@ -17,11 +17,17 @@ class Developer {
 	string name;
 	string adress;
 	int nif;
-	// Todas as apps publicadas pelo developer
-	vector<App> appsPublished;
+	vector<App> appsPublished;// Todas as apps publicadas pelo developer
 public:
 	Developer();
+	Developer(string name, string adress, int nif);
 	~Developer();
+
+	/////////////////////
+	string getName();
+	string getAdress();
+	int getNif();
+	/////////////////////
 };
 
 
