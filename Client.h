@@ -29,7 +29,7 @@ public:
 
 	/////////////////////
 	string getUsername();
-	//static int getIds(); idk what to do im dumb
+	//static int getIds(); idk what to do im dumb and a silly rabbit
 	int getAge();
 	/////////////////////
 
