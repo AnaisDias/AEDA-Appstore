@@ -22,13 +22,13 @@ AppStore::~AppStore() {
 
 }
 
-void AppStore::addApp(App app) {
+void AppStore::addApp(App* app) {
 	apps.push_back(app);
 }
-void AppStore::addClient(Client cli) {
+void AppStore::addClient(Client* cli) {
 	clients.push_back(cli);
 }
-void AppStore::addDeveloper(Developer dev) {
+void AppStore::addDeveloper(Developer* dev) {
 	developers.push_back(dev);
 }
 
@@ -45,28 +45,28 @@ void AppStore::setName(string name) {
 	this->name = name;
 }
 
-vector<App> AppStore::getApps() {
+vector<App*> AppStore::getApps() {
 	return apps;
 }
-void AppStore::setApps(vector<App> apps) {
+void AppStore::setApps(vector<App*> apps) {
 	this->apps = apps;
 }
 
-vector<Client> AppStore::getClients() {
+vector<Client*> AppStore::getClients() {
 	return clients;
 }
-void AppStore::setClients(vector<Client> clients) {
+void AppStore::setClients(vector<Client*> clients) {
 	this->clients = clients;
 }
 
-vector<Developer> AppStore::getDevelopers() {
+vector<Developer*> AppStore::getDevelopers() {
 	return developers;
 }
 
-void AppStore::setDevelopers(vector<Developer> developers) {
+void AppStore::setDevelopers(vector<Developer*> developers) {
 	this->developers = developers;
 }
-
+/*
 vector<string> removeApp(string name) {
 	App::apps;
 	for (int i = 0; i < apps.size(); i++) {
@@ -74,5 +74,5 @@ vector<string> removeApp(string name) {
 			i--;
 	}
 	return apps;
-}
+}*/
 

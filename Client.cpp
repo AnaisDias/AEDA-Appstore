@@ -22,10 +22,10 @@ Client::~Client() {
 	// TODO Auto-generated destructor stub
 }
 
-string Client::getUsername() {
+string Client::getUsername() const{
 	return username;
 }
 
-int Client::getAge() {
+int Client::getAge() const {
 	return age;
 }

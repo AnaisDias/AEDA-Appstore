@@ -20,38 +20,48 @@ using namespace std;
 class AppStore {
 	string name;
 	// Todas as apps
-	vector<App> apps;
+	vector<App*> apps;
 	// Todos os clientes
-	vector<Client> clients;
+	vector<Client*> clients;
 	// Todos os developers
-	vector<Developer> developers;
+	vector<Developer*> developers;
 public:
 	AppStore();
 	AppStore(string name);
 	~AppStore();
-	void addApp(App app);
-	void addClient(Client cli);
-	void addDeveloper(Developer dev);
+	void addApp(App* app);
+	void addClient(Client* cli);
+	void addDeveloper(Developer* dev);
 
 	vector<string> removeApp(string name);
 
 	// Saves AND Loads
-
+	void saveAppstore(string filename);
+	void loadAppstore(string filename);
 	//Menus
 
 	//Gets e Sets
 
+
 	string getName();
 	void setName(string name);
 
-	vector<App> getApps();
-	void setApps(vector<App> apps);
 
-	vector<Client> getClients();
-	void setClients(vector<Client> clients);
+	vector<App*> getApps();
+	void setApps(vector<App*> apps);
+	void saveApps(string filename);
+	void loadApps(string filename);
 
-	vector<Developer> getDevelopers();
-	void setDevelopers(vector<Developer> developers);
+	vector<Client*> getClients();
+	void setClients(vector<Client*> clients);
+	void saveClients(string filename);
+	void loadClients(string filename);
+
+	vector<Developer*> getDevelopers();
+	void setDevelopers(vector<Developer*> developers);
+	void saveDevelopers(string filename);
+	void loadDevelopers(string filename);
+
 };
 
 

@@ -12,9 +12,9 @@ Developer::Developer() {
 
 }
 
-Developer::Developer(string name, string adress, int nif) {
+Developer::Developer(string name, string address, int nif) {
 	this->name = name;
-	this->adress = adress;
+	this->address = address;
 	this->nif = nif;
 }
 
@@ -26,8 +26,8 @@ string Developer::getName() {
 	return name;
 }
 
-string Developer::getAdress() {
-	return adress;
+string Developer::getAddress() {
+	return address;
 }
 
 int Developer::getNif() {

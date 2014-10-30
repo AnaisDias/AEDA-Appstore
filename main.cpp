@@ -8,7 +8,7 @@
 #include "AppStore.h"
 #include "App.h"
 #include "Client.h"
-#include "Sale.h"
+#include "Transaction.h"
 #include "Developer.h"
 
 #include <iomanip>

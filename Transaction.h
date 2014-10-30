@@ -4,18 +4,21 @@
  *  Created on: 18 de Out de 2014
  *      Author: Sofia
  */
+#ifndef TRANSACTION_H_
+#define TRANSACTION_H_
 
 #include "App.h"
+#include "Client.h"
 
 using namespace std;
 
-#ifndef TRANSACTION_H_
-#define TRANSACTION_H_
+class Client;
+class App;
 
 class Transaction {
 	Client *client;
 	// data formato???
-	vector<App> apps;
+	vector<App*> apps;
 	string usedVoucher;
 	static vector<string> workingVouchers;
 

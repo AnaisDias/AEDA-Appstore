@@ -25,22 +25,22 @@ App::App(string name, int price, string type, string description) {
 
 
 //////////////////////////////////////
-string App::getName() {
+string App::getName() const {
 	return name;
 }
 
-float App::getPrice() {
+float App::getPrice() const {
 	return price;
 }
 
-string App::getType() {
+string App::getType() const {
 	return type;
 }
 
-string App::getDescription() {
+string App::getDescription() const {
 	return description;
 }
 
-float App::getRatings() {
+float App::getRatings() const {
 	return ratings;
 }
