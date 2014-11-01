@@ -1,10 +1,3 @@
-/*
- * main.cpp
- *
- *  Created on: 7 de Out de 2014
- *      Author: Sofia
- */
-
 #include "AppStore.h"
 #include "App.h"
 #include "Client.h"
@@ -17,14 +10,205 @@
 
 using namespace std;
 
-int main()
-{
-	// Fazer load dos ficheiros;
-	AppStore store = AppStore();
 
-	// AppStore Panel
+/////////MAIN//////////
 
-	cout << "caralho";
-	return 0;
+void Menu() {
+    // Fazer load dos ficheiros;
+    AppStore store = AppStore();
+
+    // AppStore Panel
+    int choice;
+
+    cout << "APPSTORE" << endl;
+    cout << "1 - APPS" << endl;
+    cout << "2 - USER" << endl;
+    cout << "3 - DEVELOPER" << endl;
+    cout << "4 - TRANSACTION" << endl;
+    cout << "0 - EXIT" << endl;
+    cout << "what do u want nigga";
+    cin >> choice;
+
+    switch (choice) {
+
+        case 1:
+            system("cls");
+            AppsMenu();
+            break;
+
+        case 2:
+            system("cls");
+            UserMenu();
+            break;
+
+        case 3:
+            system("cls");
+            DeveloperMenu();
+            break;
+
+        case 4:
+            system("cls");
+            TransactionMenu();
+            break;
+
+        case 0:
+            system("cls");
+            ExitMenu();
+            break;
+
+        default:
+            system("cls");
+            break;
+    }
 }
+
+/////////////////////////
+
+
+void DeveloperMenu() {
+
+    int choice;
+
+    cout << "Developer: " << endl;
+    cout << "1 - Individual Developers" << endl;
+    cout << "2 - Enterprises" << endl;
+    cout << "3 - Apps Created" << endl;
+    cout << "4 - Sales Data" << endl;
+    cout << "0 - Go back" << endl;
+    cout << "what nigga"<< endl;
+    cin >> choice;
+
+    switch(choice) {
+
+        case 1: system("cls");
+            //IndividualDevList()
+            break;
+        case 2: system("cls");
+            //EnterpriseList()
+            break;
+        case 3: system("cls");
+            //AppsCreated();
+            break;
+        case 4: system("cls");
+            //SalesData();
+            break;
+        case 0: system("cls");
+            Menu();
+            break;
+        default: break;
+
+    }
+
+}
+void AppsMenu() {
+
+    int choice;
+
+    cout << "Apps: " << endl;
+    cout << "1 - list by name" << endl;
+    cout << "2 - list by sales" << endl;
+    cout << "3 - list by type" << endl;
+    cout << "0 - Go back" << endl;
+    cout << "what nigga"<< endl;
+    cin >> choice;
+
+    switch(choice) {
+
+        case 1: system("cls");
+            //AppsListName();
+            break;
+        case 2: system("cls");
+            //AppsListSale();
+            break;
+        case 3: system("cls");
+            //AppsListType();
+            break;
+        case 0: system("cls");
+            Menu();
+            break;
+        default: break;
+
+    }
+}
+void UserMenu() {
+
+    int choice;
+
+    cout << "USER" << endl;
+    cout << "1 - Clients List" << endl;
+    cout << "2 - Purchased Apps" << endl;
+    cout << "3 - Go back" << endl;
+    cout << "Enter: ";
+    cin >> choice;
+
+    switch(choice) {
+
+        case 1: system("cls");
+            //ClientsList();
+            break;
+        case 2: system("cls");
+            //PurchasedApps();
+            break;
+        case 3: system("cls");
+            Menu();
+        default: break;
+    }
+}
+void TransactionMenu() {
+    cout << "Transactions" << endl;
+    cout << "1 - List by Apps" << endl;
+    cout << "2 - List by CLients" << endl;
+    cout << "3 - List by Developers" << endl;
+    cout << "0 - Go back";
+    int choice;
+    cin >> choice;
+
+    switch(choice) {
+
+        case 1: system("cls");
+            //TransApps();
+            break;
+        case 2: system("cls");
+            //TransClients();
+            break;
+        case 3: system("cls");
+            //TransDev();
+            break;
+        case 0: system("cls");
+            Menu();
+            break;
+        default: break;
+
+    }
+}
+
+void ExitMenu() {
+    cout << "Before you exit... Do you want to save?" << endl;
+    cout << "1 - Yes" << endl;
+    cout << "2 - No" << endl;
+    cout << "3 - Cancel" << endl;
+
+    char input;
+    cout << "Option: ";
+    cin >> input;
+
+    switch (input) {
+        case '1':
+            system("cls");
+            //menuSave();
+            break;
+        case '2':
+            system("cls");
+            cout << "bye";
+            break;
+        case '3':
+            system("cls");
+            exit(0);
+            break;
+        default:
+            system("cls");
+            break;
+    }
+}
+
 
