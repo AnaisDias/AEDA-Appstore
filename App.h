@@ -1,9 +1,4 @@
-/*
- * App.h
- *
- *  Created on: 7 de Out de 2014
- *      Author: Sofia
- */
+
 #ifndef APP_H_
 #define APP_H_
 
@@ -26,6 +21,7 @@ class App {
 	Developer* developer;
 	// acrescentar mais membros
 	float ratings; //1 NAO GOSTO - 5 ESPETACULAR float porque vai ser a media das classifica�oes atribuidas
+	vector<int> allRatings;
 	vector<string> comments;
 	vector<Transaction*> transactions;
 
@@ -42,6 +38,7 @@ public:
 	string getType() const;
 	string getDescription() const;
 	float getRatings() const;
+	vector<int> getAllRatings() const;
 	Developer* getDeveloper() const;
 	vector<string> getComments() const;
 	vector<Transaction*> getTransactions() const;
@@ -52,16 +49,18 @@ public:
 	void setDescription(string description);
 	void setDeveloper(Developer* developer);
 	void setRatings(float ratings);
+	void setAllRatings(vector<int> ratings);
 	void setComments(vector<string> comments);
-	void setTransactions();
+	void setTransactions(vector<Transaction*> transactions);
 	/////////////////////
 
 	void displayInfo();
 	void displayComments();
 	void addTransaction(Transaction* transaction);
-	void removeTransaction(Transaction* transaction);
+	bool removeTransaction(Transaction* transaction);
 	void addComment(string comment);
 	void addRating(int rating);
+	void updateRatings();
 
 
 
