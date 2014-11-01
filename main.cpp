@@ -43,7 +43,7 @@ void Menu() {
 
         case 2:
             system("cls");
-            UserMenu();
+            ClientMenu();
             break;
 
         case 3:
@@ -106,11 +106,11 @@ void AppsMenu() {
     }
 }
 
-void UserMenu() {
+void ClientMenu() {
 
     int choice;
 
-    cout << "USER" << endl;
+    cout << "Client" << endl;
     cout << "1 - Clients List" << endl;
     cout << "2 - Purchased Apps" << endl;
     cout << "3 - Go back" << endl;
@@ -245,7 +245,7 @@ void RateApps() {
 }
 
 /////////////////////////
-//////SUB USER //////////
+//////SUB CLIENT ////////
 /////////////////////////
 
 void ClientsList() {
