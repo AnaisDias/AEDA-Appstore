@@ -63,7 +63,68 @@ void Menu() {
 }
 
 /////////////////////////
+//////SUB MENUS /////////
+/////////////////////////
 
+void AppsMenu() {
+
+    int choice;
+
+    cout << "Apps: " << endl;
+    cout << "1 - list by name" << endl;
+    cout << "2 - list by sales" << endl;
+    cout << "3 - list by type" << endl;
+    cout << "4 - rate apps" << endl;
+    cout << "0 - Go back" << endl;
+    cout << "what nigga"<< endl;
+    cin >> choice;
+
+    switch(choice) {
+
+        case 1: system("cls");
+            //AppsListName();
+            break;
+        case 2: system("cls");
+            //AppsListSale();
+            break;
+        case 3: system("cls");
+            //AppsListType();
+            break;
+        case 4: system("cls");
+        		//RateApps();
+        	break;
+        case 0: system("cls");
+            Menu();
+            break;
+        default: break;
+
+    }
+}
+
+void UserMenu() {
+
+    int choice;
+
+    cout << "USER" << endl;
+    cout << "1 - Clients List" << endl;
+    cout << "2 - Purchased Apps" << endl;
+    cout << "3 - Go back" << endl;
+    cout << "Enter: ";
+    cin >> choice;
+
+    switch(choice) {
+
+        case 1: system("cls");
+            //ClientsList();
+            break;
+        case 2: system("cls");
+            //PurchasedApps();
+            break;
+        case 3: system("cls");
+            Menu();
+        default: break;
+    }
+}
 
 void DeveloperMenu() {
 
@@ -100,60 +161,7 @@ void DeveloperMenu() {
     }
 
 }
-void AppsMenu() {
 
-    int choice;
-
-    cout << "Apps: " << endl;
-    cout << "1 - list by name" << endl;
-    cout << "2 - list by sales" << endl;
-    cout << "3 - list by type" << endl;
-    cout << "0 - Go back" << endl;
-    cout << "what nigga"<< endl;
-    cin >> choice;
-
-    switch(choice) {
-
-        case 1: system("cls");
-            //AppsListName();
-            break;
-        case 2: system("cls");
-            //AppsListSale();
-            break;
-        case 3: system("cls");
-            //AppsListType();
-            break;
-        case 0: system("cls");
-            Menu();
-            break;
-        default: break;
-
-    }
-}
-void UserMenu() {
-
-    int choice;
-
-    cout << "USER" << endl;
-    cout << "1 - Clients List" << endl;
-    cout << "2 - Purchased Apps" << endl;
-    cout << "3 - Go back" << endl;
-    cout << "Enter: ";
-    cin >> choice;
-
-    switch(choice) {
-
-        case 1: system("cls");
-            //ClientsList();
-            break;
-        case 2: system("cls");
-            //PurchasedApps();
-            break;
-        case 3: system("cls");
-            Menu();
-        default: break;
-    }
-}
 void TransactionMenu() {
     cout << "Transactions" << endl;
     cout << "1 - List by Apps" << endl;
@@ -211,4 +219,72 @@ void ExitMenu() {
     }
 }
 
+/////////////////////////
+////////SUB APP /////////
+/////////////////////////
+
+void AppsListName() {
+
+}
+
+void AppsListSale() {
+
+}
+
+void AppsListType() {
+
+}
+
+void RateApps() {
+
+}
+
+/////////////////////////
+//////SUB USER //////////
+/////////////////////////
+
+void ClientsList() {
+
+}
+
+void PurchasedApps() {
+
+}
+
+
+/////////////////////////
+//////SUB DEV ///////////
+/////////////////////////
+
+void IndividualDevList() {
+
+}
+
+void EnterpriseList() {
+
+}
+
+void AppsCreated() {
+
+}
+
+void SalesData() {
+
+}
+
+/////////////////////////
+//////SUB TRANS /////////
+/////////////////////////
+
+void TransApps() {
+
+}
+
+void TransClients() {
+
+}
+
+void TransDev() {
+
+}
 
