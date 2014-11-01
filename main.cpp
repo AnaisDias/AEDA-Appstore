@@ -12,6 +12,11 @@ using namespace std;
 
 
 /////////MAIN//////////
+void AppsMenu();
+void ExitMenu();
+void DeveloperMenu();
+void TransactionMenu();
+void UserMenu();
 
 void Menu() {
     // Fazer load dos ficheiros;
