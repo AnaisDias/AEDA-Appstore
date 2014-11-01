@@ -47,6 +47,7 @@ public:
 	bool classifyApp(App* app, int classification);
 	bool commentApp(App* app, string comment);
 
+	bool operator==(const Client &ic1) const;
 };
 
 #endif /* CLIENT_H_ */

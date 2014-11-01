@@ -32,6 +32,9 @@ public:
 	void addApp(App* app);
 	void addClient(Client* cli);
 	void addDeveloper(Developer* dev);
+	bool removeApp(App* app);
+	bool removeClient(Client* cli);
+	bool removeDeveloper(Developer* dev);
 
 	vector<string> removeApp(string name);
 

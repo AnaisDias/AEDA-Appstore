@@ -24,7 +24,8 @@ class Transaction {
 
 public:
 	Transaction();
-	virtual ~Transaction();
+	~Transaction();
+	bool operator==(const App &ic1) const;
 };
 
 #endif /* TRANSACTION_H_ */

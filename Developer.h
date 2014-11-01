@@ -41,6 +41,7 @@ public:
 	void removeApp(App* app);
 	void displayInfo();
 	void displayAllSales();
+	bool operator==(const Developer &ic1) const;
 };
 
 
