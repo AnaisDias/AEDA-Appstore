@@ -36,7 +36,11 @@ public:
 	bool removeClient(Client* cli);
 	bool removeDeveloper(Developer* dev);
 
-	vector<string> removeApp(string name);
+	App* findAppByID(int id);
+	Client* findClientByID(int id);
+	Developer* findDeveloperByID(int id);
+	Transaction* findTransactionByID(int id);
+
 
 	// Saves AND Loads
 	void saveAppstore(string filename);

@@ -14,6 +14,8 @@ class Developer;
 class Transaction;
 
 class App {
+	static int allIDs;
+	int id;
 	string name;
 	float price;
 	string type;
@@ -29,10 +31,11 @@ public:
 	App();
 	App(string name, int price, string type, string description);
 	~App();
-
+	static void resetIDs();
 
 
 	/////////////////////
+	int getID() const;
 	string getName() const;
 	float getPrice() const;
 	string getType() const;
@@ -43,6 +46,7 @@ public:
 	vector<string> getComments() const;
 	vector<Transaction*> getTransactions() const;
 
+	void setID(int id);
 	void setName(string name);
 	void setPrice(int price);
 	void setType(string type);
@@ -62,6 +66,9 @@ public:
 	void addRating(int rating);
 	void updateRatings();
 	bool operator==(const App &app) const;
+	std::ostream & operator<<(std::ostream &out);
+
+	std::ostream & writeToFile(std::ostream &out);
 
 
 

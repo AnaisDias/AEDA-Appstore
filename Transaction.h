@@ -17,6 +17,8 @@ class Client;
 class App;
 
 class Transaction {
+	static int allIDs;
+	int id;
 	Client *client;
 	// data formato???
 	vector<App*> apps;
@@ -26,10 +28,13 @@ class Transaction {
 public:
 	Transaction();
 	~Transaction();
+	static void resetIDs();
+	int getID() const;
 	Client* getClient() const;
 	vector<App*> getApps() const;
 	string getUsedVoucher() const;
 
+	void setID(int id);
 	void setClient(Client* cli);
 	void setApps(vector<App*> apps);
 	void setUsedVoucher(string voucher);
@@ -38,6 +43,9 @@ public:
 	static void addWorkingVoucher(string voucher);
 
 	bool operator==(const Transaction &trans) const;
+	std::ostream & operator<<(std::ostream &out);
+
+	std::ostream & writeToFile(std::ostream &out);
 };
 
 #endif /* TRANSACTION_H_ */

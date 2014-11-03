@@ -16,21 +16,26 @@ using namespace std;
 class App;
 
 class Developer {
+	static int allIDs;
+	int id;
 	string name;
 	string address;
 	int nif;
 	vector<App*> appsPublished;// Todas as apps publicadas pelo developer
+	//float earnings;
 public:
 	Developer();
-	Developer(string name, string adress, int nif);
+	Developer(string name, string address, int nif);
 	~Developer();
 
 	/////////////////////
+	int getID() const;
 	string getName() const;
 	string getAddress() const;
 	int getNif() const;
 	vector<App*> getApps() const;
 
+	void setID(int id);
 	void setName(string name);
 	void setAddress(string address);
 	void setNif(int nif);
@@ -42,23 +47,26 @@ public:
 	void displayInfo();
 	void displayAllSales();
 	bool operator==(const Developer &dev) const;
+	std::ostream & operator<<(std::ostream &out);
+
+	std::ostream & writeToFile(std::ostream &out);
 };
 
 
 class Individual: public Developer
 {
 public:
-	Individual();
+	Individual(string name, string address, int nif);
 };
 
 class Company: public Developer
 {
-	string business_name;
+	string businessName;
 	int code;
 
 public:
 	Company();
-	Company(string business_name, int code, string name, string address);
+	Company(string businessname, int code, string name, string address, int nif);
 };
 
 #endif /* DEVELOPER_H_ */

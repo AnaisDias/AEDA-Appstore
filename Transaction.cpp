@@ -7,16 +7,28 @@
 
 #include "Transaction.h"
 
+int Transaction::allIDs=0;
 vector<string> vouchers; //clear vector?
 vector<string> Transaction::workingVouchers = vouchers;
 
 Transaction::Transaction() {
 	// TODO Auto-generated constructor stub
-
+	this->id=allIDs;
+	allIDs++;
 }
 
 Transaction::~Transaction() {
+	delete client;
+	for(int i=0; i<apps.size(); i++){
+		delete apps[i];
+		apps.erase(apps.begin()+i);
+		i--;
+	}
 	// TODO Auto-generated destructor stub
+}
+
+void Transaction::resetIDs(){
+	allIDs=0;
 }
 
 Client* Transaction::getClient() const{
@@ -59,4 +71,15 @@ bool Transaction::operator==(const Transaction &trans) const{
 		return true;
 	}
 	return false;
+}
+
+std::ostream & Transaction::operator<<(std::ostream &out){
+	out << "Transaction ID: " << id << endl;
+	out << "Client ID: " << client->getID() << "  Client Username: " << client->getUsername() << endl;
+	out << "Apps purchased: " << endl;
+	for(int i=0; i<apps.size(); i++){
+		out << apps[i];
+	}
+	out << endl;
+	return out;
 }

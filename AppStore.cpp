@@ -66,13 +66,14 @@ vector<Developer*> AppStore::getDevelopers() {
 void AppStore::setDevelopers(vector<Developer*> developers) {
 	this->developers = developers;
 }
-/*
-vector<string> removeApp(string name) {
-	App::apps;
+
+bool AppStore::removeApp(App* app) {
 	for (int i = 0; i < apps.size(); i++) {
-		if (apps[i]->getName() == name)
+		if (apps[i] == app)
+			apps.erase(apps.begin()+i);
 			i--;
+			return true;
 	}
-	return apps;
-}*/
+	return false;;
+}
 

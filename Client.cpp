@@ -88,3 +88,22 @@ bool Client::operator==(const Client &client) const{
 	if(this->id==client.id && this->username==client.username) return true;
 	return false;
 }
+
+std::ostream & Client::operator<<(std::ostream &out){
+	out << "Client ID: " << id << endl;
+	out << "Client name: " << username << endl;
+	out << "Age: " << age << endl;
+	out << endl;
+	return out;
+}
+
+std::ostream & Client::writeToFile(std::ostream &out){
+	out << id << "," << username << ",";
+	out << age << ",";
+	for(int i=0; i<transactions.size(); i++){
+		out << transactions[i]->getID();
+		if(i!=transactions.size()) out << ",";
+	}
+	return out;
+
+}

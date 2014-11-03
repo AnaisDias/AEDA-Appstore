@@ -49,6 +49,9 @@ public:
 	void commentApp(App* app, string comment);
 
 	bool operator==(const Client &client) const;
+	std::ostream & operator<<(std::ostream &out);
+
+	std::ostream & writeToFile(std::ostream &out);
 };
 
 #endif /* CLIENT_H_ */
