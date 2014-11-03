@@ -7,6 +7,9 @@
 
 #include "Transaction.h"
 
+vector<string> vouchers; //clear vector?
+vector<string> Transaction::workingVouchers = vouchers;
+
 Transaction::Transaction() {
 	// TODO Auto-generated constructor stub
 
@@ -16,3 +19,44 @@ Transaction::~Transaction() {
 	// TODO Auto-generated destructor stub
 }
 
+Client* Transaction::getClient() const{
+	return client;
+}
+
+vector<App*> Transaction::getApps() const{
+	return apps;
+}
+
+string Transaction::getUsedVoucher() const{
+	return usedVoucher;
+}
+
+void Transaction::setClient(Client* cli){
+	this->client=cli;
+}
+
+void Transaction::setApps(vector<App*> apps){
+	this->apps=apps;
+}
+
+void Transaction::setUsedVoucher(string voucher){
+	usedVoucher=voucher;
+}
+
+void Transaction::setWorkingVouchers(vector<string> vouchers){
+	workingVouchers=vouchers;
+}
+
+void Transaction::addWorkingVoucher(string voucher){
+	workingVouchers.push_back(voucher);
+}
+
+bool Transaction::operator==(const Transaction &trans) const{
+	Client* cli =this->client;
+	Client* cli2 =trans.client;
+
+	if(*cli==*cli2 && this->apps==trans.apps){
+		return true;
+	}
+	return false;
+}

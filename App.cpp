@@ -142,3 +142,8 @@ void App::updateRatings(){
 
 	this->ratings=updatedR;
 }
+
+bool App::operator==(const App &app) const{
+	if(this->name==app.name && this->developer==app.developer) return true;
+	else return false;
+}

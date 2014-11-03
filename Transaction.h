@@ -9,6 +9,7 @@
 
 #include "App.h"
 #include "Client.h"
+#include <vector>
 
 using namespace std;
 
@@ -25,7 +26,18 @@ class Transaction {
 public:
 	Transaction();
 	~Transaction();
-	bool operator==(const App &ic1) const;
+	Client* getClient() const;
+	vector<App*> getApps() const;
+	string getUsedVoucher() const;
+
+	void setClient(Client* cli);
+	void setApps(vector<App*> apps);
+	void setUsedVoucher(string voucher);
+
+	static void setWorkingVouchers(vector<string> vouchers);
+	static void addWorkingVoucher(string voucher);
+
+	bool operator==(const Transaction &trans) const;
 };
 
 #endif /* TRANSACTION_H_ */

@@ -26,10 +26,10 @@ public:
 	~Developer();
 
 	/////////////////////
-	string getName();
-	string getAddress();
-	int getNif();
-	vector<App*> getApps();
+	string getName() const;
+	string getAddress() const;
+	int getNif() const;
+	vector<App*> getApps() const;
 
 	void setName(string name);
 	void setAddress(string address);
@@ -38,10 +38,10 @@ public:
 	/////////////////////
 
 	void addApp(App* app);
-	void removeApp(App* app);
+	bool removeApp(App* app);
 	void displayInfo();
 	void displayAllSales();
-	bool operator==(const Developer &ic1) const;
+	bool operator==(const Developer &dev) const;
 };
 
 

@@ -61,7 +61,7 @@ public:
 	void addComment(string comment);
 	void addRating(int rating);
 	void updateRatings();
-	bool operator==(const App &ic1) const;
+	bool operator==(const App &app) const;
 
 
 

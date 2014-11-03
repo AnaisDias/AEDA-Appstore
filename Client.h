@@ -26,11 +26,12 @@ class Client {
 	vector<Transaction*> transactions;
 public:
 	Client();
-	Client(string username, int id, int age);
+	Client(string username, int age);
 	~Client();
 
 
 	/////////////////////
+	static void resetID();
 	string getUsername() const;
 	int getAge() const;
 	int getID() const;
@@ -41,13 +42,13 @@ public:
 	void setID(int id);
 	/////////////////////
 
-	static void resetID();
-	void addTransaction(Transaction* trans);
-	void removeTransaction(Transaction* trans);
-	bool classifyApp(App* app, int classification);
-	bool commentApp(App* app, string comment);
 
-	bool operator==(const Client &ic1) const;
+	void addTransaction(Transaction* trans);
+	bool removeTransaction(Transaction* trans);
+	void classifyApp(App* app, int classification);
+	void commentApp(App* app, string comment);
+
+	bool operator==(const Client &client) const;
 };
 
 #endif /* CLIENT_H_ */

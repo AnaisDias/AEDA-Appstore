@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <sstream>
 #include <iostream>
+#include "stdlib.h"
 
 using namespace std;
 
@@ -16,7 +17,14 @@ void AppsMenu();
 void ExitMenu();
 void DeveloperMenu();
 void TransactionMenu();
-void UserMenu();
+void ClientMenu();
+
+int main(){
+
+	return 0;
+}
+
+//talvez deviamos considerar por os menus num h e cpp proprios
 
 void Menu() {
     // Fazer load dos ficheiros;
