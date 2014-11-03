@@ -6,6 +6,7 @@
  */
 
 #include "Transaction.h"
+#include <iostream>
 
 int Transaction::allIDs=0;
 vector<string> vouchers; //clear vector?
@@ -29,6 +30,10 @@ Transaction::~Transaction() {
 
 void Transaction::resetIDs(){
 	allIDs=0;
+}
+
+int Transaction::getID() const{
+	return id;
 }
 
 Client* Transaction::getClient() const{

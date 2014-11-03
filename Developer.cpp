@@ -6,6 +6,7 @@
  */
 
 #include "Developer.h"
+#include <iostream>
 
 int Developer::allIDs=0;
 

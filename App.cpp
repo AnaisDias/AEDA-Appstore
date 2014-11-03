@@ -1,4 +1,4 @@
-
+#include <iostream>
 #include "App.h"
 
 int App::allIDs=0;

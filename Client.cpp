@@ -6,6 +6,7 @@
  */
 
 #include "Client.h"
+#include <iostream>
 
 int Client::allIDs=0;
 
