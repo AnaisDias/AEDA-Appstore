@@ -19,7 +19,26 @@ AppStore::AppStore(string name) {
 }
 
 AppStore::~AppStore() {
-
+	for(int i=0; i<apps.size(); i++){
+			delete apps[i];
+			apps.erase(apps.begin()+i);
+			i--;
+		}
+	for(int i=0; i<clients.size(); i++){
+			delete clients[i];
+			clients.erase(clients.begin()+i);
+			i--;
+		}
+	for(int i=0; i<developers.size(); i++){
+			delete developers[i];
+			developers.erase(developers.begin()+i);
+			i--;
+		}
+	for(int i=0; i<transactions.size(); i++){
+			delete transactions[i];
+			transactions.erase(transactions.begin()+i);
+			i--;
+		}
 }
 
 void AppStore::addApp(App* app) {
@@ -77,3 +96,30 @@ bool AppStore::removeApp(App* app) {
 	return false;;
 }
 
+App* AppStore::findAppByID(int id){
+	for(int i=0; i<apps.size();i++){
+		if(apps[i]->getID()==id) return apps[i];
+	}
+	return NULL;
+}
+
+Client* AppStore::findClientByID(int id){
+	for(int i=0; i<clients.size();i++){
+		if(clients[i]->getID()==id) return clients[i];
+	}
+	return NULL;
+}
+
+Developer* AppStore::findDeveloperByID(int id){
+	for(int i=0; i<developers.size();i++){
+		if(developers[i]->getID()==id) return developers[i];
+	}
+	return NULL;
+}
+
+Transaction* AppStore::findTransactionByID(int id){
+	for(int i=0; i<transactions.size();i++){
+		if(transactions[i]->getID()==id) return transactions[i];
+	}
+	return NULL;
+}

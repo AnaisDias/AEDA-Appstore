@@ -25,6 +25,7 @@ class AppStore {
 	vector<Client*> clients;
 	// Todos os developers
 	vector<Developer*> developers;
+	vector<Transaction*> transactions;
 public:
 	AppStore();
 	AppStore(string name);

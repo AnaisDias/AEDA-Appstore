@@ -88,3 +88,12 @@ std::ostream & Transaction::operator<<(std::ostream &out){
 	out << endl;
 	return out;
 }
+
+std::ostream & Transaction::writeToFile(std::ostream &out){
+	out << id << "," << client->getID() << ",";
+	out << usedVoucher;
+	for(int i=0; i<apps.size(); i++){
+		out << apps[i]->getID() << ",";
+	}
+	return out;
+}

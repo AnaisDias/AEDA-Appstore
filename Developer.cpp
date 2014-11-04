@@ -107,6 +107,16 @@ std::ostream & Developer::operator<<(std::ostream &out){
 	return out;
 }
 
+std::ostream & Developer::writeToFile(std::ostream &out){
+	out << id << "," << name << "," << address << ",";
+	out << nif << ",";
+	for(int i=0; i<appsPublished.size();i++){
+		out << appsPublished[i]->getID();
+		if(i!=appsPublished.size()) out << ",";
+	}
+	return out;
+}
+
 /////////////////////
 
 Individual::Individual(string name, string address, int nif):Developer(name, address, nif){
