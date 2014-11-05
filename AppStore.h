@@ -14,6 +14,7 @@
 #include "App.h"
 #include "Client.h"
 #include "Developer.h"
+#include "Menu.h"
 
 using namespace std;
 
@@ -69,6 +70,35 @@ public:
 	void setDevelopers(vector<Developer*> developers);
 	void saveDevelopers(string filename);
 	void loadDevelopers(string filename);
+
+	///MENUS///
+
+	//APPS//
+	void AppsListName();
+	void AppsListSale();
+	void AppsListType();
+	void RateApps();
+	void AddApplication(); //uses addApp
+	void RemoveApplication(); //uses removeApp
+
+	//CLIENT//
+	void ClientsList();
+	void PurchasedApps();
+	void AddClients();
+	void RemoveClients();
+
+	//DEV//
+	void IndividualDevList();
+	void EnterpriseList();
+	void AppsCreated();
+	void SalesData();
+	void AddDev();
+	void RemoveDev();
+
+	//TRANSACTIONS//
+	void TransApps();
+	void TransClients();
+	void TransDev();
 
 };
 
