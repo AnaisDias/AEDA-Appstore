@@ -7,6 +7,7 @@
 
 #include <string>
 #include "AppStore.h"
+#include "Exceptions.h"
 
 using namespace std;
 
@@ -93,13 +94,14 @@ bool AppStore::removeApp(App* app) {
 			i--;
 			return true;
 	}
-	return false;;
+	return false;
 }
 
 App* AppStore::findAppByID(int id){
 	for(int i=0; i<apps.size();i++){
 		if(apps[i]->getID()==id) return apps[i];
 	}
+	throw AppDoesNotExist(id);
 	return NULL;
 }
 
@@ -107,6 +109,7 @@ Client* AppStore::findClientByID(int id){
 	for(int i=0; i<clients.size();i++){
 		if(clients[i]->getID()==id) return clients[i];
 	}
+	throw ClientDoesNotExist(id);
 	return NULL;
 }
 
@@ -114,6 +117,7 @@ Developer* AppStore::findDeveloperByID(int id){
 	for(int i=0; i<developers.size();i++){
 		if(developers[i]->getID()==id) return developers[i];
 	}
+	throw DeveloperDoesNotExist(id);
 	return NULL;
 }
 
@@ -121,5 +125,6 @@ Transaction* AppStore::findTransactionByID(int id){
 	for(int i=0; i<transactions.size();i++){
 		if(transactions[i]->getID()==id) return transactions[i];
 	}
+	throw TransactionDoesNotExist(id);
 	return NULL;
 }

@@ -77,7 +77,7 @@ bool Client::removeTransaction(Transaction* trans){
 }
 
 void Client::classifyApp(App* app, int classification){
-	if(classification<0 && classification>5) throw RatingOutOfRange(classification);
+
 	app->addRating(classification);
 }
 

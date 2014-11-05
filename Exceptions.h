@@ -50,6 +50,13 @@ public:
 	int getID(){return id;}
 };
 
+class TransactionDoesNotExist{
+public:
+	int id;
+	TransactionDoesNotExist(int i){id=i;}
+	int getID(){return id;}
+};
+
 class FileDoesNotExist{
 public:
 	string name;

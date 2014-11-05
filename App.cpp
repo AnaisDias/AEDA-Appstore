@@ -1,5 +1,6 @@
 #include <iostream>
 #include "App.h"
+#include "Exceptions.h"
 
 int App::allIDs=0;
 
@@ -148,7 +149,7 @@ void App::addComment(string comment){
 }
 
 void App::addRating(int rating){
-
+	if(rating<0 && rating>5) throw RatingOutOfRange(rating);
 	allRatings.push_back(rating);
 	updateRatings();
 }
