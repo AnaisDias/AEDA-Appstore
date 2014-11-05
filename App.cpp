@@ -148,6 +148,7 @@ void App::addComment(string comment){
 }
 
 void App::addRating(int rating){
+
 	allRatings.push_back(rating);
 	updateRatings();
 }

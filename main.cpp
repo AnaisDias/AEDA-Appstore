@@ -35,9 +35,9 @@ void Menu() {
 
     cout << "APPSTORE" << endl;
     cout << "1 - APPS" << endl;
-    cout << "2 - USER" << endl;
-    cout << "3 - DEVELOPER" << endl;
-    cout << "4 - TRANSACTION" << endl;
+    cout << "2 - USERS" << endl;
+    cout << "3 - DEVELOPERS" << endl;
+    cout << "4 - TRANSACTIONS" << endl;
     cout << "0 - EXIT" << endl;
     cout << "what do u want nigga";
     cin >> choice;
@@ -47,21 +47,25 @@ void Menu() {
         case 1:
             system("cls");
             AppsMenu();
+            Menu();
             break;
 
         case 2:
             system("cls");
             ClientMenu();
+            Menu();
             break;
 
         case 3:
             system("cls");
             DeveloperMenu();
+            Menu();
             break;
 
         case 4:
             system("cls");
             TransactionMenu();
+            Menu();
             break;
 
         case 0:
@@ -84,10 +88,14 @@ void AppsMenu() {
     int choice;
 
     cout << "Apps: " << endl;
+    //add options for:
+    //add apps
+    //remove apps
     cout << "1 - list by name" << endl;
     cout << "2 - list by sales" << endl;
     cout << "3 - list by type" << endl;
     cout << "4 - rate apps" << endl;
+    cout << "5 - search by id" << endl;
     cout << "0 - Go back" << endl;
     cout << "what nigga"<< endl;
     cin >> choice;
@@ -106,6 +114,10 @@ void AppsMenu() {
         case 4: system("cls");
         		//RateApps();
         	break;
+        case 5: system("cls");
+        //ask for id
+        //findAppByID(id)
+        	break;
         case 0: system("cls");
             Menu();
             break;
@@ -119,6 +131,7 @@ void ClientMenu() {
     int choice;
 
     cout << "Client" << endl;
+    //add options for client addition/removal
     cout << "1 - Clients List" << endl;
     cout << "2 - Purchased Apps" << endl;
     cout << "3 - Go back" << endl;
@@ -231,6 +244,8 @@ void ExitMenu() {
             break;
     }
 }
+
+//todas estas funções abaixo devem ser movidas para appstore.h e cpp
 
 /////////////////////////
 ////////SUB APP /////////
