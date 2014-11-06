@@ -43,33 +43,31 @@ public:
 	Developer* findDeveloperByID(int id);
 	Transaction* findTransactionByID(int id);
 
-
-	// Saves AND Loads
-	void saveAppstore(string filename);
-	void loadAppstore(string filename);
-	//Menus
-
 	//Gets e Sets
 
 
 	string getName();
 	void setName(string name);
 
-
 	vector<App*> getApps();
 	void setApps(vector<App*> apps);
-	void saveApps(string filename);
+	void saveApps();
 	void loadApps(string filename);
 
 	vector<Client*> getClients();
 	void setClients(vector<Client*> clients);
-	void saveClients(string filename);
+	void saveClients();
 	void loadClients(string filename);
 
 	vector<Developer*> getDevelopers();
 	void setDevelopers(vector<Developer*> developers);
-	void saveDevelopers(string filename);
+	void saveDevelopers();
 	void loadDevelopers(string filename);
+
+	vector<Transaction*> getTransactions();
+	void setTransactions(vector<Transaction *> transactions);
+	void saveTransactions();
+	void loadTransaction();
 
 	///MENUS///
 

@@ -8,6 +8,8 @@
 #include <string>
 #include "AppStore.h"
 #include "Exceptions.h"
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -20,26 +22,26 @@ AppStore::AppStore(string name) {
 }
 
 AppStore::~AppStore() {
-	for(int i=0; i<apps.size(); i++){
-			delete apps[i];
-			apps.erase(apps.begin()+i);
-			i--;
-		}
-	for(int i=0; i<clients.size(); i++){
-			delete clients[i];
-			clients.erase(clients.begin()+i);
-			i--;
-		}
-	for(int i=0; i<developers.size(); i++){
-			delete developers[i];
-			developers.erase(developers.begin()+i);
-			i--;
-		}
-	for(int i=0; i<transactions.size(); i++){
-			delete transactions[i];
-			transactions.erase(transactions.begin()+i);
-			i--;
-		}
+	for(unsigned int i=0; i<apps.size(); i++){
+		delete apps[i];
+		apps.erase(apps.begin()+i);
+		i--;
+	}
+	for(unsigned int i=0; i<clients.size(); i++){
+		delete clients[i];
+		clients.erase(clients.begin()+i);
+		i--;
+	}
+	for(unsigned int i=0; i<developers.size(); i++){
+		delete developers[i];
+		developers.erase(developers.begin()+i);
+		i--;
+	}
+	for(unsigned int i=0; i<transactions.size(); i++){
+		delete transactions[i];
+		transactions.erase(transactions.begin()+i);
+		i--;
+	}
 }
 
 void AppStore::addApp(App* app) {
@@ -87,8 +89,18 @@ void AppStore::setDevelopers(vector<Developer*> developers) {
 	this->developers = developers;
 }
 
+vector<Transaction*> AppStore::getTransactions()
+{
+	return transactions;
+}
+
+void AppStore::setTransactions(vector<Transaction *> transactions)
+{
+	this->transactions = transactions;
+}
+
 bool AppStore::removeApp(App* app) {
-	for (int i = 0; i < apps.size(); i++) {
+	for (unsigned int i = 0; i < apps.size(); i++) {
 		if (apps[i] == app)
 			apps.erase(apps.begin()+i);
 			i--;
@@ -98,7 +110,7 @@ bool AppStore::removeApp(App* app) {
 }
 
 App* AppStore::findAppByID(int id){
-	for(int i=0; i<apps.size();i++){
+	for(unsigned int i=0; i<apps.size();i++){
 		if(apps[i]->getID()==id) return apps[i];
 	}
 	throw AppDoesNotExist(id);
@@ -106,7 +118,7 @@ App* AppStore::findAppByID(int id){
 }
 
 Client* AppStore::findClientByID(int id){
-	for(int i=0; i<clients.size();i++){
+	for(unsigned int i=0; i<clients.size();i++){
 		if(clients[i]->getID()==id) return clients[i];
 	}
 	throw ClientDoesNotExist(id);
@@ -114,7 +126,7 @@ Client* AppStore::findClientByID(int id){
 }
 
 Developer* AppStore::findDeveloperByID(int id){
-	for(int i=0; i<developers.size();i++){
+	for(unsigned int i=0; i<developers.size();i++){
 		if(developers[i]->getID()==id) return developers[i];
 	}
 	throw DeveloperDoesNotExist(id);
@@ -122,7 +134,7 @@ Developer* AppStore::findDeveloperByID(int id){
 }
 
 Transaction* AppStore::findTransactionByID(int id){
-	for(int i=0; i<transactions.size();i++){
+	for(unsigned int i=0; i<transactions.size();i++){
 		if(transactions[i]->getID()==id) return transactions[i];
 	}
 	throw TransactionDoesNotExist(id);
@@ -135,7 +147,7 @@ Transaction* AppStore::findTransactionByID(int id){
 ////////SUB APP /////////
 /////////////////////////
 
-void AppsListName() {
+void AppStore::AppsListName() {
 	cout << "Apps List By NAME: " << endl;
 
 	//display da função da lista
@@ -149,7 +161,7 @@ void AppsListName() {
 
 }
 
-void AppsListSale() {
+void AppStore::AppsListSale() {
 	cout << "Apps List By SALE NUMBERS: " << endl;
 
 	//display da função da lista
@@ -163,7 +175,7 @@ void AppsListSale() {
 		AppsMenu();}
 }
 
-void AppsListType() {
+void AppStore::AppsListType() {
 	cout << "Apps List By TYPE: " << endl;
 
 	//display da função da lista
@@ -177,7 +189,7 @@ void AppsListType() {
 		AppsMenu();}
 }
 
-void RateApps() {
+void AppStore::RateApps() {
 	string name;
 	char y = 'y';
 	int rate;
@@ -256,7 +268,7 @@ void RateApps() {
 	}
 }
 
-void AddApplication() {
+void AppStore::AddApplication() {
 	string name;
 	cout << "Name Of The App To Be Added: ";
 	cin >> name;
@@ -273,7 +285,7 @@ void AddApplication() {
 	AppsMenu();}
 }
 
-void RemoveApplication() {
+void AppStore::RemoveApplication() {
 	string name;
 	cout << "Name Of The App To Be Removed: ";
 	cin >> name;
@@ -294,7 +306,7 @@ void RemoveApplication() {
 //////SUB CLIENT ////////
 /////////////////////////
 
-void ClientsList() {
+void AppStore::ClientsList() {
 	cout << "CLIENTS LIST" << endl;
 	//display list
 
@@ -308,7 +320,7 @@ void ClientsList() {
 	}
 }
 
-void PurchasedApps() {
+void AppStore::PurchasedApps() {
 	cout << "PURCHASED APPS" << endl;
 	//display list
 
@@ -321,7 +333,7 @@ void PurchasedApps() {
 		ClientMenu();}
 }
 
-void AddClients() {
+void AppStore::AddClients() {
 	string name;
 	cout << "Name Of The Client To Be Added: ";
 	cin >> name;
@@ -340,7 +352,7 @@ void AddClients() {
 	}
 }
 
-void RemoveClients() {
+void AppStore::RemoveClients() {
 	string name;
 	cout << "Name Of The Client To Be Removed: ";
 	cin >> name;
@@ -364,7 +376,7 @@ void RemoveClients() {
 //////SUB DEV ///////////
 /////////////////////////
 
-void IndividualDevList() {
+void AppStore::IndividualDevList() {
 	cout << "INDIVIDUAL DEVELOPERS: " << endl;
 
 	//display list
@@ -381,7 +393,7 @@ void IndividualDevList() {
 
 }
 
-void EnterpriseList() {
+void AppStore::EnterpriseList() {
 	cout << "ENTERPRISES: " << endl;
 
 	//display list
@@ -398,7 +410,7 @@ void EnterpriseList() {
 
 }
 
-void AppsCreated() {
+void AppStore::AppsCreated() {
 	int choice;
 	char y = 'y';
 	string name;
@@ -446,11 +458,11 @@ void AppsCreated() {
 	}
 }
 
-void SalesData() {
+void AppStore::SalesData() {
 
 }
 
-void AddDev() {
+void AppStore::AddDev() {
 	string name;
 	cout << "Developer To Be Added: ";
 	cin >> name;
@@ -469,7 +481,7 @@ void AddDev() {
 	}
 }
 
-void RemoveDev() {
+void AppStore::RemoveDev() {
 	string name;
 	cout << "Developer To Be Removed: ";
 	// display list of Devs
@@ -494,7 +506,7 @@ void RemoveDev() {
 //////SUB TRANS /////////
 /////////////////////////
 
-void TransApps() {
+void AppStore::TransApps() {
 	cout << "APPS TRANSACTIONS: " << endl;
 	//display apps transactions
 
@@ -508,7 +520,7 @@ void TransApps() {
 	}
 }
 
-void TransClients() {
+void AppStore::TransClients() {
 	cout << "CLIENTS TRANSACTIONS: " << endl;
 	//display the client transactions????
 
@@ -522,7 +534,7 @@ void TransClients() {
 	}
 }
 
-void TransDev() {
+void AppStore::TransDev() {
 	cout << "DEVELOPERS/ENTERPRISES TRANSACTIONS: " << endl;
 	//display the devs list and which transaction the client wants to see????? lol
 
@@ -534,6 +546,74 @@ void TransDev() {
 		system("cls");
 		TransactionMenu();
 	}
+}
+
+/**********************************************************
+ *                    SAVES AND LOADS                     *
+ *********************************************************/
+
+void AppStore::saveApps()
+{
+	vector<App *>::iterator it = apps.begin();
+
+	ofstream file;
+	file.open("apps.txt",ios::trunc);
+
+	for(; it != apps.end(); it++)
+	{
+		(*it)->writeToFile(file);
+	}
+	system("cls");
+	file.close();
+	cout << "\n Apps saved." << endl;
+}
+
+void AppStore::saveDevelopers()
+{
+	vector<Developer *>::iterator it = developers.begin();
+
+	ofstream file;
+	file.open("developers.txt",ios::trunc);
+
+	for(; it != developers.end(); it++)
+	{
+		(*it)->writeToFile(file);
+	}
+	system("cls");
+	file.close();
+	cout << "\n Developers saved." << endl;
+}
+
+void AppStore::saveClients()
+{
+	vector<Client *>::iterator it = clients.begin();
+
+	ofstream file;
+	file.open("clients.txt",ios::trunc);
+
+	for(; it != clients.end(); it++)
+	{
+		(*it)->writeToFile(file);
+	}
+	system("cls");
+	file.close();
+	cout << "\n Clients saved." << endl;
+}
+
+void AppStore::saveTransactions()
+{
+	vector<Transaction *>::iterator it = transactions.begin();
+
+	ofstream file;
+	file.open("transactions.txt",ios::trunc);
+
+	for(; it != transactions.end(); it++)
+	{
+		(*it)->writeToFile(file);
+	}
+	system("cls");
+	file.close();
+	cout << "\n Transactions saved." << endl;
 }
 
 

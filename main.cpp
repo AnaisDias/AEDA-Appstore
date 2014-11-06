@@ -4,14 +4,9 @@
 using namespace std;
 
 
-/* PENSO Q ISTO JA NAO SEJA NECESSARIO MAS PRONTOS
-void AppsMenu();
-void ExitMenu();
-void DeveloperMenu();
-void TransactionMenu();
-void ClientMenu();*/
-
 int main(){
+
+	AppStore AppStr = AppStore();
 
 	return 0;
 }
