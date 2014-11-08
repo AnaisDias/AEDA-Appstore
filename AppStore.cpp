@@ -10,6 +10,7 @@
 #include "Exceptions.h"
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 
 using namespace std;
 
@@ -22,11 +23,6 @@ AppStore::AppStore(string name) {
 }
 
 AppStore::~AppStore() {
-	for(unsigned int i=0; i<apps.size(); i++){
-		delete apps[i];
-		apps.erase(apps.begin()+i);
-		i--;
-	}
 	for(unsigned int i=0; i<clients.size(); i++){
 		delete clients[i];
 		clients.erase(clients.begin()+i);
@@ -117,6 +113,38 @@ App* AppStore::findAppByID(int id){
 	return NULL;
 }
 
+vector<App*> AppStore::findAppsByName(string name){
+	vector<App*> appsbyname;
+	for(unsigned int i=0; i<apps.size();i++){
+		if(apps[i]->getName()==name) appsbyname.push_back(apps[i]);
+	}
+	return appsbyname;
+}
+
+vector<App*> AppStore::findAppsByType(string type){
+	vector<App*> appsbytype;
+	for(unsigned int i=0; i<apps.size();i++){
+		if(apps[i]->getType()==type) appsbytype.push_back(apps[i]);
+	}
+	return appsbytype;
+}
+
+bool ordenaRating(App* app1, App* app2){
+	return (app1->getRatings() > app2->getRatings());
+}
+
+vector<App*> AppStore::orderAppsByTop5Rating(){
+	vector<App*> apps2 = apps;
+	vector<App*> top5;
+	sort(apps2.begin(), apps2.end(), ordenaRating);
+	for(int i=0; i<5; i++){
+		top5.push_back(apps2[i]);
+	}
+	return top5;
+}
+
+
+
 Client* AppStore::findClientByID(int id){
 	for(unsigned int i=0; i<clients.size();i++){
 		if(clients[i]->getID()==id) return clients[i];
@@ -147,33 +175,49 @@ Transaction* AppStore::findTransactionByID(int id){
 ////////SUB APP /////////
 /////////////////////////
 
+void AppStore::Top5Apps(){
+	vector<App*> top5 = orderAppsByTop5Rating();
+	char input;
+	cout << "TOP 5 APPS" << endl << endl;
+	for(int i=0; i<top5.size(); i++){
+		cout << top5[i] << endl;
+	}
+	cout << endl << "Select app by ID or enter 'r' to return: ";
+	cin >> input;
+	if(input == 'r') return;
+	else findAppByID((int)input);
+}
+
 void AppStore::AppsListName() {
-	cout << "Apps List By NAME: " << endl;
+	string input;
+	char input2;
+	vector<App*> appsN;
+	cout << "Enter app name: ";
+	cin >> input;
+	appsN=findAppsByName(input);
 
-	//display da função da lista
-
-	cout << endl;
-	string y;
-	cout << "Go Back? (y)";
-	cin >> y;
 	system("cls");
-	AppsMenu();
+	cout << "Apps List By NAME: " << endl;
+	if(appsN.empty()) {
+		cout << "No apps with the requested name. Press any key to go back" <<endl;
+		cin.get();
+	}
+	else{
+	for(int i=0; i<appsN.size();i++){
+		cout << appsN[i] << endl;
+	}
+	}
+
+	cout << endl << "Select app by ID or enter 'r' to return: ";
+		cin >> input2;
+		if(input2 == 'r') {
+			system("cls");
+			return;
+		}
+		else findAppByID((int)input2);
 
 }
 
-void AppStore::AppsListSale() {
-	cout << "Apps List By SALE NUMBERS: " << endl;
-
-	//display da função da lista
-
-	cout << endl;
-	char y = 'y';
-	cout << "Go Back? (y)";
-	cin >> y;
-	if (y == 'y') {
-		system("cls");
-		AppsMenu();}
-}
 
 void AppStore::AppsListType() {
 	cout << "Apps List By TYPE: " << endl;
@@ -185,8 +229,7 @@ void AppStore::AppsListType() {
 	cout << "Go Back? (y)";
 	cin >> y;
 	if (y == 'y') {
-		system("cls");
-		AppsMenu();}
+		system("cls");}
 }
 
 void AppStore::RateApps() {
@@ -219,7 +262,7 @@ void AppStore::RateApps() {
 			cin >> y;
 			if(y == 'y') {
 			system("cls");
-			AppsMenu();}
+			}
 			break;
 	case 2: system("cls");
 			//call function to rate wt 2;
@@ -229,7 +272,7 @@ void AppStore::RateApps() {
 			cin >> y;
 			if(y == 'y') {
 			system("cls");
-			AppsMenu();}
+			}
 			break;
 	case 3: system("cls");
 			//call function to rate wt 3;
@@ -239,7 +282,7 @@ void AppStore::RateApps() {
 			cin >> y;
 			if(y == 'y') {
 			system("cls");
-			AppsMenu();}
+			}
 			break;
 	case 4: system("cls");
 			//call function to rate wt 4;
@@ -249,7 +292,7 @@ void AppStore::RateApps() {
 			cin >> y;
 			if(y == 'y') {
 			system("cls");
-			AppsMenu();}
+			}
 			break;
 	case 5: system("cls");
 			//call function to rate wt 5;
@@ -259,10 +302,10 @@ void AppStore::RateApps() {
 			cin >> y;
 			if(y == 'y') {
 			system("cls");
-			AppsMenu();}
+			}
 			break;
 	case 0: system("cls");
-			AppsMenu();
+			;
 			break;
 	default: break;
 	}
@@ -282,7 +325,7 @@ void AppStore::AddApplication() {
 	cin >> y;
 	if (y == 'y') {
 	system("cls");
-	AppsMenu();}
+	}
 }
 
 void AppStore::RemoveApplication() {
@@ -299,7 +342,7 @@ void AppStore::RemoveApplication() {
 	cin >> y;
 	if (y == 'y') {
 		system("cls");
-		AppsMenu();}
+		}
 }
 
 /////////////////////////
@@ -488,7 +531,7 @@ void AppStore::RemoveDev() {
 	cout << "Remove: ";
 	cin >> name;
 
-	//add dev to the appstore
+	//remove dev from the appstore
 
 	cout << "Developer Removed Successfully From The Appstore" << endl;
 
@@ -557,12 +600,15 @@ void AppStore::saveApps()
 	vector<App *>::iterator it = apps.begin();
 
 	ofstream file;
-	file.open("apps.txt",ios::trunc);
+	file.open("apps.txt", ios::trunc);
+
 
 	for(; it != apps.end(); it++)
 	{
 		(*it)->writeToFile(file);
+		file << endl;
 	}
+
 	system("cls");
 	file.close();
 	cout << "\n Apps saved." << endl;
@@ -578,6 +624,7 @@ void AppStore::saveDevelopers()
 	for(; it != developers.end(); it++)
 	{
 		(*it)->writeToFile(file);
+		file << endl;
 	}
 	system("cls");
 	file.close();
@@ -594,6 +641,7 @@ void AppStore::saveClients()
 	for(; it != clients.end(); it++)
 	{
 		(*it)->writeToFile(file);
+		file << endl;
 	}
 	system("cls");
 	file.close();
@@ -610,6 +658,7 @@ void AppStore::saveTransactions()
 	for(; it != transactions.end(); it++)
 	{
 		(*it)->writeToFile(file);
+		file << endl;
 	}
 	system("cls");
 	file.close();

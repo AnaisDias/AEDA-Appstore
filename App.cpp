@@ -1,13 +1,14 @@
 #include <iostream>
 #include "App.h"
 #include "Exceptions.h"
+#include <sstream>
 
 int App::allIDs=0;
 
 App::App() {
-	// TODO Auto-generated constructor stub
 	id=allIDs;
 	allIDs++;
+	price=0;
 }
 
 App::~App() {
@@ -19,7 +20,7 @@ App::~App() {
 	}
 }
 
-App::App(string name, int price, string type, string description) {
+App::App(string name, float price, string type, string description) {
 	this->name = name;
 	this->price = price;
 	this->type = type;

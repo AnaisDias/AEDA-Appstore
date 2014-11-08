@@ -1,62 +1,8 @@
 #include "Menu.h"
 
-void Menu() {
-    // Fazer load dos ficheiros;
-    AppStore store = AppStore();
+void Menu(AppStore as);
 
-    int choice;
-
-    cout << "APPSTORE" << endl;
-    cout << "1 - APPS" << endl;
-    cout << "2 - USERS" << endl;
-    cout << "3 - DEVELOPERS" << endl;
-    cout << "4 - TRANSACTIONS" << endl;
-    cout << "0 - EXIT" << endl;
-    cout << "Option: ";
-    cin >> choice;
-
-    switch (choice) {
-
-        case 1:
-            system("cls");
-            AppsMenu();
-            Menu();
-            break;
-
-        case 2:
-            system("cls");
-            ClientMenu();
-            Menu();
-            break;
-
-        case 3:
-            system("cls");
-            DeveloperMenu();
-            Menu();
-            break;
-
-        case 4:
-            system("cls");
-            TransactionMenu();
-            Menu();
-            break;
-
-        case 0:
-            system("cls");
-            ExitMenu();
-            break;
-
-        default:
-            system("cls");
-            break;
-    }
-}
-
-/////////////////////////
-//////SUB MENUS /////////
-/////////////////////////
-
-void AppsMenu() {
+void AppsMenu(AppStore as) {
 
     int choice;
 
@@ -64,8 +10,8 @@ void AppsMenu() {
     //add options for:
     //add apps
     //remove apps
-    cout << "1 - list by name" << endl;
-    cout << "2 - list by sales" << endl;
+    cout << "1 - Top 5 Rated Apps" << endl;
+    cout << "2 - Search Apps by Name" << endl;
     cout << "3 - list by type" << endl;
     cout << "4 - rate apps" << endl;
     cout << "5 - search by id" << endl;
@@ -79,10 +25,10 @@ void AppsMenu() {
     switch(choice) {
 
         case 1: system("cls");
-            	//AppsListName();
+            	as.Top5Apps();
             	break;
         case 2: system("cls");
-        		//AppsListSale();
+        		as.AppsListName();
             	break;
         case 3: system("cls");
             	//AppsListType();
@@ -101,7 +47,7 @@ void AppsMenu() {
         		//removeApplication(); uses removeApp();
         		break;
         case 0: system("cls");
-        		Menu();
+        		Menu(as);
         		break;
         default: break;
 
@@ -115,7 +61,7 @@ void ClientMenu() {
     cout << "Client" << endl;
     //add options for client addition/removal
     cout << "1 - Clients List" << endl;
-    cout << "2 - Purchased Apps" << endl;
+    cout << "2 - Purchased Apps (requires client ID)" << endl;
     cout << "3 - Add Client" << endl;
     cout << "4 - Remove Client" << endl;
     cout << "0 - Go back" << endl;
@@ -137,7 +83,7 @@ void ClientMenu() {
         		//RemoveClients();
         		break;
         case 0: system("cls");
-            	Menu();
+            	//Menu(as);
         default: break;
     }
 }
@@ -149,8 +95,8 @@ void DeveloperMenu() {
     cout << "Developer: " << endl;
     cout << "1 - Individual Developers" << endl;
     cout << "2 - Enterprises" << endl;
-    cout << "3 - Apps Created" << endl;
-    cout << "4 - Sales Data" << endl;
+    cout << "3 - Apps Created (requires developer's ID)" << endl;
+    cout << "4 - Show all sales (requires developer's ID)" << endl;
     cout << "5 - Add Developer/Enterprise" << endl;
     cout << "6 - Remove Developer/Enterprise" << endl;
     cout << "0 - Go back" << endl;
@@ -178,7 +124,7 @@ void DeveloperMenu() {
         		//RemoveDev(); //uses removeDeveloper;
 
         case 0: system("cls");
-            	Menu();
+            	//Menu(as);
             	break;
         default: break;
 
@@ -208,7 +154,7 @@ void TransactionMenu() {
             //TransDev();
             break;
         case 0: system("cls");
-            Menu();
+            //Menu(as);
             break;
         default: break;
 
@@ -228,20 +174,76 @@ void ExitMenu() {
     switch (input) {
         case '1':
             system("cls");
-            //menuSave();
+            //SaveMenu();
             break;
         case '2':
             system("cls");
             cout << "bye";
+            exit(0);
             break;
         case '3':
             system("cls");
-            exit(0);
             break;
         default:
             system("cls");
             break;
     }
 }
+void Menu(AppStore as) {
+    // Fazer load dos ficheiros;
+    AppStore store = AppStore();
+
+    int choice;
+
+    cout << "APPSTORE" << endl;
+    cout << "1 - APPS" << endl;
+    cout << "2 - USERS" << endl;
+    cout << "3 - DEVELOPERS" << endl;
+    cout << "4 - TRANSACTIONS" << endl;
+    cout << "0 - EXIT" << endl;
+    cout << "Option: ";
+    cin >> choice;
+
+    switch (choice) {
+
+        case 1:
+            system("cls");
+            AppsMenu(as);
+            Menu(as);
+            break;
+
+        case 2:
+            system("cls");
+            ClientMenu();
+            Menu(as);
+            break;
+
+        case 3:
+            system("cls");
+            DeveloperMenu();
+            Menu(as);
+            break;
+
+        case 4:
+            system("cls");
+            TransactionMenu();
+            Menu(as);
+            break;
+
+        case 0:
+            system("cls");
+            ExitMenu();
+            break;
+
+        default:
+            system("cls");
+            break;
+    }
+}
+
+/////////////////////////
+//////SUB MENUS /////////
+/////////////////////////
+
 
 

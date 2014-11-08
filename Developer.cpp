@@ -13,7 +13,6 @@ int Developer::allIDs=0;
 Developer::Developer() {
 	id=allIDs;
 	allIDs++;
-	// TODO Auto-generated constructor stub
 
 }
 
@@ -26,7 +25,11 @@ Developer::Developer(string name, string address, int nif) {
 }
 
 Developer::~Developer() {
-	// TODO Auto-generated destructor stub
+	for(unsigned int i=0; i<appsPublished.size(); i++){
+			delete appsPublished[i];
+			appsPublished.erase(appsPublished.begin()+i);
+			i--;
+		}
 }
 
 int Developer::getID() const{

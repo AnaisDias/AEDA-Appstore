@@ -39,6 +39,11 @@ public:
 	bool removeDeveloper(Developer* dev);
 
 	App* findAppByID(int id);
+	vector<App*> findAppsByName(string name);
+	vector<App*> findAppsByType(string type);
+	vector<App*> orderAppsByTop5Rating();
+
+
 	Client* findClientByID(int id);
 	Developer* findDeveloperByID(int id);
 	Transaction* findTransactionByID(int id);
@@ -72,8 +77,8 @@ public:
 	///MENUS///
 
 	//APPS//
+	void Top5Apps();
 	void AppsListName();
-	void AppsListSale();
 	void AppsListType();
 	void RateApps();
 	void AddApplication(); //uses addApp

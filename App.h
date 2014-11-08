@@ -21,7 +21,6 @@ class App {
 	string type;
 	string description;
 	Developer* developer;
-	// acrescentar mais membros
 	float ratings; //1 NAO GOSTO - 5 ESPETACULAR float porque vai ser a media das classifica�oes atribuidas
 	vector<int> allRatings;
 	vector<string> comments;
@@ -29,7 +28,7 @@ class App {
 
 public:
 	App();
-	App(string name, int price, string type, string description);
+	App(string name, float price, string type, string description);
 	~App();
 	static void resetIDs();
 
