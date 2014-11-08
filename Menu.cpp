@@ -4,69 +4,73 @@ void Menu(AppStore as);
 
 void AppsMenu(AppStore as) {
 
-    int choice;
+	int choice;
 
-    cout << "Apps: " << endl;
-    //add options for:
-    //add apps
-    //remove apps
-    cout << "1 - Top 5 Rated Apps" << endl;
-    cout << "2 - Search Apps by Name" << endl;
-    cout << "3 - list by type" << endl;
-    cout << "4 - rate apps" << endl;
-    cout << "5 - search by id" << endl;
-    cout << "6 - add app" << endl;
-    cout << "7 - remove app" << endl;
-    cout << "0 - Go back" << endl;
+	cout << "Apps: " << endl;
 
-    cout << "Option: ";
-    cin >> choice;
+	cout << "1 - Top 5 Rated Apps" << endl;
+	cout << "2 - Search Apps by Name" << endl;
+	cout << "3 - List Apps by Type" << endl;
+	cout << "4 - Show all apps" << endl;
+	cout << "5 - Rate apps" << endl;
+	cout << "6 - Add app" << endl;
+	cout << "7 - Remove app" << endl;
+	cout << "0 - Go back" << endl;
 
-    switch(choice) {
+	cout << "Option: ";
+	cin >> choice;
 
-        case 1: system("cls");
-            	as.Top5Apps();
-            	break;
-        case 2: system("cls");
-        		as.AppsListName();
-            	break;
-        case 3: system("cls");
-            	//AppsListType();
-        		break;
-        case 4: system("cls");
-        		//RateApps();
-        		break;
-        case 5: system("cls");
-        		//ask for id
-        		//findAppByID(id)
-        		break;
-        case 6: system("cls");
-        		//addApplication(); uses addApp();
-        		break;
-        case 7: system("cls");
-        		//removeApplication(); uses removeApp();
-        		break;
-        case 0: system("cls");
-        		Menu(as);
-        		break;
-        default: break;
+	switch(choice) {
 
-    }
+		case 1: system("cls");
+				as.Top5Apps();
+				AppsMenu(as);
+				break;
+		case 2: system("cls");
+				as.AppsListName();
+				AppsMenu(as);
+				break;
+		case 3: system("cls");
+				as.AppsListType();
+				AppsMenu(as);
+				break;
+		case 4: system("cls");
+				as.AllAppsList();
+				AppsMenu(as);
+				break;
+		case 5: system("cls");
+				as.RateApps();
+				AppsMenu(as);
+				break;
+		case 6: system("cls");
+				as.AddApplicationMenu();
+				AppsMenu(as);
+				break;
+		case 7: system("cls");
+				as.RemoveApplicationMenu();
+				AppsMenu(as);
+				break;
+		case 0: system("cls");
+				Menu(as);
+				break;
+		default: break;
+
+	}
 }
 
 void ClientMenu() {
 
-    int choice;
+	int choice;
 
-    cout << "Client" << endl;
-    //add options for client addition/removal
-    cout << "1 - Clients List" << endl;
-    cout << "2 - Purchased Apps (requires client ID)" << endl;
-    cout << "3 - Add Client" << endl;
-    cout << "4 - Remove Client" << endl;
-    cout << "0 - Go back" << endl;
-    cout << "Option: ";
-    cin >> choice;
+	cout << "Client" << endl;
+	//add options for client addition/removal
+	cout << "1 - Clients List" << endl;
+	cout << "2 - Purchased Apps (requires client ID)" << endl;
+	cout << "3 - Add Client" << endl;
+	cout << "4 - Remove Client" << endl;
+	cout << "0 - Go back" << endl;
+	cout << "Option: ";
+	cin >> choice;
 
     switch(choice) {
 

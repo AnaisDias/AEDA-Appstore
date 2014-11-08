@@ -121,7 +121,7 @@ vector<App*> AppStore::findAppsByName(string name){
 	return appsbyname;
 }
 
-vector<App*> AppStore::findAppsByType(string type){
+vector<App*> AppStore::findAppsByType(int type){
 	vector<App*> appsbytype;
 	for(unsigned int i=0; i<apps.size();i++){
 		if(apps[i]->getType()==type) appsbytype.push_back(apps[i]);
@@ -201,148 +201,194 @@ void AppStore::AppsListName() {
 	if(appsN.empty()) {
 		cout << "No apps with the requested name. Press any key to go back" <<endl;
 		cin.get();
+		return;
 	}
 	else{
-	for(int i=0; i<appsN.size();i++){
-		cout << appsN[i] << endl;
-	}
+		for(int i=0; i<appsN.size();i++){
+			cout << appsN[i] << endl;
+		}
 	}
 
 	cout << endl << "Select app by ID or enter 'r' to return: ";
-		cin >> input2;
-		if(input2 == 'r') {
-			system("cls");
-			return;
-		}
-		else findAppByID((int)input2);
-
+	cin >> input2;
+	if(input2 == 'r') {
+		system("cls");
+		return;
+	}
+	else AppManagementMenu(findAppByID((int)input2));
+//insert try and catch here
 }
 
 
 void AppStore::AppsListType() {
+	int type;
+	char input;
+	vector<App*> appstype;
 	cout << "Apps List By TYPE: " << endl;
+	cout << endl << "Types: ";
+	cout << "1. Entertainment" << endl;
+	cout << "2. Finances" << endl;
+	cout << "3. Games" << endl;
+	cout << "4. Fitness" << endl;
+	cout << "5. Lifestyle" << endl;
+	cout << "6. Music" << endl;
+	cout << "7. Photography" << endl;
+	cout << "8. Productivity" << endl;
+	cout << "9. Social Networks" << endl;
+	cout << "10. Sports" << endl;
+	cout << "11. Traveling" << endl;
+	cout << "12. Utilities" << endl;
 
-	//display da função da lista
+	cout << "Select a type: ";
+	cin >> type;
+	appstype = findAppsByType(type);
+	if(appstype.empty()){
+		cout << "No apps with the requested type. Press any key to go back" <<endl;
+		cin.get();
+		return;
+	}
+	else{
+	for(int i=0; i<appstype.size(); i++){
+		cout << appstype[i] << endl;
+	}
+	}
 
-	cout << endl;
-	char y = 'y';
-	cout << "Go Back? (y)";
-	cin >> y;
-	if (y == 'y') {
-		system("cls");}
+	cout << endl << "Select app by ID or enter 'r' to return: ";
+	cin >> input;
+	if(input == 'r') {
+		system("cls");
+		return;
+	}
+	else AppManagementMenu(findAppByID((int)input));
+	//insert try and catch here
+
 }
 
+void AppStore::AllAppsList(){
+	char input;
+	if(apps.empty()){
+		cout << "No apps. Press any key to go back" <<endl;
+		cin.get();
+		return;
+	}
+	for(int i=0; i<apps.size(); i++){
+		cout << apps[i] << endl;
+	}
+	cout << endl << "Select app by ID or enter 'r' to return: ";
+	cin >> input;
+	if(input == 'r') {
+		system("cls");
+		return;
+	}
+	else AppManagementMenu(findAppByID((int)input));
+}
 void AppStore::RateApps() {
 	string name;
 	char y = 'y';
 	int rate;
+	char input;
 
-	cout << "Which App Do You Want To Rate?" << endl;
-	cout << "Apps List" << endl;
-	//call Apps List by name
-	cin >> name;
+	cout << "Which app do you want to rate?" << endl;
+	cout << "Apps List:" << endl;
+
+	if(apps.empty()){
+		cout << "No apps. Press any key to go back" <<endl;
+		cin.get();
+		return;
+	}
+	for(int i=0; i<apps.size(); i++){
+		cout << apps[i] << endl;
+	}
+	cout << endl << "Select app by ID or enter 'r' to return: ";
+	cin >> input;
+	if(input == 'r') {
+		system("cls");
+		return;
+	}
+
+	else{
 	system("cls");
 	cout << "RATE:" << endl;
 	cout << "1 - Hate" << endl;
 	cout << "2 - Dislike" << endl;
 	cout << "3 - Like" << endl;
-	cout << "4 - Adore" << endl;
+	cout << "4 - Love" << endl;
 	cout << "5 - Amazing" << endl;
 	cout << "0 - Go Back" << endl;
 	cout << "OPTION: ";
 	cin >> rate;
 
-	switch(rate) {
-
-	case 1: system("cls");
-			//call function to rate wt 1;
-			cout << "App rated successfully!";
-			cout << endl;
-			cout << "Go Back? (y)";
-			cin >> y;
-			if(y == 'y') {
-			system("cls");
-			}
-			break;
-	case 2: system("cls");
-			//call function to rate wt 2;
-			cout << "App rated successfully!";
-			cout << endl;
-			cout << "Go Back? (y)";
-			cin >> y;
-			if(y == 'y') {
-			system("cls");
-			}
-			break;
-	case 3: system("cls");
-			//call function to rate wt 3;
-			cout << "App rated successfully!";
-			cout << endl;
-			cout << "Go Back? (y)";
-			cin >> y;
-			if(y == 'y') {
-			system("cls");
-			}
-			break;
-	case 4: system("cls");
-			//call function to rate wt 4;
-			cout << "App rated successfully!";
-			cout << endl;
-			cout << "Go Back? (y)";
-			cin >> y;
-			if(y == 'y') {
-			system("cls");
-			}
-			break;
-	case 5: system("cls");
-			//call function to rate wt 5;
-			cout << "App rated successfully!";
-			cout << endl;
-			cout << "Go Back? (y)";
-			cin >> y;
-			if(y == 'y') {
-			system("cls");
-			}
-			break;
-	case 0: system("cls");
-			;
-			break;
-	default: break;
+	App *app = findAppByID((int)input);
+	//add try and catch exception here
+	app->addRating(rate);
+	cout << "Rating added successfully!" << endl;
 	}
 }
 
-void AppStore::AddApplication() {
-	string name;
-	cout << "Name Of The App To Be Added: ";
+void AppStore::AddApplicationMenu() {
+	string name, desc;
+	int price, type, dev;
+	cout << "ADD APP" <<endl;
+	cout << "Insert the following information: " << endl << endl;
+	cout << "Name: ";
 	cin >> name;
+	cout << endl << "Price: ";
+	cin >> price;
+	cout << endl << "Type (select from 1 to 12): ";
+	cin >> type;
+	cout << endl << "Add a short description (no commas): ";
+	cin >> desc;
+	cout << endl << "Developer's ID: ";
+	cin >> dev;
 
-	//call function that adds apps
+	App *app;
+	app = new App(name, price, type, desc);
+	app->setDeveloper(findDeveloperByID(dev));
+	//add try and catch exception here
+
+	addApp(app);
 
 	cout << "App" << name << "Added Successfully To The Appstore" << endl;
 	cout << endl;
-	char y = 'y';
-	cout << "Go Back? (y)";
-	cin >> y;
-	if (y == 'y') {
-	system("cls");
-	}
+	cout << "Press any key to return ";
+	cin.get();
+
 }
 
-void AppStore::RemoveApplication() {
-	string name;
-	cout << "Name Of The App To Be Removed: ";
-	cin >> name;
 
-	//call function that removes apps
-
-	cout << "App" << name << "Removed Successfully From The Appstore" << endl;
-	cout << endl;
-	char y = 'y';
-	cout << "Go Back? (y)";
-	cin >> y;
-	if (y == 'y') {
+void AppStore::RemoveApplicationMenu() {
+	char input;
+	if(apps.empty()){
+		cout << "No apps. Press any key to go back" <<endl;
+		cin.get();
+		return;
+	}
+	for(int i=0; i<apps.size(); i++){
+		cout << apps[i] << endl;
+	}
+	cout << endl << "Select app by ID or enter 'r' to return: ";
+	cin >> input;
+	if(input == 'r') {
 		system("cls");
-		}
+		return;
+	}
+
+	App *app = findAppByID((int)input);
+	// add try and catch here;
+	removeApp(app);
+
+	cout << "App removed successfully from the Appstore" << endl;
+	cout << endl;
+	cout << "Press any key to return ";
+	cin.get();
+}
+
+void AppStore::AppManagementMenu(App* app){
+	//change name
+	//change developer
+	//change type
+	//add rating
+	//remove app
 }
 
 /////////////////////////

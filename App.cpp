@@ -9,6 +9,7 @@ App::App() {
 	id=allIDs;
 	allIDs++;
 	price=0;
+	type=0;
 }
 
 App::~App() {
@@ -20,7 +21,7 @@ App::~App() {
 	}
 }
 
-App::App(string name, float price, string type, string description) {
+App::App(string name, float price, int type, string description) {
 	this->name = name;
 	this->price = price;
 	this->type = type;
@@ -50,7 +51,7 @@ float App::getPrice() const {
 	return price;
 }
 
-string App::getType() const {
+int App::getType() const {
 	return type;
 }
 
@@ -90,7 +91,7 @@ void App::setPrice(int price){
 	this->price=price;
 }
 
-void App::setType(string type){
+void App::setType(int type){
 	this->type=type;
 }
 
@@ -174,11 +175,55 @@ bool App::operator==(const App &app) const{
 	else return false;
 }
 
+string App::translateType(int t){
+	switch(t){
+	case 1:
+		return "Entertainment";
+		break;
+	case 2:
+		return "Finances";
+		break;
+	case 3:
+		return "Games";
+		break;
+	case 4:
+		return "Fitness";
+		break;
+	case 5:
+		return "Lifestyle";
+		break;
+	case 6:
+		return "Music";
+		break;
+	case 7:
+		return "Photography";
+		break;
+	case 8:
+		return "Productivity";
+		break;
+	case 9:
+		return "Social Networks";
+		break;
+	case 10:
+		return "Sports";
+		break;
+	case 11:
+		return "Traveling";
+		break;
+	case 12:
+		return "Utilities";
+		break;
+	default:
+		break;
+
+	}
+}
+
 std::ostream & App::operator<<(std::ostream &out){
 	out << "App ID: " << id << endl;
 	out << "Name: " << name << endl;
 	out << "Price: " << price << endl;
-	out << "Type: " << type << endl;
+	out << "Type: " << type << ". " << translateType(type) << endl;
 	out << "Rating: " << ratings << endl;
 	out << "Description: " << description << endl;
 	out << "Developer: " << developer->getName() << endl << endl;

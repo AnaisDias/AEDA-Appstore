@@ -18,7 +18,7 @@ class App {
 	int id;
 	string name;
 	float price;
-	string type;
+	int type;
 	string description;
 	Developer* developer;
 	float ratings; //1 NAO GOSTO - 5 ESPETACULAR float porque vai ser a media das classifica�oes atribuidas
@@ -28,7 +28,7 @@ class App {
 
 public:
 	App();
-	App(string name, float price, string type, string description);
+	App(string name, float price, int type, string description);
 	~App();
 	static void resetIDs();
 
@@ -37,7 +37,7 @@ public:
 	int getID() const;
 	string getName() const;
 	float getPrice() const;
-	string getType() const;
+	int getType() const;
 	string getDescription() const;
 	float getRatings() const;
 	vector<int> getAllRatings() const;
@@ -48,7 +48,7 @@ public:
 	void setID(int id);
 	void setName(string name);
 	void setPrice(int price);
-	void setType(string type);
+	void setType(int type);
 	void setDescription(string description);
 	void setDeveloper(Developer* developer);
 	void setRatings(float ratings);
@@ -57,6 +57,7 @@ public:
 	void setTransactions(vector<Transaction*> transactions);
 	/////////////////////
 
+	string translateType(int t);
 	void displayInfo();
 	void displayComments();
 	void addTransaction(Transaction* transaction);

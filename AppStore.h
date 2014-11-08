@@ -40,7 +40,7 @@ public:
 
 	App* findAppByID(int id);
 	vector<App*> findAppsByName(string name);
-	vector<App*> findAppsByType(string type);
+	vector<App*> findAppsByType(int type);
 	vector<App*> orderAppsByTop5Rating();
 
 
@@ -80,9 +80,11 @@ public:
 	void Top5Apps();
 	void AppsListName();
 	void AppsListType();
+	void AllAppsList();
 	void RateApps();
-	void AddApplication(); //uses addApp
-	void RemoveApplication(); //uses removeApp
+	void AddApplicationMenu(); //uses addApp
+	void RemoveApplicationMenu(); //uses removeApp
+	void AppManagementMenu(App* app);
 
 	//CLIENT//
 	void ClientsList();
