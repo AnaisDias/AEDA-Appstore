@@ -10,6 +10,9 @@ App::App() {
 	allIDs++;
 	price=0;
 	type=0;
+	developer=NULL;
+	description="";
+name="";
 }
 
 App::~App() {
@@ -121,8 +124,18 @@ void App::setTransactions(vector<Transaction*> transactions){
 
 //OTHER FUNCTIONS
 
-void App::displayInfo(){
-	cout << this;
+string App::displayInfo(){
+	stringstream out;
+	out << "App ID: " << id << endl;
+		out << "Name: " << name << endl;
+		out << "Price: " << price << endl;
+		out << "Type: " << type << ". " << translateType(type) << endl;
+		out << "Rating: " << ratings << endl;
+		out << "Description: " << description << endl;
+		if(developer!=NULL){
+		out << "Developer: " << developer->getName() << endl << endl;
+		}
+	return out.str();
 }
 
 void App::displayComments(){
@@ -214,6 +227,7 @@ string App::translateType(int t){
 		return "Utilities";
 		break;
 	default:
+		return "No type";
 		break;
 
 	}

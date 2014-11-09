@@ -13,6 +13,8 @@ int Developer::allIDs=0;
 Developer::Developer() {
 	id=allIDs;
 	allIDs++;
+	nif=0;
+	name="";
 
 }
 

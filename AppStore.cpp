@@ -184,8 +184,14 @@ void AppStore::Top5Apps(){
 	}
 	cout << endl << "Select app by ID or enter 'r' to return: ";
 	cin >> input;
+	int in = input - '0';
 	if(input == 'r') return;
-	else findAppByID((int)input);
+	else try{
+		AppManagementMenu(findAppByID(in));
+	}
+	catch (AppDoesNotExist &e1){
+		cout << "Specified app does not exist. ID: " << e1.getID() << endl;
+	}
 }
 
 void AppStore::AppsListName() {
@@ -211,12 +217,17 @@ void AppStore::AppsListName() {
 
 	cout << endl << "Select app by ID or enter 'r' to return: ";
 	cin >> input2;
+	int in = input2 - '0';
 	if(input2 == 'r') {
 		system("cls");
 		return;
 	}
-	else AppManagementMenu(findAppByID((int)input2));
-//insert try and catch here
+	else try{
+		AppManagementMenu(findAppByID(in));
+	}
+	catch (AppDoesNotExist &e1){
+		cout << "Specified app does not exist. ID: " << e1.getID() << endl;
+	}
 }
 
 
@@ -249,17 +260,24 @@ void AppStore::AppsListType() {
 	}
 	else{
 	for(int i=0; i<appstype.size(); i++){
-		cout << appstype[i] << endl;
+		cout << appstype[i]->displayInfo() << endl;
 	}
 	}
 
 	cout << endl << "Select app by ID or enter 'r' to return: ";
 	cin >> input;
+	int in = input - '0';
 	if(input == 'r') {
 		system("cls");
 		return;
 	}
-	else AppManagementMenu(findAppByID((int)input));
+
+	else try{
+		AppManagementMenu(findAppByID(in));
+	}
+	catch (AppDoesNotExist &e1){
+		cout << "Specified app does not exist. ID: " << e1.getID() << endl;
+	}
 	//insert try and catch here
 
 }
@@ -271,16 +289,24 @@ void AppStore::AllAppsList(){
 		cin.get();
 		return;
 	}
-	for(int i=0; i<apps.size(); i++){
-		cout << apps[i] << endl;
+	vector<App *>::iterator it = apps.begin();
+	for( ;it<apps.end(); it++){
+		cout << (*(*it)).displayInfo();
+				cout << endl;
 	}
 	cout << endl << "Select app by ID or enter 'r' to return: ";
-	cin >> input;
+	int in = input - '0';
 	if(input == 'r') {
 		system("cls");
 		return;
 	}
-	else AppManagementMenu(findAppByID((int)input));
+
+	else try{
+		AppManagementMenu(findAppByID(in));
+	}
+	catch (AppDoesNotExist &e1){
+		cout << "Specified app does not exist. ID: " << e1.getID() << endl;
+	}
 }
 void AppStore::RateApps() {
 	string name;
@@ -297,10 +323,12 @@ void AppStore::RateApps() {
 		return;
 	}
 	for(int i=0; i<apps.size(); i++){
-		cout << apps[i] << endl;
+		 cout << apps[i]->displayInfo();
+				 cout << endl;
 	}
 	cout << endl << "Select app by ID or enter 'r' to return: ";
 	cin >> input;
+	int in= input - '0';
 	if(input == 'r') {
 		system("cls");
 		return;
@@ -318,10 +346,15 @@ void AppStore::RateApps() {
 	cout << "OPTION: ";
 	cin >> rate;
 
-	App *app = findAppByID((int)input);
-	//add try and catch exception here
-	app->addRating(rate);
-	cout << "Rating added successfully!" << endl;
+		try{
+			App *app = findAppByID(in);
+			app->addRating(rate);
+			cout << "Rating added successfully!" << endl;
+		}
+		catch (AppDoesNotExist &e1){
+			cout << "Specified app does not exist. ID: " << e1.getID() << endl;
+		}
+
 	}
 }
 
@@ -384,11 +417,58 @@ void AppStore::RemoveApplicationMenu() {
 }
 
 void AppStore::AppManagementMenu(App* app){
+
+	string name;
+	int choice, type, dev, rating;
+	system("cls");
+	cout << "APP MANAGEMENT: ID=" << app->getID() << endl << endl;
+	cout << "What do you wish to do? " << endl;
+	cout << "1. Change name" << endl;
+	cout << "2. Change type" << endl;
+	cout << "3. Change developer" << endl;
+	cout << "4. Add rating" << endl;
+	cout << "5. Remove app" << endl;
+	cin >> choice;
 	//change name
 	//change developer
 	//change type
 	//add rating
 	//remove app
+
+	switch(choice) {
+
+			case 1: system("cls");
+			cout << "Insert new name ";
+					cin >> name;
+					app->setName(name);
+					cout << endl << "Name changed to " << name << endl;
+					break;
+			case 2: "Insert new type ";
+			cin >> type;
+			app->setType(type);
+			cout << endl << "Type changed to " << type << endl;
+					break;
+			case 3: "Insert new developer ID ";
+			cin >> dev;
+			app->setDeveloper(findDeveloperByID(dev));
+			//add try and catch here
+			cout << endl << "Developer's new ID is " << dev << endl;
+
+					break;
+			case 4: "Insert new rating ";
+			cin >> rating;
+			app->addRating(rating);
+			cout << endl << "Rating added: " << rating << endl;
+
+					break;
+			case 5: removeApp(app);
+					cout << "App successfully removed. ";
+					break;
+			default: break;
+	}
+	cout << endl;
+	cout << "Press any key to return ";
+	cin.get();
 }
 
 /////////////////////////

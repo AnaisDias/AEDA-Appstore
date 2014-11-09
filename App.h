@@ -58,7 +58,7 @@ public:
 	/////////////////////
 
 	string translateType(int t);
-	void displayInfo();
+	string displayInfo();
 	void displayComments();
 	void addTransaction(Transaction* transaction);
 	bool removeTransaction(Transaction* transaction);

@@ -5,10 +5,10 @@ using namespace std;
 
 
 int main(){
-/*
+
 	AppStore AppStr = AppStore();
 	App *app1, *app2;
-	app1 = new App("appawesome",0.99,"entertainment","great app");
+	app1 = new App("appawesome",0.99,1,"great app");
 	app2 = new App();
 	Developer *dev1, *dev2;
 	dev1 = new Developer("James", "dev street", 5247);
@@ -20,8 +20,10 @@ int main(){
 	AppStr.addDeveloper(dev1);
 	AppStr.addDeveloper(dev2);
 
+	Menu(AppStr);
 	AppStr.saveApps();
-	AppStr.saveDevelopers();*/
+	AppStr.saveDevelopers();
+
 
 	return 0;
 }

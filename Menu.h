@@ -13,9 +13,10 @@
 #include "stdlib.h"
 
 using namespace std;
+class AppStore;
 
-void Menu();
-void AppsMenu();
+void Menu(AppStore appstore);
+void AppsMenu(AppStore appstore);
 void ClientMenu();
 void DeveloperMenu();
 void TransactionMenu();
