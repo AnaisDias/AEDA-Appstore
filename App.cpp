@@ -247,17 +247,19 @@ std::ostream & App::operator<<(std::ostream &out){
 std::ostream & App::writeToFile(std::ostream &out){
 	out << id << "," << name << "," << price << "," ;
 	out << type <<"," << description << "," << developer->getID() << ",";
-	out << ratings << ",";
+	out << ratings << "," << allRatings.size() << ",";
 	for(int i=0; i<allRatings.size();i++){
 		out << allRatings[i] << ",";
 	}
-	out << "/endRatings,";
+	out << "/endRatings," << comments.size() << ",";
 	for(int i=0; i<comments.size();i++){
 		out << comments[i] << ",";
 	}
-	out << "/endComments,";
+	out << "/endComments," << transactions.size() << ","
+
 	for(int i=0; i<transactions.size(); i++){
-		out << transactions[i]->getID() << ",";
+		out << transactions[i]->getID();
+		if(i!=transactions.size()) out << ",";
 	}
 	out << "/endTransactions";
 	return out;

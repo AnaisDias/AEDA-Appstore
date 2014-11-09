@@ -180,7 +180,7 @@ void AppStore::Top5Apps(){
 	char input;
 	cout << "TOP 5 APPS" << endl << endl;
 	for(int i=0; i<top5.size(); i++){
-		cout << top5[i] << endl;
+		cout << top5[i]->displayInfo() << endl;
 	}
 	cout << endl << "Select app by ID or enter 'r' to return: ";
 	cin >> input;
@@ -790,5 +790,217 @@ void AppStore::saveTransactions()
 	file.close();
 	cout << "\n Transactions saved." << endl;
 }
+
+///loads
+
+string AppStore::loadTokens(unsigned num, string line) {
+	string token;
+	stringstream ss(line);
+
+	while (num >= 0) {
+		getline(ss, token, ',');
+		num--;
+	}
+	return token;
+}
+
+void AppStore::loadApps()
+{
+	cout << "Loading Apps...";
+
+	ifstream file;
+	file.open("apps.txt", ios::in);
+
+	int id, devId, numR, numC, numT, transid;
+	float price, rating;
+	string name, description, type, comment;
+
+	if(file.is_open()){
+		while(!file.eof())
+		{
+			int i=0;
+			App *app;
+			string line;
+			getline(file, line);
+
+			id = atoi(loadTokens(i, line).c_str());
+			i++;
+			name = loadTokens(i, line);
+			i++;
+			price = atof(loadTokens(i, line).c_str());
+			i++;
+			type = atoi(loadTokens(i,line).c_str());
+			i++;
+			description = loadTokens(i, line);
+			i++;
+			devId = atoi(loadTokens(i, line).c_str());
+			i++;
+			numR = atoi(loadTokens(i,line).c_str());
+
+			app = new App(name,price,type,description);
+			app->setDeveloper(findDeveloperByID(devId));
+			for(int j=0; j<numR; j++){
+				rating = atoi(loadTokens(i,line).c_str());
+				i++;
+				app->addRating(rating);
+			}
+			numC = atoi(loadTokens(i,line).c_str());
+			for(int j=0; j<numC; j++){
+				comment = loadTokens(i,line);
+				i++;
+				app->addComment(comment);
+			}
+			/*
+			numT = atoi(loadTokens(i,line).c_str());
+
+			for(int j=0; j<numT; j++){
+				transid = atoi(loadTokens(i,line).c_str());
+				i++;
+				app->addTransaction(findTransactionByID(transid));
+			}*/
+
+			apps.push_back(app);
+			}
+
+		}
+
+	file.close();
+	cout <<"\n Apps Loaded.";
+}
+
+void AppStore::loadDevelopers()
+{
+	cout << "Loading Developers...";
+
+	ifstream file;
+	file.open("developers.txt", ios::in);
+
+	int id, nif;
+	string name, address;
+
+	if(file.is_open()){
+		while(!file.eof())
+		{
+			Developer *developer;
+			vector<App*>appsP;
+			int i=0;
+			string line;
+			getline(file, line);
+
+			id = atoi(loadTokens(i, line).c_str());
+			i++;
+			name = loadTokens(i, line);
+			i++;
+			address = loadTokens(i, line);
+			i++;
+			nif = atoi(loadTokens(i,line).c_str());
+
+			developer = new Developer(name, address, nif);
+			developer->setID(id);
+			//AppsPublished (vai ser numa funçao diferente)
+			developers.push_back(developer);
+		}
+	}
+
+	file.close();
+	cout <<"\n Transactions Loaded.";
+}
+
+void AppStore::assignPublishedAppsToDevs(){
+
+}
+
+
+void AppStore::loadClients()
+{
+	cout << "Loading Clients...";
+
+	ifstream file;
+	file.open("clients.txt", ios::in);
+
+	int id, age, numT, transid;
+	string username;
+
+	if(file.is_open()){
+		while(!file.eof())
+		{
+			Client *client;
+			int i=1;
+			string line;
+			getline(file, line);
+
+			id = atoi(loadTokens(i, line).c_str());
+			i++;
+			username = loadTokens(i, line);
+			i++;
+			age = atoi(loadTokens(i, line).c_str());
+			i++;
+			numT = atoi(loadTokens(i, line).c_str());
+			client = new Client(username, age);
+			client->setID(id);
+			int j=0;
+			while(j!=numT){
+				transid = atoi(loadTokens(i, line).c_str());
+				i++;
+				client->addTransaction(findTransactionByID(transid));
+				j++;
+
+			}
+
+			clients.push_back(client);
+
+		}
+	}
+
+	file.close();
+	cout << "\n Clients Loaded.";
+}
+
+void AppStore::loadTransactions()
+{
+	cout << "Loading Transactions...";
+
+	ifstream file;
+	file.open("transactions.txt", ios::in);
+
+
+	int id, clientId, numA, appID;
+	string usedVoucher;
+
+	if(file.is_open()){
+		while(!file.eof())
+		{
+			int i=0;
+			string line;
+			getline(file, line);
+
+			id = atoi(loadTokens(i, line).c_str());
+			i++;
+			clientId = atoi(loadTokens(i, line).c_str());
+			i++;
+			usedVoucher = loadTokens(i, line);
+			i++;
+			numA = atoi(loadTokens(i, line).c_str());
+
+
+			Transaction *trans = new Transaction();
+			trans->setID(id);
+			trans->setClient(findClientByID(clientId));
+			trans->setUsedVoucher(usedVoucher);
+
+			for(int j=0; j<numA; j++){
+				appID = atoi(loadTokens(i,line).c_str());
+				i++;
+				trans->addApp(findAppByID(appID));
+			}
+
+		transactions.push_back(trans);
+		}
+	}
+
+	file.close();
+	cout <<"\n Transactions Loaded.";
+}
+
 
 

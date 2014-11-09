@@ -5,6 +5,13 @@ using namespace std;
 
 
 int main(){
+	//loads
+	//chamar load developers
+	//chamar load apps
+	//chamar assignappstodevs
+	//chamar load trans
+	//chamar load transactions
+	//chamar assigntransactionstoapps
 
 	AppStore AppStr = AppStore();
 	App *app1, *app2;
