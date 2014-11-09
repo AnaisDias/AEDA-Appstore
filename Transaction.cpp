@@ -48,6 +48,12 @@ string Transaction::getUsedVoucher() const{
 	return usedVoucher;
 }
 
+void Transaction::addApp(App *app){
+	apps.push_back(app);
+	float earn = app->getPrice() * 0.8;
+	app->getDeveloper()->addEarnings(earn);
+}
+
 void Transaction::setClient(Client* cli){
 	this->client=cli;
 }

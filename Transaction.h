@@ -34,6 +34,8 @@ public:
 	vector<App*> getApps() const;
 	string getUsedVoucher() const;
 
+	void addApp(App *app);
+
 	void setID(int id);
 	void setClient(Client* cli);
 	void setApps(vector<App*> apps);

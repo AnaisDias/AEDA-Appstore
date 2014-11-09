@@ -21,6 +21,7 @@ class Developer {
 	string name;
 	string address;
 	int nif;
+	float earnings;
 	vector<App*> appsPublished;// Todas as apps publicadas pelo developer
 	//float earnings;
 public:
@@ -42,6 +43,7 @@ public:
 	void setApps(vector<App*> apps);
 	/////////////////////
 
+	void addEarnings(float earn){earnings+=earn};
 	void addApp(App* app);
 	bool removeApp(App* app);
 	void displayInfo();
