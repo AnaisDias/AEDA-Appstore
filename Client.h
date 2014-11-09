@@ -48,6 +48,8 @@ public:
 	void classifyApp(App* app, int classification);
 	void commentApp(App* app, string comment);
 
+	string displayInfo();
+
 	bool operator==(const Client &client) const;
 	std::ostream & operator<<(std::ostream &out);
 

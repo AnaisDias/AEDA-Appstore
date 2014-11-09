@@ -18,9 +18,9 @@ class AppStore;
 void Menu(AppStore appstore);
 void AppsMenu(AppStore appstore);
 void ClientMenu();
-void DeveloperMenu();
-void TransactionMenu();
-void ExitMenu();
+void DeveloperMenu(AppStore as);
+void TransactionMenu(AppStore as);
+void ExitMenu(AppStore as);
 
 
 

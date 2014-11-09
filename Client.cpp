@@ -8,6 +8,7 @@
 #include "Client.h"
 #include "Exceptions.h"
 #include <iostream>
+#include <sstream>
 
 int Client::allIDs=0;
 
@@ -103,10 +104,27 @@ std::ostream & Client::operator<<(std::ostream &out){
 std::ostream & Client::writeToFile(std::ostream &out){
 	out << id << "," << username << ",";
 	out << age << ",";
-	for(int i=0; i<transactions.size(); i++){
+	for(unsigned int i=0; i<transactions.size(); i++){
 		out << transactions[i]->getID();
-		if(i!=transactions.size()) out << ",";
+		if(i!=transactions.size()){
+			out << ",";
+		}
+
 	}
 	return out;
 
+}
+
+string Client::displayInfo()
+{
+	stringstream out;
+	out << "\n Client ID: " << id << endl;
+	out << " Username: " << username << endl;
+	out << " Age: " << age << endl;
+	out << " Transactions: ";
+	for(unsigned int i = 0; i <transactions.size(); i++)
+	{
+		out << transactions[i] << ',' << endl;
+	}
+	return out.str();
 }

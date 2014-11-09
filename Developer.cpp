@@ -15,6 +15,7 @@ Developer::Developer() {
 	allIDs++;
 	nif=0;
 	name="";
+	earnings = 0;
 
 }
 
@@ -23,7 +24,9 @@ Developer::Developer(string name, string address, int nif) {
 	this->address = address;
 	this->nif = nif;
 	this->id=allIDs;
+	earnings = 0;
 	allIDs++;
+
 }
 
 Developer::~Developer() {

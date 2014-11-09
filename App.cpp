@@ -12,12 +12,13 @@ App::App() {
 	type=0;
 	developer=NULL;
 	description="";
-name="";
+	name="";
+	ratings = 0;
 }
 
 App::~App() {
 	delete developer;
-	for(int i=0; i<transactions.size(); i++){
+	for(unsigned int i=0; i<transactions.size(); i++){
 		delete transactions[i];
 		transactions.erase(transactions.begin()+i);
 		i--;
@@ -126,20 +127,20 @@ void App::setTransactions(vector<Transaction*> transactions){
 
 string App::displayInfo(){
 	stringstream out;
-	out << "App ID: " << id << endl;
-		out << "Name: " << name << endl;
-		out << "Price: " << price << endl;
-		out << "Type: " << type << ". " << translateType(type) << endl;
-		out << "Rating: " << ratings << endl;
-		out << "Description: " << description << endl;
+	out << " App ID: " << id << endl;
+		out << " Name: " << name << endl;
+		out << " Price: " << price << endl;
+		out << " Type: " << type << ". " << translateType(type) << endl;
+		out << " Rating: " << ratings << endl;
+		out << " Description: " << description << endl;
 		if(developer!=NULL){
-		out << "Developer: " << developer->getName() << endl << endl;
+		out << " Developer: " << developer->getName() << endl << endl;
 		}
 	return out.str();
 }
 
 void App::displayComments(){
-	for(int i=0; i<comments.size(); i++){
+	for(unsigned int i=0; i<comments.size(); i++){
 		cout << comments[i] << endl;
 	}
 	cout << endl;
@@ -150,7 +151,7 @@ void App::addTransaction(Transaction* transaction){
 }
 
 bool App::removeTransaction(Transaction* transaction){
-	for(int i=0; i<transactions.size(); i++){
+	for(unsigned int i=0; i<transactions.size(); i++){
 		if(transaction==transactions[i]){
 			transactions.erase(transactions.begin() + i);
 			return true;
@@ -171,7 +172,7 @@ void App::addRating(int rating){
 
 void App::updateRatings(){
 	float updatedR=0;
-	for(int i=0; i<allRatings.size(); i++){
+	for(unsigned int i=0; i<allRatings.size(); i++){
 		updatedR+=allRatings[i];
 	}
 
@@ -248,15 +249,15 @@ std::ostream & App::writeToFile(std::ostream &out){
 	out << id << "," << name << "," << price << "," ;
 	out << type <<"," << description << "," << developer->getID() << ",";
 	out << ratings << ",";
-	for(int i=0; i<allRatings.size();i++){
+	for(unsigned int i=0; i<allRatings.size();i++){
 		out << allRatings[i] << ",";
 	}
 	out << "/endRatings,";
-	for(int i=0; i<comments.size();i++){
+	for(unsigned int i=0; i<comments.size();i++){
 		out << comments[i] << ",";
 	}
 	out << "/endComments,";
-	for(int i=0; i<transactions.size(); i++){
+	for(unsigned int i=0; i<transactions.size(); i++){
 		out << transactions[i]->getID() << ",";
 	}
 	out << "/endTransactions";

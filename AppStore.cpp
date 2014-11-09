@@ -11,6 +11,7 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include "Menu.h"
 
 using namespace std;
 
@@ -49,11 +50,6 @@ void AppStore::addClient(Client* cli) {
 void AppStore::addDeveloper(Developer* dev) {
 	developers.push_back(dev);
 }
-
-// Saves AND Loads
-
-//Menus
-
 //Gets e Sets
 
 string AppStore::getName() {
@@ -178,13 +174,21 @@ Transaction* AppStore::findTransactionByID(int id){
 void AppStore::Top5Apps(){
 	vector<App*> top5 = orderAppsByTop5Rating();
 	char input;
-	cout << "TOP 5 APPS" << endl << endl;
-	for(int i=0; i<top5.size(); i++){
-		cout << top5[i] << endl;
+
+	cout << "\n TOP 5 APPS" << endl << endl;
+	for(unsigned int i=0; i<top5.size(); i++){
+		cout << top5[i]->displayInfo() << endl;
 	}
-	cout << endl << "Select app by ID or enter 'r' to return: ";
+
+	// Crasha por aqui
+
+	cout << endl ;
+
+	cout << "Select app by ID or enter 'r' to return: ";
 	cin >> input;
+
 	int in = input - '0';
+
 	if(input == 'r') return;
 	else try{
 		AppManagementMenu(findAppByID(in));
@@ -195,23 +199,26 @@ void AppStore::Top5Apps(){
 }
 
 void AppStore::AppsListName() {
+
 	string input;
 	char input2;
 	vector<App*> appsN;
-	cout << "Enter app name: ";
+	cout << endl;
+	cout << " Enter app name: ";
 	cin >> input;
 	appsN=findAppsByName(input);
 
 	system("cls");
-	cout << "Apps List By NAME: " << endl;
+	cout << " Apps List By NAME: " << endl;
+	cout << endl;
 	if(appsN.empty()) {
 		cout << "No apps with the requested name. Press any key to go back" <<endl;
 		cin.get();
 		return;
 	}
 	else{
-		for(int i=0; i<appsN.size();i++){
-			cout << appsN[i] << endl;
+		for(unsigned int i=0; i<appsN.size();i++){
+			cout << appsN[i]->displayInfo() << endl;
 		}
 	}
 
@@ -396,8 +403,8 @@ void AppStore::RemoveApplicationMenu() {
 		cin.get();
 		return;
 	}
-	for(int i=0; i<apps.size(); i++){
-		cout << apps[i] << endl;
+	for(unsigned int i=0; i<apps.size(); i++){
+		cout << apps[i]->displayInfo() << endl;
 	}
 	cout << endl << "Select app by ID or enter 'r' to return: ";
 	cin >> input;
@@ -419,7 +426,7 @@ void AppStore::RemoveApplicationMenu() {
 void AppStore::AppManagementMenu(App* app){
 
 	string name;
-	int choice, type, dev, rating;
+	char choice, type, dev, rating;
 	system("cls");
 	cout << "APP MANAGEMENT: ID=" << app->getID() << endl << endl;
 	cout << "What do you wish to do? " << endl;
@@ -437,34 +444,40 @@ void AppStore::AppManagementMenu(App* app){
 
 	switch(choice) {
 
-			case 1: system("cls");
-			cout << "Insert new name ";
-					cin >> name;
-					app->setName(name);
-					cout << endl << "Name changed to " << name << endl;
-					break;
-			case 2: "Insert new type ";
-			cin >> type;
-			app->setType(type);
-			cout << endl << "Type changed to " << type << endl;
-					break;
-			case 3: "Insert new developer ID ";
+			case '1':
+				system("cls");
+				cout << "Insert new name ";
+				cin >> name;
+				app->setName(name);
+				cout << endl << "Name changed to " << name << endl;
+				break;
+			case '2':
+				cout << "Insert new type ";
+				cin >> type;
+				app->setType(type);
+				cout << endl << "Type changed to " << type << endl;
+				break;
+			case '3':
+				cout << "Insert new developer ID ";
 			cin >> dev;
 			app->setDeveloper(findDeveloperByID(dev));
 			//add try and catch here
 			cout << endl << "Developer's new ID is " << dev << endl;
 
 					break;
-			case 4: "Insert new rating ";
+			case '4':
+				cout << "Insert new rating " << endl;
 			cin >> rating;
 			app->addRating(rating);
 			cout << endl << "Rating added: " << rating << endl;
 
 					break;
-			case 5: removeApp(app);
-					cout << "App successfully removed. ";
-					break;
-			default: break;
+			case '5':
+				removeApp(app);
+				cout << "App successfully removed. ";
+				break;
+			default:
+				break;
 	}
 	cout << endl;
 	cout << "Press any key to return ";
@@ -476,68 +489,66 @@ void AppStore::AppManagementMenu(App* app){
 /////////////////////////
 
 void AppStore::ClientsList() {
-	cout << "CLIENTS LIST" << endl;
-	//display list
 
-	cout << endl;
-	char y = 'y';
-	cout << "Go Back? (y)";
-	cin >> y;
-	if(y == 'y') {
-	system("cls");
-	ClientMenu();
+	cout << "\n CLIENTS LIST" << endl;
+	cout << " ---------------------------------------------------------" << endl;
+
+	for(unsigned int i = 0; i < clients.size(); i++)
+	{
+		cout << clients[i]->displayInfo() << endl;
 	}
+
 }
 
 void AppStore::PurchasedApps() {
 	cout << "PURCHASED APPS" << endl;
-	//display list
+	cout << " ---------------------------------------------------------" << endl;
+	/*for(unsigned int i = 0; i < clients.size(); i++)
+	{
 
-	cout << endl;
-	char y = 'y';
-	cout << "Go Back? (y)";
-	cin >> y;
-	if (y == 'y') {
-		system("cls");
-		ClientMenu();}
+	}*/
+
+
 }
 
 void AppStore::AddClients() {
 	string name;
-	cout << "Name Of The Client To Be Added: ";
-	cin >> name;
+	int age;
 
-	//add client
-
-	cout << "Client Added Successfully To The Appstore Database" << endl;
-
+	cout << "\n ADD CLIENT" << endl;
+	cout << " ---------------------------------------------------------" << endl;
 	cout << endl;
-	char y = 'y';
-	cout << "Go Back? (y)";
-	cin >> y;
-	if (y == 'y') {
-		system("cls");
-		ClientMenu();
-	}
+
+	cout << " Name Of The Client To Be Added: ";
+	cin >> name;
+	cout << endl;
+	cout << " Age Of The Client To Be Added: ";
+	cin >> age;
+
+	Client *cli = new Client(name, age);
+	clients.push_back(cli);
+
+	cout << endl << endl;
+	cout << " Client Added Successfully To The Appstore Database." << endl;
+
 }
 
 void AppStore::RemoveClients() {
+
 	string name;
 	cout << "Name Of The Client To Be Removed: ";
 	cin >> name;
 
-	//remove client
-
-	cout << "Client Removed Successfully From The Appstore Database" << endl;
+	for(unsigned int i = 0; i < clients.size(); i++)
+	{
+		if(clients[i]->getUsername().compare(name) == 0)
+		{
+			clients.erase(clients.begin() + i);
+		}
+	}
 
 	cout << endl;
-	char y = 'y';
-	cout << "Go Back? (y)";
-	cin >> y;
-	if (y == 'y') {
-		system("cls");
-		ClientMenu();
-	}
+	cout << "Client Removed Successfully From The Appstore Database" << endl;
 
 }
 
@@ -545,7 +556,7 @@ void AppStore::RemoveClients() {
 //////SUB DEV ///////////
 /////////////////////////
 
-void AppStore::IndividualDevList() {
+void AppStore::IndividualDevList(AppStore as) {
 	cout << "INDIVIDUAL DEVELOPERS: " << endl;
 
 	//display list
@@ -556,13 +567,13 @@ void AppStore::IndividualDevList() {
 	cin >> y;
 	if (y == 'y') {
 		system("cls");
-		DeveloperMenu();
+		DeveloperMenu(as);
 	}
 
 
 }
 
-void AppStore::EnterpriseList() {
+void AppStore::EnterpriseList(AppStore as) {
 	cout << "ENTERPRISES: " << endl;
 
 	//display list
@@ -573,13 +584,13 @@ void AppStore::EnterpriseList() {
 	cin >> y;
 	if (y == 'y') {
 		system("cls");
-		DeveloperMenu();
+		DeveloperMenu(as);
 	}
 
 
 }
 
-void AppStore::AppsCreated() {
+void AppStore::AppsCreated(AppStore as) {
 	int choice;
 	char y = 'y';
 	string name;
@@ -603,7 +614,7 @@ void AppStore::AppsCreated() {
 			cin >> y;
 			if (y == 'y') {
 				system("cls");
-				DeveloperMenu();
+				DeveloperMenu(as);
 			}
 			break;
 	case 2: system("cls");
@@ -617,21 +628,21 @@ void AppStore::AppsCreated() {
 			cin >> y;
 			if (y == 'y') {
 				system("cls");
-				DeveloperMenu();
+				DeveloperMenu(as);
 			}
 			break;
 	case 0: system("cls");
-			DeveloperMenu();
+			DeveloperMenu(as);
 			break;
 	default: break;
 	}
 }
 
-void AppStore::SalesData() {
+void AppStore::SalesData(AppStore as) {
 
 }
 
-void AppStore::AddDev() {
+void AppStore::AddDev(AppStore as) {
 	string name;
 	cout << "Developer To Be Added: ";
 	cin >> name;
@@ -646,11 +657,11 @@ void AppStore::AddDev() {
 	cin >> y;
 	if (y == 'y') {
 		system("cls");
-		DeveloperMenu();
+		DeveloperMenu(as);
 	}
 }
 
-void AppStore::RemoveDev() {
+void AppStore::RemoveDev(AppStore as) {
 	string name;
 	cout << "Developer To Be Removed: ";
 	// display list of Devs
@@ -667,7 +678,7 @@ void AppStore::RemoveDev() {
 	cin >> y;
 	if (y == 'y') {
 		system("cls");
-		DeveloperMenu();
+		DeveloperMenu(as);
 	}
 }
 
@@ -675,7 +686,7 @@ void AppStore::RemoveDev() {
 //////SUB TRANS /////////
 /////////////////////////
 
-void AppStore::TransApps() {
+void AppStore::TransApps(AppStore as) {
 	cout << "APPS TRANSACTIONS: " << endl;
 	//display apps transactions
 
@@ -685,11 +696,11 @@ void AppStore::TransApps() {
 	cin >> y;
 	if (y == 'y') {
 		system("cls");
-		TransactionMenu();
+		TransactionMenu(as);
 	}
 }
 
-void AppStore::TransClients() {
+void AppStore::TransClients(AppStore as) {
 	cout << "CLIENTS TRANSACTIONS: " << endl;
 	//display the client transactions????
 
@@ -699,11 +710,11 @@ void AppStore::TransClients() {
 	cin >> y;
 	if (y == 'y') {
 		system("cls");
-		TransactionMenu();
+		TransactionMenu(as);
 	}
 }
 
-void AppStore::TransDev() {
+void AppStore::TransDev(AppStore as) {
 	cout << "DEVELOPERS/ENTERPRISES TRANSACTIONS: " << endl;
 	//display the devs list and which transaction the client wants to see????? lol
 
@@ -713,9 +724,11 @@ void AppStore::TransDev() {
 	cin >> y;
 	if (y == 'y') {
 		system("cls");
-		TransactionMenu();
+		TransactionMenu(as);
 	}
 }
+
+
 
 /**********************************************************
  *                    SAVES AND LOADS                     *
@@ -735,9 +748,9 @@ void AppStore::saveApps()
 		file << endl;
 	}
 
-	system("cls");
+
 	file.close();
-	cout << "\n Apps saved." << endl;
+	cout << " Apps saved.\n" << endl;
 }
 
 void AppStore::saveDevelopers()
@@ -752,9 +765,9 @@ void AppStore::saveDevelopers()
 		(*it)->writeToFile(file);
 		file << endl;
 	}
-	system("cls");
+
 	file.close();
-	cout << "\n Developers saved." << endl;
+	cout << " Developers saved.\n" << endl;
 }
 
 void AppStore::saveClients()
@@ -764,14 +777,14 @@ void AppStore::saveClients()
 	ofstream file;
 	file.open("clients.txt",ios::trunc);
 
-	for(; it != clients.end(); it++)
+	for(it = clients.begin() ; it != clients.end(); it++)
 	{
 		(*it)->writeToFile(file);
 		file << endl;
 	}
-	system("cls");
+
 	file.close();
-	cout << "\n Clients saved." << endl;
+	cout << " Clients saved.\n" << endl;
 }
 
 void AppStore::saveTransactions()
@@ -786,9 +799,9 @@ void AppStore::saveTransactions()
 		(*it)->writeToFile(file);
 		file << endl;
 	}
-	system("cls");
+
 	file.close();
-	cout << "\n Transactions saved." << endl;
+	cout << " Transactions saved.\n " << endl;
 }
 
 

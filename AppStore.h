@@ -74,7 +74,7 @@ public:
 	void saveTransactions();
 	void loadTransaction();
 
-	///MENUS///
+
 
 	//APPS//
 	void Top5Apps();
@@ -93,17 +93,17 @@ public:
 	void RemoveClients();
 
 	//DEV//
-	void IndividualDevList();
-	void EnterpriseList();
-	void AppsCreated();
-	void SalesData();
-	void AddDev();
-	void RemoveDev();
+	void IndividualDevList(AppStore as);
+	void EnterpriseList(AppStore as);
+	void AppsCreated(AppStore as);
+	void SalesData(AppStore as);
+	void AddDev(AppStore as);
+	void RemoveDev(AppStore as);
 
 	//TRANSACTIONS//
-	void TransApps();
-	void TransClients();
-	void TransDev();
+	void TransApps(AppStore as);
+	void TransClients(AppStore as);
+	void TransDev(AppStore as);
 
 };
 

@@ -1,0 +1,2 @@
+0,appawesome,0.99,1,great app,11734536,0,/endRatings,/endComments,/endTransactions
+1,,0,0,,1,0,/endRatings,/endComments,/endTransactions
