@@ -14,7 +14,13 @@ int main(){
 	//chamar assigntransactionstoapps
 
 	AppStore AppStr = AppStore();
-	App *app1, *app2;
+	AppStr.loadDevelopers();
+	AppStr.loadApps2();
+	AppStr.assignPublishedAppsToDevs();
+	AppStr.loadClients();
+	AppStr.loadTransactions();
+	AppStr.assignTransactionsToApps();
+	/*App *app1, *app2;
 	app1 = new App("appawesome",0.99,1,"great app");
 	app2 = new App();
 	Developer *dev1, *dev2;
@@ -25,12 +31,13 @@ int main(){
 	AppStr.addApp(app1);
 	AppStr.addApp(app2);
 	AppStr.addDeveloper(dev1);
-	AppStr.addDeveloper(dev2);
+	AppStr.addDeveloper(dev2);*/
 
 	Menu(AppStr);
 	AppStr.saveApps();
 	AppStr.saveDevelopers();
-
+	AppStr.saveClients();
+	AppStr.saveTransactions();
 
 	return 0;
 }

@@ -17,10 +17,11 @@ class AppStore;
 
 void Menu(AppStore appstore);
 void AppsMenu(AppStore appstore);
-void ClientMenu();
+void ClientMenu(AppStore appstore);
 void DeveloperMenu();
 void TransactionMenu();
-void ExitMenu();
+void ExitMenu(AppStore appstore);
+void SaveMenu(AppStore appstore);
 
 
 

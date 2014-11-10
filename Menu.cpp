@@ -58,7 +58,7 @@ void AppsMenu(AppStore as) {
 	}
 }
 
-void ClientMenu() {
+void ClientMenu(AppStore as) {
 
 	int choice;
 
@@ -70,24 +70,30 @@ void ClientMenu() {
 	cout << "4 - Remove Client" << endl;
 	cout << "0 - Go back" << endl;
 	cout << "Option: ";
+	cin.get();
 	cin >> choice;
 
     switch(choice) {
 
         case 1: system("cls");
-            	//ClientsList();
+            	as.ClientsList();
+            	ClientMenu(as);
             	break;
         case 2: system("cls");
-            	//PurchasedApps();
+            	as.PurchasedApps();
+            	ClientMenu(as);
             	break;
         case 3: system("cls");
-        		//AddClients();
+        		as.AddClients();
+        		ClientMenu(as);
         		break;
         case 4: system("cls");
-        		//RemoveClients();
+        		as.RemoveClients();
+        		ClientMenu(as);
         		break;
         case 0: system("cls");
-            	//Menu(as);
+            	Menu(as);
+            	break;
         default: break;
     }
 }
@@ -165,33 +171,101 @@ void TransactionMenu() {
     }
 }
 
-void ExitMenu() {
-    cout << "Before you exit... Do you want to save?" << endl;
-    cout << "1 - Yes" << endl;
-    cout << "2 - No" << endl;
-    cout << "3 - Cancel" << endl;
+void SaveMenu(AppStore as);
+
+void ExitMenu(AppStore as) {
+    cout << "\n Before you exit... Do you want to save?" << endl;
+    cout << " ---------------------------------------------------------" << endl;
+    cout << endl;
+    cout << "   1 - Yes" << endl;
+    cout << "   2 - No" << endl;
+    cout << "   3 - Cancel" << endl;
 
     char input;
-    cout << "Option: ";
+    cout << "\n Option: ";
     cin >> input;
 
     switch (input) {
         case '1':
             system("cls");
-            //SaveMenu();
+            SaveMenu(as);
             break;
         case '2':
-            system("cls");
-            cout << "bye";
             exit(0);
             break;
         case '3':
-            system("cls");
+        	system("cls");
+            Menu(as);
             break;
         default:
-            system("cls");
+        	system("cls");
+        	ExitMenu(as);
             break;
     }
+}
+void SaveMenu(AppStore as)
+{
+	cout << "\n Choose what you want to save." << endl;
+	cout << " ---------------------------------------------------------" << endl;
+	cout << endl;
+	cout << "   1. Clients" << endl;
+	cout << "   2. Developers" << endl;
+	cout << "   3. Apps" << endl;
+	cout << "   4. Transactions" << endl;
+	cout << "   5. Save Everything." << endl;
+	cout << endl;
+	cout << "   0. Go Back" << endl;
+	cout << "   9. Exit" << endl;
+	cout << endl;
+	char input;
+	cout << " Option: "; cin >> input;
+
+	switch(input)
+	{
+	case '0':
+		system("cls");
+		ExitMenu(as);
+		break;
+
+	case '1':
+		system("cls");
+		as.saveClients();
+		SaveMenu(as);
+		break;
+	case '2':
+		system("cls");
+		as.saveDevelopers();
+		SaveMenu(as);
+			break;
+	case '3':
+		system("cls");
+		as.saveApps();
+		SaveMenu(as);
+			break;
+	case '4':
+		system("cls");
+		as.saveTransactions();
+		SaveMenu(as);
+			break;
+	case '5':
+		system("cls");
+		as.saveClients();
+		as.saveDevelopers();
+		as.saveApps();
+		as.saveTransactions();
+		system("cls");
+		cout << "\n All saved.\n" << endl;
+		SaveMenu(as);
+		break;
+	case '9':
+		exit(0);
+		break;
+	default:
+		system("cls");
+		SaveMenu(as);
+		break;
+	}
+
 }
 void Menu(AppStore as) {
     // Fazer load dos ficheiros;
@@ -218,7 +292,7 @@ void Menu(AppStore as) {
 
         case 2:
             system("cls");
-            ClientMenu();
+            ClientMenu(as);
             Menu(as);
             break;
 
@@ -236,7 +310,7 @@ void Menu(AppStore as) {
 
         case 0:
             system("cls");
-            ExitMenu();
+            ExitMenu(as);
             break;
 
         default:

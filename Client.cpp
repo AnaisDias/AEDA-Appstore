@@ -8,6 +8,7 @@
 #include "Client.h"
 #include "Exceptions.h"
 #include <iostream>
+#include <sstream>
 
 int Client::allIDs=0;
 
@@ -87,6 +88,14 @@ void Client::commentApp(App* app, string comment){
 	app->addComment(comment);
 }
 
+string Client::displayInfo(){
+	stringstream out;
+	out << "Client ID: " << id << endl;
+	out << "Username: " << username << endl;
+	out << "Age: " << age << endl;
+
+	return out.str();
+}
 bool Client::operator==(const Client &client) const{
 	if(this->id==client.id && this->username==client.username) return true;
 	return false;

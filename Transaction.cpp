@@ -54,6 +54,10 @@ void Transaction::addApp(App *app){
 	app->getDeveloper()->addEarnings(earn);
 }
 
+void Transaction::setID(int id){
+	this->id=id;
+}
+
 void Transaction::setClient(Client* cli){
 	this->client=cli;
 }

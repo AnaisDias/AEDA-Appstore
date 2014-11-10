@@ -43,7 +43,7 @@ public:
 	void setApps(vector<App*> apps);
 	/////////////////////
 
-	void addEarnings(float earn){earnings+=earn};
+	void addEarnings(float earn){earnings+=earn;};
 	void addApp(App* app);
 	bool removeApp(App* app);
 	void displayInfo();

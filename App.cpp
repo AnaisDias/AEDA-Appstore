@@ -16,12 +16,12 @@ name="";
 }
 
 App::~App() {
-	delete developer;
+	/*delete developer;
 	for(int i=0; i<transactions.size(); i++){
 		delete transactions[i];
 		transactions.erase(transactions.begin()+i);
 		i--;
-	}
+	}*/
 }
 
 App::App(string name, float price, int type, string description) {
@@ -247,7 +247,7 @@ std::ostream & App::operator<<(std::ostream &out){
 std::ostream & App::writeToFile(std::ostream &out){
 	out << id << "," << name << "," << price << "," ;
 	out << type <<"," << description << "," << developer->getID() << ",";
-	out << ratings << "," << allRatings.size() << ",";
+	out << allRatings.size() << ",";
 	for(int i=0; i<allRatings.size();i++){
 		out << allRatings[i] << ",";
 	}
@@ -255,7 +255,7 @@ std::ostream & App::writeToFile(std::ostream &out){
 	for(int i=0; i<comments.size();i++){
 		out << comments[i] << ",";
 	}
-	out << "/endComments," << transactions.size() << ","
+	out << "/endComments," << transactions.size() << ",";
 
 	for(int i=0; i<transactions.size(); i++){
 		out << transactions[i]->getID();

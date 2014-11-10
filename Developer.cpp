@@ -15,6 +15,7 @@ Developer::Developer() {
 	allIDs++;
 	nif=0;
 	name="";
+	appsPublished.clear();
 
 }
 
@@ -114,7 +115,7 @@ std::ostream & Developer::operator<<(std::ostream &out){
 
 std::ostream & Developer::writeToFile(std::ostream &out){
 	out << id << "," << name << "," << address << ",";
-	out << nif << ",";
+	out << nif << "," << appsPublished.size() << ",";
 	for(int i=0; i<appsPublished.size();i++){
 		out << appsPublished[i]->getID();
 		if(i!=appsPublished.size()) out << ",";
