@@ -49,6 +49,8 @@ public:
 	void commentApp(App* app, string comment);
 
 	string displayInfo();
+	string displayName();
+
 	bool operator==(const Client &client) const;
 	std::ostream & operator<<(std::ostream &out);
 

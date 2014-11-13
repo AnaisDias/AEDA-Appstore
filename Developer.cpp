@@ -93,6 +93,7 @@ bool Developer::removeApp(App* app){
 
 void Developer::displayInfo(){
 
+
 }
 
 void Developer::displayAllSales(){
@@ -131,4 +132,11 @@ Individual::Individual(string name, string address, int nif):Developer(name, add
 Company::Company(string businessname, int code, string name, string address, int nif):Developer(name, address, nif){
 	this->code=code;
 	this->businessName=businessname;
+}
+
+string Developer::displayNameDev() {
+	stringstream out;
+	out << "Dev Name: " << name << endl;
+
+	return out.str();
 }

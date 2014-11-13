@@ -78,6 +78,8 @@ void Transaction::addWorkingVoucher(string voucher){
 	workingVouchers.push_back(voucher);
 }
 
+
+
 bool Transaction::operator==(const Transaction &trans) const{
 	Client* cli =this->client;
 	Client* cli2 =trans.client;

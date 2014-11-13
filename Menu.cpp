@@ -142,7 +142,7 @@ void DeveloperMenu() {
 
 }
 
-void TransactionMenu() {
+void TransactionMenu(AppStore as) {
     cout << "Transactions" << endl;
     cout << "1 - List by Apps" << endl;
     cout << "2 - List by CLients" << endl;
@@ -155,17 +155,20 @@ void TransactionMenu() {
     switch(choice) {
 
         case 1: system("cls");
-            //TransApps();
-            break;
+            	as.TransApps();
+            	TransactionMenu(as);
+            	break;
         case 2: system("cls");
-            //TransClients();
-            break;
+            	//as.TransClients();
+            	//TransactionMenu(as);
+            	break;
         case 3: system("cls");
-            //TransDev();
-            break;
+				//as.TransDev();
+				//TransactionMenu(as);
+				break;
         case 0: system("cls");
-            //Menu(as);
-            break;
+				Menu(as);
+				break;
         default: break;
 
     }
@@ -186,23 +189,20 @@ void ExitMenu(AppStore as) {
     cin >> input;
 
     switch (input) {
-        case '1':
-            system("cls");
-            SaveMenu(as);
-            break;
-        case '2':
-            exit(0);
-            break;
-        case '3':
-        	system("cls");
-            Menu(as);
-            break;
-        default:
-        	system("cls");
-        	ExitMenu(as);
-            break;
+        case '1':system("cls");
+        		SaveMenu(as);
+        		break;
+        case '2':exit(0);
+        		break;
+        case '3':system("cls");
+            	Menu(as);
+            	break;
+        default:system("cls");
+        		ExitMenu(as);
+        		break;
     }
 }
+
 void SaveMenu(AppStore as)
 {
 	cout << "\n Choose what you want to save." << endl;
@@ -222,48 +222,46 @@ void SaveMenu(AppStore as)
 
 	switch(input)
 	{
-	case '0':
-		system("cls");
-		ExitMenu(as);
-		break;
+	case '0':system("cls");
+			ExitMenu(as);
+			break;
 
-	case '1':
-		system("cls");
-		as.saveClients();
-		SaveMenu(as);
-		break;
-	case '2':
-		system("cls");
-		as.saveDevelopers();
-		SaveMenu(as);
+	case '1':system("cls");
+			as.saveClients();
+			SaveMenu(as);
 			break;
-	case '3':
-		system("cls");
-		as.saveApps();
-		SaveMenu(as);
+
+	case '2':system("cls");
+			as.saveDevelopers();
+			SaveMenu(as);
 			break;
-	case '4':
-		system("cls");
-		as.saveTransactions();
-		SaveMenu(as);
+
+	case '3':system("cls");
+			as.saveApps();
+			SaveMenu(as);
 			break;
-	case '5':
-		system("cls");
-		as.saveClients();
-		as.saveDevelopers();
-		as.saveApps();
-		as.saveTransactions();
-		system("cls");
-		cout << "\n All saved.\n" << endl;
-		SaveMenu(as);
-		break;
-	case '9':
-		exit(0);
-		break;
-	default:
-		system("cls");
-		SaveMenu(as);
-		break;
+
+	case '4':system("cls");
+			as.saveTransactions();
+			SaveMenu(as);
+			break;
+
+	case '5':system("cls");
+			as.saveClients();
+			as.saveDevelopers();
+			as.saveApps();
+			as.saveTransactions();
+			system("cls");
+			cout << "\n All saved.\n" << endl;
+			SaveMenu(as);
+			break;
+
+	case '9':exit(0);
+			break;
+
+	default:system("cls");
+			SaveMenu(as);
+			break;
 	}
 
 }
@@ -284,44 +282,34 @@ void Menu(AppStore as) {
 
     switch (choice) {
 
-        case 1:
-            system("cls");
-            AppsMenu(as);
-            Menu(as);
-            break;
+        case 1:	system("cls");
+            	AppsMenu(as);
+            	Menu(as);
+            	break;
 
-        case 2:
-            system("cls");
-            ClientMenu(as);
-            Menu(as);
-            break;
+        case 2:	system("cls");
+        		ClientMenu(as);
+        		Menu(as);
+        		break;
 
-        case 3:
-            system("cls");
-            DeveloperMenu();
-            Menu(as);
-            break;
+        case 3: system("cls");
+            	DeveloperMenu();
+            	Menu(as);
+            	break;
 
-        case 4:
-            system("cls");
-            TransactionMenu();
-            Menu(as);
-            break;
+        case 4: system("cls");
+        		TransactionMenu();
+        		Menu(as);
+        		break;
 
-        case 0:
-            system("cls");
-            ExitMenu(as);
-            break;
+        case 0:	system("cls");
+            	ExitMenu(as);
+            	break;
 
-        default:
-            system("cls");
-            break;
+        default:system("cls");
+            	break;
     }
 }
-
-/////////////////////////
-//////SUB MENUS /////////
-/////////////////////////
 
 
 

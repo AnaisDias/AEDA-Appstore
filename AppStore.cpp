@@ -763,8 +763,19 @@ void AppStore::RemoveDev() {
 /////////////////////////
 
 void AppStore::TransApps() {
-	cout << "APPS TRANSACTIONS: " << endl;
-	//display apps transactions
+	cout << "APPS TRANSACTIONS: " << endl << endl;
+	cout << "Apps List" << endl;
+	for(int i=0; i<apps.size();i++){
+		cout << apps[i]->displayInfo() << endl;
+	}
+	cout << endl;
+	cout << "App to view transactions: ";
+	string apptrans;
+	cin >> apptrans;
+
+	system("cls");
+	cout << "TRANSACTIONS: " << endl;
+	//cout << apps[] //pegar na app de nome apptrans e fazer display das transactions
 
 	cout << endl;
 	char y = 'y';
@@ -778,7 +789,19 @@ void AppStore::TransApps() {
 
 void AppStore::TransClients() {
 	cout << "CLIENTS TRANSACTIONS: " << endl;
-	//display the client transactions????
+	cout << "Clients List" << endl;
+	for (int i = 0; i < clients.size(); i++){
+		cout << clients[i]->displayName() << endl;
+	}
+
+	cout << endl;
+	cout << "Client to view transactions: ";
+	string clientTrans;
+	cin >> clientTrans;
+
+	system("cls");
+	cout << "TRANSACTIONS: " << endl;
+	//cout << clients[] //pegar na client de nome clientTrans e fazer display das transactions
 
 	cout << endl;
 	char y = 'y';
@@ -791,8 +814,20 @@ void AppStore::TransClients() {
 }
 
 void AppStore::TransDev() {
-	cout << "DEVELOPERS/ENTERPRISES TRANSACTIONS: " << endl;
-	//display the devs list and which transaction the client wants to see????? lol
+	cout << "DEVELOPERS TRANSACTIONS: " << endl;
+	cout << "Developers List" << endl;
+	for (int i = 0; i < developers.size(); i++) {
+		cout << developers[i]->displayNameDev() << endl;
+	}
+
+	cout << endl;
+	cout << "Developer to view transactions: ";
+	string devTrans;
+	cin >> devTrans;
+
+	system("cls");
+	cout << "TRANSACTIONS: " << endl;
+	//cout << developers[] //pegar no dev de nome devTrans e fazer display das transactions
 
 	cout << endl;
 	char y = 'y';
@@ -1121,7 +1156,7 @@ void AppStore::loadDevelopers()
 
 			developer = new Developer(name, address, nif);
 			developer->setID(id);
-			//AppsPublished (vai ser numa funçao diferente)
+			//AppsPublished (vai ser numa funï¿½ao diferente)
 			developers.push_back(developer);
 			cout << "Developer added" << endl;
 		}
@@ -1179,7 +1214,7 @@ void AppStore::loadClients()
 			//set transactions
 			client = new Client(username,age);
 			client->setID(id);
-			//AppsPublished (vai ser numa funçao diferente)
+			//AppsPublished (vai ser numa funï¿½ao diferente)
 			clients.push_back(client);
 			cout << "Client added" << endl;
 		}
@@ -1235,7 +1270,7 @@ void AppStore::loadTransactions()
 						i++;
 						transaction->addApp(findAppByID(appID));
 					}
-					//AppsPublished (vai ser numa funçao diferente)
+					//AppsPublished (vai ser numa funï¿½ao diferente)
 					transactions.push_back(transaction);
 					cout << "Transaction added" << endl;
 				}

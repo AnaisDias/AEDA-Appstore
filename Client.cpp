@@ -96,6 +96,14 @@ string Client::displayInfo(){
 
 	return out.str();
 }
+
+string Client::displayName() {
+	stringstream out;
+	out << "Client Name: " << username << endl;
+
+	return out.str();
+}
+
 bool Client::operator==(const Client &client) const{
 	if(this->id==client.id && this->username==client.username) return true;
 	return false;
