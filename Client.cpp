@@ -104,7 +104,12 @@ std::ostream & Client::operator<<(std::ostream &out){
 std::ostream & Client::writeToFile(std::ostream &out){
 	out << id << "," << username << ",";
 	out << age << ",";
+<<<<<<< HEAD
 	for(unsigned int i=0; i<transactions.size(); i++){
+=======
+	out << transactions.size() << ",";
+	for(int i=0; i<transactions.size(); i++){
+>>>>>>> origin/master
 		out << transactions[i]->getID();
 		if(i!=transactions.size()){
 			out << ",";

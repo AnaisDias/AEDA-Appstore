@@ -57,22 +57,26 @@ public:
 	vector<App*> getApps();
 	void setApps(vector<App*> apps);
 	void saveApps();
-	void loadApps(string filename);
+	void loadApps();
+	void assignTransactionsToApps();
 
 	vector<Client*> getClients();
 	void setClients(vector<Client*> clients);
 	void saveClients();
-	void loadClients(string filename);
+	void loadClients();
 
 	vector<Developer*> getDevelopers();
 	void setDevelopers(vector<Developer*> developers);
 	void saveDevelopers();
-	void loadDevelopers(string filename);
+	void loadDevelopers();
+	void assignPublishedAppsToDevs();
 
 	vector<Transaction*> getTransactions();
 	void setTransactions(vector<Transaction *> transactions);
 	void saveTransactions();
-	void loadTransaction();
+	void loadTransactions();
+
+	string loadTokens(unsigned num, string line);
 
 
 
