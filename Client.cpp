@@ -90,9 +90,9 @@ void Client::commentApp(App* app, string comment){
 
 string Client::displayInfo(){
 	stringstream out;
-	out << "Client ID: " << id << endl;
-	out << "Username: " << username << endl;
-	out << "Age: " << age << endl;
+	out << " Client ID: " << id << endl;
+	out << " Username: " << username << endl;
+	out << " Age: " << age << endl;
 
 	return out.str();
 }
@@ -120,32 +120,11 @@ std::ostream & Client::operator<<(std::ostream &out){
 std::ostream & Client::writeToFile(std::ostream &out){
 	out << id << "," << username << ",";
 	out << age << ",";
-<<<<<<< HEAD
-	for(unsigned int i=0; i<transactions.size(); i++){
-=======
 	out << transactions.size() << ",";
-	for(int i=0; i<transactions.size(); i++){
->>>>>>> origin/master
+	for(unsigned int i=0; i<transactions.size(); i++){
 		out << transactions[i]->getID();
-		if(i!=transactions.size()){
-			out << ",";
-		}
-
+		if(i!=transactions.size()) out << ",";
 	}
 	return out;
 
-}
-
-string Client::displayInfo()
-{
-	stringstream out;
-	out << "\n Client ID: " << id << endl;
-	out << " Username: " << username << endl;
-	out << " Age: " << age << endl;
-	out << " Transactions: ";
-	for(unsigned int i = 0; i <transactions.size(); i++)
-	{
-		out << transactions[i] << ',' << endl;
-	}
-	return out.str();
 }

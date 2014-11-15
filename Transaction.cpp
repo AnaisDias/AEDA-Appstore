@@ -7,20 +7,20 @@
 
 #include "Transaction.h"
 #include <iostream>
+#include <sstream>
 
 int Transaction::allIDs=0;
-vector<string> vouchers; //clear vector?
+vector<string> vouchers;
 vector<string> Transaction::workingVouchers = vouchers;
 
 Transaction::Transaction() {
-	// TODO Auto-generated constructor stub
 	this->id=allIDs;
 	allIDs++;
 }
 
 Transaction::~Transaction() {
 	delete client;
-	for(int i=0; i<apps.size(); i++){
+	for(unsigned int i=0; i<apps.size(); i++){
 		delete apps[i];
 		apps.erase(apps.begin()+i);
 		i--;
@@ -90,11 +90,21 @@ bool Transaction::operator==(const Transaction &trans) const{
 	return false;
 }
 
+string Transaction::displayInfo()
+{
+	stringstream out;
+	out << " Transaction ID: " << id << endl;
+	out << " Client Name: " << client->getUsername() << endl;
+
+	return out.str();
+}
+
+
 std::ostream & Transaction::operator<<(std::ostream &out){
 	out << "Transaction ID: " << id << endl;
 	out << "Client ID: " << client->getID() << "  Client Username: " << client->getUsername() << endl;
 	out << "Apps purchased: " << endl;
-	for(int i=0; i<apps.size(); i++){
+	for(unsigned int i=0; i<apps.size(); i++){
 		out << apps[i];
 	}
 	out << endl;
@@ -104,7 +114,7 @@ std::ostream & Transaction::operator<<(std::ostream &out){
 std::ostream & Transaction::writeToFile(std::ostream &out){
 	out << id << "," << client->getID() << ",";
 	out << usedVoucher << "," << apps.size() << ",";
-	for(int i=0; i<apps.size(); i++){
+	for(unsigned int i=0; i<apps.size(); i++){
 		out << apps[i]->getID() << ",";
 	}
 	return out;

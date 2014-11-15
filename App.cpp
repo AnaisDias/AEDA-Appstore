@@ -17,13 +17,8 @@ App::App() {
 }
 
 App::~App() {
-<<<<<<< HEAD
-	delete developer;
-	for(unsigned int i=0; i<transactions.size(); i++){
-=======
 	/*delete developer;
 	for(int i=0; i<transactions.size(); i++){
->>>>>>> b736a6f055f7c0da8e3ddbb6938dc41e87839f03
 		delete transactions[i];
 		transactions.erase(transactions.begin()+i);
 		i--;
@@ -37,6 +32,7 @@ App::App(string name, float price, int type, string description) {
 	this->description = description;
 	this->id=allIDs;
 	allIDs++;
+	this->ratings = 0;
 }
 
 void App::resetIDs(){
@@ -145,7 +141,7 @@ string App::displayInfo(){
 }
 
 void App::displayComments(){
-	for(unsigned int i=0; i<comments.size(); i++){
+	for(int i=0; i<comments.size(); i++){
 		cout << comments[i] << endl;
 	}
 	cout << endl;
@@ -156,7 +152,7 @@ void App::addTransaction(Transaction* transaction){
 }
 
 bool App::removeTransaction(Transaction* transaction){
-	for(unsigned int i=0; i<transactions.size(); i++){
+	for(int i=0; i<transactions.size(); i++){
 		if(transaction==transactions[i]){
 			transactions.erase(transactions.begin() + i);
 			return true;
@@ -177,7 +173,7 @@ void App::addRating(int rating){
 
 void App::updateRatings(){
 	float updatedR=0;
-	for(unsigned int i=0; i<allRatings.size(); i++){
+	for(int i=0; i<allRatings.size(); i++){
 		updatedR+=allRatings[i];
 	}
 
@@ -253,24 +249,7 @@ std::ostream & App::operator<<(std::ostream &out){
 std::ostream & App::writeToFile(std::ostream &out){
 	out << id << "," << name << "," << price << "," ;
 	out << type <<"," << description << "," << developer->getID() << ",";
-<<<<<<< HEAD
-<<<<<<< HEAD
-	out << ratings << ",";
-	for(unsigned int i=0; i<allRatings.size();i++){
-		out << allRatings[i] << ",";
-	}
-	out << "/endRatings,";
-	for(unsigned int i=0; i<comments.size();i++){
-		out << comments[i] << ",";
-	}
-	out << "/endComments,";
-	for(unsigned int i=0; i<transactions.size(); i++){
-		out << transactions[i]->getID() << ",";
-=======
-	out << ratings << "," << allRatings.size() << ",";
-=======
 	out << allRatings.size() << ",";
->>>>>>> b736a6f055f7c0da8e3ddbb6938dc41e87839f03
 	for(int i=0; i<allRatings.size();i++){
 		out << allRatings[i] << ",";
 	}
@@ -283,7 +262,6 @@ std::ostream & App::writeToFile(std::ostream &out){
 	for(int i=0; i<transactions.size(); i++){
 		out << transactions[i]->getID();
 		if(i!=transactions.size()) out << ",";
->>>>>>> origin/master
 	}
 	out << "/endTransactions";
 	return out;

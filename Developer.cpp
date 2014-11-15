@@ -7,6 +7,7 @@
 
 #include "Developer.h"
 #include <iostream>
+#include <sstream>
 
 int Developer::allIDs=0;
 
@@ -15,11 +16,8 @@ Developer::Developer() {
 	allIDs++;
 	nif=0;
 	name="";
-<<<<<<< HEAD
-	earnings = 0;
-=======
+	earnings=0;
 	appsPublished.clear();
->>>>>>> b736a6f055f7c0da8e3ddbb6938dc41e87839f03
 
 }
 
@@ -28,9 +26,8 @@ Developer::Developer(string name, string address, int nif) {
 	this->address = address;
 	this->nif = nif;
 	this->id=allIDs;
-	earnings = 0;
+	earnings= 0;
 	allIDs++;
-
 }
 
 Developer::~Developer() {
@@ -88,7 +85,7 @@ void Developer::addApp(App* app){
 }
 
 bool Developer::removeApp(App* app){
-	for(int i=0; i<appsPublished.size(); i++){
+	for(unsigned int i=0; i<appsPublished.size(); i++){
 		if(app==appsPublished[i]){
 			appsPublished.erase(appsPublished.begin() + i);
 			return true;
@@ -97,17 +94,48 @@ bool Developer::removeApp(App* app){
 	return false;
 }
 
-void Developer::displayInfo(){
+string Developer::displayInfo(){
 
+	stringstream out;
+	out << " Developer ID: " << id << endl;
+	out << " Name: " << name << endl;
+	out << " Address: " << address << endl;
+	out << " NIF: " << nif << endl;
 
+	return out.str();
+}
+
+string Company::displayInfo()
+{
+	cout << Developer::displayInfo();
+
+	stringstream out;
+	out << " Company: " << businessName << endl;
+	out << " Code: " << code << endl;
+
+	return out.str();
+
+}
+
+string Individual::displayInfo()
+{
+	return Developer::displayInfo();
 }
 
 void Developer::displayAllSales(){
 
+	for(unsigned int i = 0; i < appsPublished.size(); i++)
+	{
+		cout << appsPublished[i]->displayInfo() << endl;
+	}
 }
 
 bool Developer::operator==(const Developer &dev) const{
-	if(this->name==dev.name && this->nif==dev.nif) return true;
+	if(this->name==dev.name && this->nif==dev.nif)
+		{
+		return true;
+		}
+
 	return false;
 }
 
@@ -121,12 +149,23 @@ std::ostream & Developer::operator<<(std::ostream &out){
 }
 
 std::ostream & Developer::writeToFile(std::ostream &out){
-	out << id << "," << name << "," << address << ",";
-	out << nif << "," << appsPublished.size() << ",";
-	for(int i=0; i<appsPublished.size();i++){
-		out << appsPublished[i]->getID();
-		if(i!=appsPublished.size()) out << ",";
-	}
+	out << id << "," << devtype() << "," << name << "," << address << ",";
+	out << nif << ",";
+	return out;
+}
+
+std::ostream & Individual::writeToFile(std::ostream &out)
+{
+	Developer::writeToFile(out);
+
+	return out;
+}
+
+std::ostream & Company::writeToFile(std::ostream &out)
+{
+	Developer::writeToFile(out);
+
+	out << businessName << "," << code;
 	return out;
 }
 

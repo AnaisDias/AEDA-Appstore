@@ -79,7 +79,10 @@ public:
 
 
 
-
+	///MENUS///
+	void ShowIndivDev();
+	void ShowCompDev();
+	void ShowAppsByName(int id);
 
 	//APPS//
 	void Top5Apps();
@@ -87,9 +90,10 @@ public:
 	void AppsListType();
 	void AllAppsList();
 	void RateApps();
-	void AddApplicationMenu(); //uses addApp
+	App* AddApplicationMenu(); //uses addApp
 	void RemoveApplicationMenu(); //uses removeApp
 	void AppManagementMenu(App* app);
+	void addDeveloperMenu();
 
 	//CLIENT//
 	void ClientsList();
@@ -97,19 +101,26 @@ public:
 	void AddClients();
 	void RemoveClients();
 	void ClientManagementMenu(Client* client);
+	void BuyApp(Client* cli);
+
 
 	//DEV//
-	void IndividualDevList(AppStore as);
-	void EnterpriseList(AppStore as);
-	void AppsCreated(AppStore as);
-	void SalesData(AppStore as);
-	void AddDev(AppStore as);
-	void RemoveDev(AppStore as);
+	void IndividualDevList();
+	void EnterpriseList();
+	void AppsCreated();
+	void SalesData();
+	void AddDev();
+	void RemoveDev();
+	void ShowAllDev();
+	void DevManagementMenu(Developer* dev){}
+	void DevManagementMenu(Individual* ind);
+	void DevManagementMenu(Company* comp);
 
 	//TRANSACTIONS//
-	void TransApps(AppStore as);
-	void TransClients(AppStore as);
-	void TransDev(AppStore as);
+	void TransApps();
+	void TransClients();
+	void TransDev();
+	void ShowAllTransactions();
 
 };
 

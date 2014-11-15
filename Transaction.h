@@ -20,7 +20,6 @@ class Transaction {
 	static int allIDs;
 	int id;
 	Client *client;
-	// data formato???
 	vector<App*> apps;
 	string usedVoucher;
 	static vector<string> workingVouchers;
@@ -45,7 +44,7 @@ public:
 	static void addWorkingVoucher(string voucher);
 
 
-	//string displayInfoTransApps();
+	string displayInfo();
 
 	bool operator==(const Transaction &trans) const;
 	std::ostream & operator<<(std::ostream &out);

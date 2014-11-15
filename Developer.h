@@ -22,12 +22,15 @@ class Developer {
 	string address;
 	int nif;
 	float earnings;
-	vector<App*> appsPublished;// Todas as apps publicadas pelo developer
-	//float earnings;
+	vector<App*> appsPublished;
+
 public:
 	Developer();
 	Developer(string name, string address, int nif);
 	~Developer();
+
+	virtual int devtype(){}
+	virtual std::ostream & writeToFile(std::ostream &out);
 
 	/////////////////////
 	int getID() const;
@@ -46,12 +49,12 @@ public:
 	void addEarnings(float earn){earnings+=earn;};
 	void addApp(App* app);
 	bool removeApp(App* app);
-	void displayInfo();
+	virtual string displayInfo();
 	void displayAllSales();
 	bool operator==(const Developer &dev) const;
 	std::ostream & operator<<(std::ostream &out);
 
-	std::ostream & writeToFile(std::ostream &out);
+
 
 	string displayNameDev();
 };
@@ -61,6 +64,11 @@ class Individual: public Developer
 {
 public:
 	Individual(string name, string address, int nif);
+	std::ostream & writeToFile(std::ostream &out);
+	string displayInfo();
+	int devtype(){
+		return 1;
+	}
 };
 
 class Company: public Developer
@@ -71,6 +79,28 @@ class Company: public Developer
 public:
 	Company();
 	Company(string businessname, int code, string name, string address, int nif);
+	std::ostream & writeToFile(std::ostream &out);
+	int devtype(){
+			return 2;
+		}
+	string displayInfo();
+	string getCompanyName(){
+		return businessName;
+	}
+	int getCode(){
+		return code;
+	}
+
+	void setCompanyName(string businessname)
+	{
+		this->businessName = businessname;
+	}
+
+	void setCode(int code)
+	{
+		this->code = code;
+	}
+
 };
 
 #endif /* DEVELOPER_H_ */
