@@ -15,7 +15,11 @@ Developer::Developer() {
 	allIDs++;
 	nif=0;
 	name="";
+<<<<<<< HEAD
 	earnings = 0;
+=======
+	appsPublished.clear();
+>>>>>>> b736a6f055f7c0da8e3ddbb6938dc41e87839f03
 
 }
 
@@ -95,6 +99,7 @@ bool Developer::removeApp(App* app){
 
 void Developer::displayInfo(){
 
+
 }
 
 void Developer::displayAllSales(){
@@ -117,7 +122,7 @@ std::ostream & Developer::operator<<(std::ostream &out){
 
 std::ostream & Developer::writeToFile(std::ostream &out){
 	out << id << "," << name << "," << address << ",";
-	out << nif << ",";
+	out << nif << "," << appsPublished.size() << ",";
 	for(int i=0; i<appsPublished.size();i++){
 		out << appsPublished[i]->getID();
 		if(i!=appsPublished.size()) out << ",";
@@ -133,4 +138,11 @@ Individual::Individual(string name, string address, int nif):Developer(name, add
 Company::Company(string businessname, int code, string name, string address, int nif):Developer(name, address, nif){
 	this->code=code;
 	this->businessName=businessname;
+}
+
+string Developer::displayNameDev() {
+	stringstream out;
+	out << "Dev Name: " << name << endl;
+
+	return out.str();
 }

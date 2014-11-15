@@ -76,6 +76,7 @@ void AppsMenu(AppStore as) {
 
 void ClientMenu(AppStore as) {
 
+<<<<<<< HEAD
 	char choice;
 
 	cout << "\n CLIENTS" << endl;
@@ -89,10 +90,24 @@ void ClientMenu(AppStore as) {
 	cout << "   0 - Go back" << endl;
 	cout << endl;
 	cout << " Option: ";
+=======
+	int choice;
+
+	cout << "Client" << endl;
+	//add options for client addition/removal
+	cout << "1 - Clients List" << endl;
+	cout << "2 - Purchased Apps (requires client ID)" << endl;
+	cout << "3 - Add Client" << endl;
+	cout << "4 - Remove Client" << endl;
+	cout << "0 - Go back" << endl;
+	cout << "Option: ";
+	cin.get();
+>>>>>>> b736a6f055f7c0da8e3ddbb6938dc41e87839f03
 	cin >> choice;
 
     switch(choice) {
 
+<<<<<<< HEAD
     char input;
 
         case '1':
@@ -170,6 +185,28 @@ void ClientMenu(AppStore as) {
         	system("cls");
         	ClientMenu(as);
         	break;
+=======
+        case 1: system("cls");
+            	as.ClientsList();
+            	ClientMenu(as);
+            	break;
+        case 2: system("cls");
+            	as.PurchasedApps();
+            	ClientMenu(as);
+            	break;
+        case 3: system("cls");
+        		as.AddClients();
+        		ClientMenu(as);
+        		break;
+        case 4: system("cls");
+        		as.RemoveClients();
+        		ClientMenu(as);
+        		break;
+        case 0: system("cls");
+            	Menu(as);
+            	break;
+        default: break;
+>>>>>>> b736a6f055f7c0da8e3ddbb6938dc41e87839f03
     }
 }
 
@@ -226,6 +263,7 @@ void DeveloperMenu(AppStore as) {
 }
 
 void TransactionMenu(AppStore as) {
+<<<<<<< HEAD
 
     cout << "\n TRANSACTIONS" << endl;
     cout << " ---------------------------------------------------------" << endl;
@@ -240,10 +278,20 @@ void TransactionMenu(AppStore as) {
     cout << endl;
     cout << " Option: ";
     char choice;
+=======
+    cout << "Transactions" << endl;
+    cout << "1 - List by Apps" << endl;
+    cout << "2 - List by CLients" << endl;
+    cout << "3 - List by Developers" << endl;
+    cout << "0 - Go back";
+    cout << "OPTION: ";
+    int choice;
+>>>>>>> b736a6f055f7c0da8e3ddbb6938dc41e87839f03
     cin >> choice;
 
     switch(choice) {
 
+<<<<<<< HEAD
         case '1':
         	system("cls");
             //TransApps();
@@ -268,11 +316,33 @@ void TransactionMenu(AppStore as) {
         	system("cls");
         	TransactionMenu(as);
         	break;
+=======
+        case 1: system("cls");
+            	as.TransApps();
+            	TransactionMenu(as);
+            	break;
+        case 2: system("cls");
+            	//as.TransClients();
+            	//TransactionMenu(as);
+            	break;
+        case 3: system("cls");
+				//as.TransDev();
+				//TransactionMenu(as);
+				break;
+        case 0: system("cls");
+				Menu(as);
+				break;
+        default: break;
+>>>>>>> b736a6f055f7c0da8e3ddbb6938dc41e87839f03
 
     }
 }
 
+<<<<<<< HEAD
 
+=======
+void SaveMenu(AppStore as);
+>>>>>>> b736a6f055f7c0da8e3ddbb6938dc41e87839f03
 
 void ExitMenu(AppStore as) {
     cout << "\n Before you exit... Do you want to save?" << endl;
@@ -287,6 +357,7 @@ void ExitMenu(AppStore as) {
     cin >> input;
 
     switch (input) {
+<<<<<<< HEAD
         case '1':
             system("cls");
             saveMenu(as);
@@ -306,6 +377,23 @@ void ExitMenu(AppStore as) {
 }
 
 void saveMenu(AppStore as)
+=======
+        case '1':system("cls");
+        		SaveMenu(as);
+        		break;
+        case '2':exit(0);
+        		break;
+        case '3':system("cls");
+            	Menu(as);
+            	break;
+        default:system("cls");
+        		ExitMenu(as);
+        		break;
+    }
+}
+
+void SaveMenu(AppStore as)
+>>>>>>> b736a6f055f7c0da8e3ddbb6938dc41e87839f03
 {
 	cout << "\n Choose what you want to save." << endl;
 	cout << " ---------------------------------------------------------" << endl;
@@ -324,6 +412,7 @@ void saveMenu(AppStore as)
 
 	switch(input)
 	{
+<<<<<<< HEAD
 	case '0':
 		system("cls");
 		ExitMenu(as);
@@ -370,6 +459,51 @@ void saveMenu(AppStore as)
 
 }
 
+=======
+	case '0':system("cls");
+			ExitMenu(as);
+			break;
+
+	case '1':system("cls");
+			as.saveClients();
+			SaveMenu(as);
+			break;
+
+	case '2':system("cls");
+			as.saveDevelopers();
+			SaveMenu(as);
+			break;
+
+	case '3':system("cls");
+			as.saveApps();
+			SaveMenu(as);
+			break;
+
+	case '4':system("cls");
+			as.saveTransactions();
+			SaveMenu(as);
+			break;
+
+	case '5':system("cls");
+			as.saveClients();
+			as.saveDevelopers();
+			as.saveApps();
+			as.saveTransactions();
+			system("cls");
+			cout << "\n All saved.\n" << endl;
+			SaveMenu(as);
+			break;
+
+	case '9':exit(0);
+			break;
+
+	default:system("cls");
+			SaveMenu(as);
+			break;
+	}
+
+}
+>>>>>>> b736a6f055f7c0da8e3ddbb6938dc41e87839f03
 void Menu(AppStore as) {
 
     AppStore store = AppStore();
@@ -391,6 +525,7 @@ void Menu(AppStore as) {
 
     switch (choice) {
 
+<<<<<<< HEAD
         case '1':
             system("cls");
             AppsMenu(as);
@@ -426,3 +561,36 @@ void Menu(AppStore as) {
             break;
     }
 }
+=======
+        case 1:	system("cls");
+            	AppsMenu(as);
+            	Menu(as);
+            	break;
+
+        case 2:	system("cls");
+        		ClientMenu(as);
+        		Menu(as);
+        		break;
+
+        case 3: system("cls");
+            	DeveloperMenu();
+            	Menu(as);
+            	break;
+
+        case 4: system("cls");
+        		TransactionMenu();
+        		Menu(as);
+        		break;
+
+        case 0:	system("cls");
+            	ExitMenu(as);
+            	break;
+
+        default:system("cls");
+            	break;
+    }
+}
+
+
+
+>>>>>>> b736a6f055f7c0da8e3ddbb6938dc41e87839f03

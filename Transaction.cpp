@@ -54,6 +54,10 @@ void Transaction::addApp(App *app){
 	app->getDeveloper()->addEarnings(earn);
 }
 
+void Transaction::setID(int id){
+	this->id=id;
+}
+
 void Transaction::setClient(Client* cli){
 	this->client=cli;
 }
@@ -73,6 +77,8 @@ void Transaction::setWorkingVouchers(vector<string> vouchers){
 void Transaction::addWorkingVoucher(string voucher){
 	workingVouchers.push_back(voucher);
 }
+
+
 
 bool Transaction::operator==(const Transaction &trans) const{
 	Client* cli =this->client;

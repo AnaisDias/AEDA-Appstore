@@ -88,6 +88,22 @@ void Client::commentApp(App* app, string comment){
 	app->addComment(comment);
 }
 
+string Client::displayInfo(){
+	stringstream out;
+	out << "Client ID: " << id << endl;
+	out << "Username: " << username << endl;
+	out << "Age: " << age << endl;
+
+	return out.str();
+}
+
+string Client::displayName() {
+	stringstream out;
+	out << "Client Name: " << username << endl;
+
+	return out.str();
+}
+
 bool Client::operator==(const Client &client) const{
 	if(this->id==client.id && this->username==client.username) return true;
 	return false;

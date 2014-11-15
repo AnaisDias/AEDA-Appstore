@@ -44,6 +44,9 @@ public:
 	static void setWorkingVouchers(vector<string> vouchers);
 	static void addWorkingVoucher(string voucher);
 
+
+	//string displayInfoTransApps();
+
 	bool operator==(const Transaction &trans) const;
 	std::ostream & operator<<(std::ostream &out);
 

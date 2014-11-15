@@ -58,6 +58,7 @@ public:
 	void setApps(vector<App*> apps);
 	void saveApps();
 	void loadApps();
+	void loadApps2();
 	void assignTransactionsToApps();
 
 	vector<Client*> getClients();
@@ -76,7 +77,7 @@ public:
 	void saveTransactions();
 	void loadTransactions();
 
-	string loadTokens(unsigned num, string line);
+
 
 
 
@@ -95,6 +96,7 @@ public:
 	void PurchasedApps();
 	void AddClients();
 	void RemoveClients();
+	void ClientManagementMenu(Client* client);
 
 	//DEV//
 	void IndividualDevList(AppStore as);

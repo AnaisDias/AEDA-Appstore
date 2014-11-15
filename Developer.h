@@ -52,6 +52,8 @@ public:
 	std::ostream & operator<<(std::ostream &out);
 
 	std::ostream & writeToFile(std::ostream &out);
+
+	string displayNameDev();
 };
 
 

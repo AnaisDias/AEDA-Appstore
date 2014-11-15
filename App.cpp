@@ -17,12 +17,17 @@ App::App() {
 }
 
 App::~App() {
+<<<<<<< HEAD
 	delete developer;
 	for(unsigned int i=0; i<transactions.size(); i++){
+=======
+	/*delete developer;
+	for(int i=0; i<transactions.size(); i++){
+>>>>>>> b736a6f055f7c0da8e3ddbb6938dc41e87839f03
 		delete transactions[i];
 		transactions.erase(transactions.begin()+i);
 		i--;
-	}
+	}*/
 }
 
 App::App(string name, float price, int type, string description) {
@@ -249,6 +254,7 @@ std::ostream & App::writeToFile(std::ostream &out){
 	out << id << "," << name << "," << price << "," ;
 	out << type <<"," << description << "," << developer->getID() << ",";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	out << ratings << ",";
 	for(unsigned int i=0; i<allRatings.size();i++){
 		out << allRatings[i] << ",";
@@ -262,6 +268,9 @@ std::ostream & App::writeToFile(std::ostream &out){
 		out << transactions[i]->getID() << ",";
 =======
 	out << ratings << "," << allRatings.size() << ",";
+=======
+	out << allRatings.size() << ",";
+>>>>>>> b736a6f055f7c0da8e3ddbb6938dc41e87839f03
 	for(int i=0; i<allRatings.size();i++){
 		out << allRatings[i] << ",";
 	}
@@ -269,7 +278,7 @@ std::ostream & App::writeToFile(std::ostream &out){
 	for(int i=0; i<comments.size();i++){
 		out << comments[i] << ",";
 	}
-	out << "/endComments," << transactions.size() << ","
+	out << "/endComments," << transactions.size() << ",";
 
 	for(int i=0; i<transactions.size(); i++){
 		out << transactions[i]->getID();

@@ -14,6 +14,7 @@ int main(){
 	//chamar assigntransactionstoapps
 
 	AppStore AppStr = AppStore();
+<<<<<<< HEAD
 
 	//AppStr.loadApps();
 	//AppStr.loadTransactions();
@@ -26,6 +27,15 @@ int main(){
 	cli = new Client("casq", 19);
 	//cli->addTransaction(trans);
 	App *app1, *app2;
+=======
+	AppStr.loadDevelopers();
+	AppStr.loadApps2();
+	AppStr.assignPublishedAppsToDevs();
+	AppStr.loadClients();
+	AppStr.loadTransactions();
+	AppStr.assignTransactionsToApps();
+	/*App *app1, *app2;
+>>>>>>> b736a6f055f7c0da8e3ddbb6938dc41e87839f03
 	app1 = new App("appawesome",0.99,1,"great app");
 	app2 = new App();
 	Developer *dev1, *dev2;
@@ -36,15 +46,22 @@ int main(){
 	AppStr.addApp(app1);
 	AppStr.addApp(app2);
 	AppStr.addDeveloper(dev1);
+<<<<<<< HEAD
 	AppStr.addDeveloper(dev2);
 	AppStr.addClient(cli);
+=======
+	AppStr.addDeveloper(dev2);*/
+>>>>>>> b736a6f055f7c0da8e3ddbb6938dc41e87839f03
 
 	Menu(AppStr);
 	AppStr.saveApps();
 	AppStr.saveDevelopers();
 	AppStr.saveClients();
 	AppStr.saveTransactions();
+<<<<<<< HEAD
 
+=======
+>>>>>>> b736a6f055f7c0da8e3ddbb6938dc41e87839f03
 
 	return 0;
 }
