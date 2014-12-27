@@ -21,7 +21,7 @@ class App {
 	int type;
 	string description;
 	Developer* developer;
-	float ratings; //1 NAO GOSTO - 5 ESPETACULAR float porque vai ser a media das classifica�oes atribuidas
+	float ratings;
 	vector<int> allRatings;
 	vector<string> comments;
 	vector<Transaction*> transactions;
@@ -66,6 +66,7 @@ public:
 	void addRating(int rating);
 	void updateRatings();
 	bool operator==(const App &app) const;
+	bool operator<(const App &app) const;
 	std::ostream & operator<<(std::ostream &out);
 
 	std::ostream & writeToFile(std::ostream &out);

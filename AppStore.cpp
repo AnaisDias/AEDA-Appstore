@@ -14,11 +14,11 @@
 
 using namespace std;
 
-AppStore::AppStore() {
+AppStore::AppStore():appTree(new App()) {
 	this->name = "APP STORE";
 }
 
-AppStore::AppStore(string name) {
+AppStore::AppStore(string name):appTree(new App()) {
 	this->name = name;
 }
 
@@ -42,6 +42,7 @@ AppStore::~AppStore() {
 
 void AppStore::addApp(App* app) {
 	apps.push_back(app);
+	appTree.insert(app);
 }
 void AppStore::addClient(Client* cli) {
 	clients.push_back(cli);
@@ -60,10 +61,18 @@ void AppStore::setName(string name) {
 vector<App*> AppStore::getApps() {
 	return apps;
 }
+
+BST<App*> AppStore::getAppTree(){
+	return appTree;
+}
+
 void AppStore::setApps(vector<App*> apps) {
 	this->apps = apps;
 }
 
+void AppStore::setAppTree(BST<App*> apps){
+	this->appTree=apps;
+}
 vector<Client*> AppStore::getClients() {
 	return clients;
 }
@@ -92,7 +101,7 @@ void AppStore::setTransactions(vector<Transaction *> transactions)
 bool AppStore::removeApp(App* app) {
 	cout << apps.size() << endl;
 	for (unsigned int i = 0; i < apps.size(); i++) {
-		if (apps[i] == app){
+		if ((*apps[i]) == (*app)){
 			apps.erase(apps.begin()+i);
 			i--;
 
@@ -100,12 +109,14 @@ bool AppStore::removeApp(App* app) {
 		}
 
 	}
+
+	appTree.remove(app);
 	return false;
 }
 
 bool AppStore::removeClient(Client* client){
 	for (unsigned int i = 0; i < clients.size(); i++) {
-		if (clients[i] == client){
+		if ((*clients[i]) == (*client)){
 			clients.erase(clients.begin()+i);
 			i--;
 			return true;
@@ -118,7 +129,7 @@ bool AppStore::removeClient(Client* client){
 
 bool AppStore::removeDeveloper(Developer *dev){
 	for (unsigned int i = 0; i < developers.size(); i++) {
-		if (developers[i] == dev){
+		if ((*developers[i]) == (*dev)){
 
 				developers.erase(developers.begin()+i);
 				i--;
@@ -157,14 +168,17 @@ bool ordenaRating(App* app1, App* app2){
 	return (app1->getRatings() > app2->getRatings());
 }
 
-vector<App*> AppStore::orderAppsByTop5Rating(){
-	vector<App*> apps2 = apps;
-	vector<App*> top5;
-	sort(apps2.begin(), apps2.end(), ordenaRating);
-	for(int i=0; i<5; i++){
-		top5.push_back(apps2[i]);
+vector<App*> AppStore::topTenApps(){
+	BSTItrIn<App*> it(appTree);
+	int n =0;
+	vector<App*> top10;
+	while(n<10 && !it.isAtEnd()){
+		top10.push_back(it.retrieve());
+		cout << it.retrieve()->getName() << endl;
+		it.advance();
+		n++;
 	}
-	return top5;
+	return top10;
 }
 
 
@@ -199,20 +213,21 @@ Transaction* AppStore::findTransactionByID(int id){
 ////////SUB APP /////////
 /////////////////////////
 
-void AppStore::Top5Apps(){
-	vector<App*> top5 = orderAppsByTop5Rating();
-
+void AppStore::top10Apps(){
+	cout << "antes da binary tree" << endl;
+	vector<App*> top10 = topTenApps();
+cout << "depois" << endl;
 		string input;
 
 		unsigned int var;
-		if(apps.size() < 5) var = apps.size();
-		else var = 5;
+		if(top10.size() < 10) var = top10.size();
+		else var = 10;
 
-		cout << "\n TOP 5 APPS" << endl;
+		cout << "\n TOP 10 APPS" << endl;
 		cout << " ---------------------------------------------------------" << endl;
 		cout << endl;
 		for(unsigned int i=0; i<var; i++){
-			cout << top5[i]->displayInfo() << endl;
+			cout << top10[i]->displayInfo() << endl;
 		}
 
 
@@ -608,6 +623,8 @@ void AppStore::AppManagementMenu(App* app){
 				cout << "  Option: ";
 				cin >> type;
 				app->setType(type);
+				appTree.remove(app);
+				appTree.insert(app);
 				cout << endl << " Type changed to " << type << endl;
 				break;
 			case '3':
@@ -623,11 +640,14 @@ void AppStore::AppManagementMenu(App* app){
 				cout << "\n Insert new rating: ";
 				cin >> rating;
 				app->addRating(rating);
+				appTree.remove(app);
+				appTree.insert(app);
 				cout << endl << "Rating added: " << rating << endl;
 
 				break;
 			case '5':
 				removeApp(app);
+				appTree.remove(app);
 				cout << "\n App successfully removed. ";
 				break;
 			case '0':
@@ -1683,6 +1703,7 @@ void AppStore::loadApps()
 
 			}
 			apps.push_back(app);
+			appTree.insert(app);
 			firstread++;
 			}
 	}

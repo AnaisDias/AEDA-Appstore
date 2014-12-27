@@ -9,7 +9,7 @@ void AppsMenu(AppStore as) {
 	cout << "\n APPS " << endl;
 	cout << " ---------------------------------------------------------" << endl;
 	cout << endl;
-	cout << "   1 - Top 5 Rated Apps" << endl;
+	cout << "   1 - Top 10 Rated Apps" << endl;
 	cout << "   2 - Search Apps by Name" << endl;
 	cout << "   3 - List Apps by Type" << endl;
 	cout << "   4 - Show all apps" << endl;
@@ -26,7 +26,7 @@ void AppsMenu(AppStore as) {
 
 	case '1':
 		system("cls");
-		as.Top5Apps();
+		as.top10Apps();
 		system("cls");
 		AppsMenu(as);
 		break;

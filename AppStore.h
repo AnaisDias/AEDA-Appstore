@@ -15,6 +15,7 @@
 #include "Client.h"
 #include "Developer.h"
 #include "Menu.h"
+#include "BST.h"
 
 using namespace std;
 
@@ -27,6 +28,7 @@ class AppStore {
 	// Todos os developers
 	vector<Developer*> developers;
 	vector<Transaction*> transactions;
+	BST<App*> appTree;
 public:
 	AppStore();
 	AppStore(string name);
@@ -41,7 +43,7 @@ public:
 	App* findAppByID(int id);
 	vector<App*> findAppsByName(string name);
 	vector<App*> findAppsByType(int type);
-	vector<App*> orderAppsByTop5Rating();
+	vector<App*> topTenApps();
 
 
 	Client* findClientByID(int id);
@@ -55,7 +57,9 @@ public:
 	void setName(string name);
 
 	vector<App*> getApps();
+	BST<App*> getAppTree();
 	void setApps(vector<App*> apps);
+	void setAppTree(BST<App*> apps);
 	void saveApps();
 	void loadApps();
 	void loadApps2();
@@ -85,7 +89,7 @@ public:
 	void ShowAppsByName(int id);
 
 	//APPS//
-	void Top5Apps();
+	void top10Apps();
 	void AppsListName();
 	void AppsListType();
 	void AllAppsList();

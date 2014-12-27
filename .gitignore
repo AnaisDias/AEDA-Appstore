@@ -26,3 +26,8 @@
 *.exe
 *.out
 *.app
+/apps.txt
+/apps1.txt
+/clients.txt
+/developers.txt
+/transactions.txt

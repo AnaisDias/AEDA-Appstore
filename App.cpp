@@ -190,6 +190,17 @@ bool App::operator==(const App &app) const{
 	else return false;
 }
 
+bool App::operator<(const App &app) const{
+	if(this->getRatings()<app.getRatings()) return true;
+	else if(this->getRatings()==app.getRatings()){
+		if(this->getPrice()<app.getPrice()) return true;
+		else if(this->getPrice()==app.getPrice()){
+			return this->getType()<app.getType();
+		}
+	}
+	return false;
+}
+
 string App::translateType(int t){
 	switch(t){
 	case 1:
