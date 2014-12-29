@@ -170,7 +170,7 @@ bool ordenaRating(App* app1, App* app2){
 
 vector<App*> AppStore::topTenApps(){
 	BSTItrIn<App*> it(appTree);
-	int n =0;
+	int n=0;
 	vector<App*> top10;
 	while(n<10 && !it.isAtEnd()){
 		top10.push_back(it.retrieve());
@@ -216,8 +216,8 @@ Transaction* AppStore::findTransactionByID(int id){
 void AppStore::top10Apps(){
 	cout << "antes da binary tree" << endl;
 	vector<App*> top10 = topTenApps();
-cout << "depois" << endl;
-		string input;
+	cout << "depois" << endl;
+	string input;
 
 		unsigned int var;
 		if(top10.size() < 10) var = top10.size();

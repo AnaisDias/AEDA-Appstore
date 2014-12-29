@@ -10,6 +10,7 @@
 #pragma once
 
 #include<vector>
+#include<queue>
 #include<string>
 #include "App.h"
 #include "Client.h"
@@ -18,6 +19,8 @@
 #include "BST.h"
 
 using namespace std;
+
+typedef priority_queue<App*> DEV_APPS;
 
 class AppStore {
 	string name;
@@ -29,6 +32,7 @@ class AppStore {
 	vector<Developer*> developers;
 	vector<Transaction*> transactions;
 	BST<App*> appTree;
+	DEV_APPS appsToBeAceppted;
 public:
 	AppStore();
 	AppStore(string name);

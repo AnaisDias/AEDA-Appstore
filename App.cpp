@@ -190,7 +190,7 @@ bool App::operator==(const App &app) const{
 	else return false;
 }
 
-bool App::operator<(const App &app) const{
+/*bool App::operator<(const App &app) const{
 	if(this->getRatings()<app.getRatings()) return true;
 	else if(this->getRatings()==app.getRatings()){
 		if(this->getPrice()<app.getPrice()) return true;
@@ -199,7 +199,7 @@ bool App::operator<(const App &app) const{
 		}
 	}
 	return false;
-}
+}*/
 
 string App::translateType(int t){
 	switch(t){
@@ -278,6 +278,21 @@ std::ostream & App::writeToFile(std::ostream &out){
 	return out;
 }
 
+bool operator<(App &app1, App &app2)
+{
+	if(app1.ratings<app2.ratings){
+		cout << "APP 1 RATINGS :" << app1.ratings << endl;
+		return true;
+
+	}
+	else if(app1.ratings==app2.ratings){
+		if(app1.price<app2.price) return true;
+		else if(app1.price==app2.price){
+			return app1.type<app2.type;
+		}
+	}
+	return false;
+}
 
 
 

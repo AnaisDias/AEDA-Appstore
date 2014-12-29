@@ -55,7 +55,6 @@ public:
 	void setAllRatings(vector<int> ratings);
 	void setComments(vector<string> comments);
 	void setTransactions(vector<Transaction*> transactions);
-	/////////////////////
 
 	string translateType(int t);
 	string displayInfo();
@@ -66,7 +65,8 @@ public:
 	void addRating(int rating);
 	void updateRatings();
 	bool operator==(const App &app) const;
-	bool operator<(const App &app) const;
+	//bool operator<(const App &app) const;
+	friend bool operator<(App &app1,App &app2);
 	std::ostream & operator<<(std::ostream &out);
 
 	std::ostream & writeToFile(std::ostream &out);
