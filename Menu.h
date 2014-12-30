@@ -22,7 +22,9 @@ void DeveloperMenu(AppStore appstore);
 void TransactionMenu(AppStore appstore);
 void ExitMenu(AppStore appstore);
 void SaveMenu(AppStore appstore);
-
+void LogInMenu(AppStore as);
+void Register(AppStore as);
+void InitialMenu(AppStore as);
 
 
 #endif /* SRC_MENU_H_ */

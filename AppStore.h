@@ -17,6 +17,7 @@
 #include "Developer.h"
 #include "Menu.h"
 #include "BST.h"
+#include "User.h"
 #include <tr1/unordered_set>
 
 using namespace std;
@@ -25,7 +26,7 @@ struct hApp {
 
 	int operator()(const App& app) const{
 		int hashVal = 0;
-		for ( int i = 0; i <app.getName().size() ; i++ )
+		for (unsigned int i = 0; i<app.getName().size() ; i++ )
 			hashVal = 37*hashVal + app.getName()[i];
 		return hashVal;
 	}
@@ -37,6 +38,21 @@ struct hApp {
 };
 typedef tr1::unordered_set<App, hApp, hApp> hashApp;
 
+struct AppCompare
+{
+	bool operator()(const App &app1, const App &app2) const
+	{
+		if(app1.getTime()<app2.getTime()) return true;
+		else if(app1.getTime()==app2.getTime()){
+			if(app1.getPrice()<app2.getPrice()) return true;
+			else if(app1.getPrice()==app2.getPrice()){
+				return app1.getName()<app2.getName();
+			}
+		}
+		return false;
+	}
+};
+
 class AppStore {
 	string name;
 	// Todas as apps
@@ -45,6 +61,7 @@ class AppStore {
 	vector<Client*> clients;
 	// Todos os developers
 	vector<Developer*> developers;
+	vector<User *> users;
 	vector<Transaction*> transactions;
 	BST<App*> appTree;
 	hashApp appsNotForSale;
@@ -102,6 +119,8 @@ public:
 	void setDevelopers(vector<Developer*> developers);
 	void saveDevelopers();
 	void loadDevelopers();
+	void saveUsers();
+	void loadUsers();
 	void assignPublishedAppsToDevs();
 
 	vector<Transaction*> getTransactions();

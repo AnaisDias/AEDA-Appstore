@@ -36,8 +36,6 @@ public:
 	~App();
 	static void resetIDs();
 
-
-	/////////////////////
 	int getID() const;
 	string getName() const;
 	float getPrice() const;
@@ -77,26 +75,7 @@ public:
 	bool operator==(const App &app) const;
 	bool operator<(const App &app) const;
 	std::ostream & operator<<(std::ostream &out);
-
 	std::ostream & writeToFile(std::ostream &out);
-
-
-
-};
-
-struct AppCompare
-{
-	bool operator()(const App &app1, const App &app2) const
-	{
-		if(app1.getTime()<app2.getTime()) return true;
-		else if(app1.getTime()==app2.getTime()){
-			if(app1.getPrice()<app2.getPrice()) return true;
-			else if(app1.getPrice()==app2.getPrice()){
-				return app1.getName()<app2.getName();
-			}
-		}
-		return false;
-	}
 };
 
 #endif /* APP_H_ */

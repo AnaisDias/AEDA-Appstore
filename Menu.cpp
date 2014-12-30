@@ -355,6 +355,95 @@ void SaveMenu(AppStore as)
 
 }
 
+void Register(AppStore as)
+{
+	char choice;
+	string username;
+	string password;
+
+		cout << "\n Register OR 0 TO EXIT" << endl;
+		cout << " ---------------------------------------------------------" << endl;
+		cout << "\n   USERNAME:" << endl;
+		cout << "   PASSWORD:" << endl;
+		cout << "   0 - EXIT\n" << endl;
+		cout << " Option: ";
+		cin >> choice;
+
+		switch (choice) {
+
+		case '0':
+			system("cls");
+			ExitMenu(as);
+			break;
+		default:
+			system("cls");
+			Register(as);
+			break;
+		}
+}
+
+void LogInMenu(AppStore as)
+{
+	char choice;
+	string username;
+	string password;
+
+		cout << "\n LOG IN OR 0 TO EXIT" << endl;
+		cout << " ---------------------------------------------------------" << endl;
+		cout << "\n   USERNAME:" << endl;
+		cout << "   PASSWORD:" << endl;
+		cout << "   0 - EXIT\n" << endl;
+		cout << " Option: ";
+		cin >> choice;
+
+		switch (choice) {
+		case '0':
+			system("cls");
+			ExitMenu(as);
+			break;
+		default:
+			system("cls");
+			LogInMenu(as);
+			break;
+		}
+}
+
+void InitialMenu(AppStore as)
+{
+	char choice;
+
+	cout << "\n Hi, Welcome to the Appstore!" << endl;
+	cout << " ---------------------------------------------------------" << endl;
+	cout << "\n   1 - LOG IN" << endl;
+	cout << "   2 - REGISTER" << endl;
+	cout << "   0 - EXIT\n" << endl;
+	cout << " Option: ";
+	cin >> choice;
+
+	switch (choice) {
+
+	case '1':
+		system("cls");
+		LogInMenu(as);
+		//Menu(as);
+		break;
+
+	case '2':
+		system("cls");
+		Register(as);
+		//Menu(as);
+		break;
+	case '0':
+		system("cls");
+		ExitMenu(as);
+		break;
+	default:
+		system("cls");
+		InitialMenu(as);
+		break;
+	}
+}
+
 void Menu(AppStore as) {
     AppStore store = AppStore();
 

@@ -1658,6 +1658,23 @@ void AppStore::saveClients()
 	cout << "\n Clients saved." << endl;
 }
 
+void AppStore::saveUsers()
+{
+	vector<User *>::iterator it = users.begin();
+
+	ofstream file;
+	file.open("users.txt",ios::trunc);
+
+	for(; it != users.end(); it++)
+	{
+		(*it)->writeToFile(file);
+		file << endl;
+	}
+	system("cls");
+	file.close();
+	cout << "\n Users saved." << endl;
+}
+
 void AppStore::saveTransactions()
 {
 	vector<Transaction *>::iterator it = transactions.begin();
@@ -1910,6 +1927,48 @@ void AppStore::loadTransactions()
 			file.close();
 			cout << "\n Clients Loaded.\n ";
 }
+
+void AppStore::loadUsers()
+{
+	cout << "\n Loading Users...";
+
+	ifstream file;
+	file.open("users.txt", ios::in);
+
+	int id, type;
+	string username, line, password;
+
+	if(file.is_open()){
+		while(getline(file,line))
+		{
+			vector<string> fields;
+			stringstream ss( line );
+			string field;
+			while (getline(ss, field, ',' )){
+				fields.push_back(field);
+			}
+			int i=0;
+			User *user;
+
+			id = atoi(fields[i].c_str());
+			i++;
+			username = fields[i];
+			i++;
+			password = fields[i];
+			i++;
+			type = atoi(fields[i].c_str());
+			i++;
+
+			//user = new User(username,password,type);
+			user->setId(id);
+			users.push_back(user);
+			cout << "User added" << endl;
+		}
+	}
+	file.close();
+	cout << "\n Users Loaded.";
+}
+
 
 
 
