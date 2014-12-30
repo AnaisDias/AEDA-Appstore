@@ -73,6 +73,27 @@ void AppStore::setApps(vector<App*> apps) {
 void AppStore::setAppTree(BST<App*> apps){
 	this->appTree=apps;
 }
+
+bool AppStore::sellApp(App* app){
+	hashApp::iterator it = appsNotForSale.find(*app);
+	if(it == appsNotForSale.end()) return false;
+	else{
+		app->setSaleStatus(true);
+		appsNotForSale.erase(it);
+		return true;
+	}
+}
+
+bool AppStore::removeSaleApp(App* app){
+
+	if(app->getSaleStatus()==false) return false;
+	else{
+		app->setSaleStatus(false);
+		pair<hashApp::iterator, bool> it = appsNotForSale.insert(*app);
+		return it.second;
+	}
+}
+
 vector<Client*> AppStore::getClients() {
 	return clients;
 }
@@ -174,7 +195,6 @@ vector<App*> AppStore::topTenApps(){
 	vector<App*> top10;
 	while(n<10 && !it.isAtEnd()){
 		top10.push_back(it.retrieve());
-		cout << it.retrieve()->getName() << endl;
 		it.advance();
 		n++;
 	}
@@ -214,9 +234,7 @@ Transaction* AppStore::findTransactionByID(int id){
 /////////////////////////
 
 void AppStore::top10Apps(){
-	cout << "antes da binary tree" << endl;
 	vector<App*> top10 = topTenApps();
-	cout << "depois" << endl;
 	string input;
 
 		unsigned int var;
@@ -474,13 +492,21 @@ void AppStore::RateApps() {
 	}
 }
 
+void AppStore::addToPQ(App *app)
+{
+	priority_queue<App*> appsRes;
+
+
+}
+
 App* AppStore::AddApplicationMenu() {
 	string name, desc;
 	int type, dev;
 	float price;
+
 	cout << "\n ADD APP" <<endl;
 	cout << " ---------------------------------------------------------" << endl;
-		cout << endl;
+	cout << endl;
 	cout << " Insert the following information: " << endl << endl;
 	cout << " Name: ";
 	cin >> name;
@@ -502,38 +528,35 @@ App* AppStore::AddApplicationMenu() {
 	cout << " Option: ";
 	cin >> type;
 	cout << endl << " Add a short description (no commas): ";
-	cin.get();
-	getline(cin,desc);
+	cin.get(); getline(cin,desc);
 	cout << endl << " Developer's ID: ";
 	cin >> dev;
 
 	App *app;
 	try{
+		app = new App(name, price, type, desc);
+		app->setDeveloper(findDeveloperByID(dev));
 
+		//addApp(app);
+		addToPQ(app);
 
-	app = new App(name, price, type, desc);
-	app->setDeveloper(findDeveloperByID(dev));
+		cout << "\n App " << name << " Added Successfully To The Appstore" << endl;
 
-	addApp(app);
+		cout << endl;
+		char y = 'y';
+		cout << "\n Go Back? (y)";
+		cin >> y;
+		if (y == 'y') {
+			system("cls");
+			return app;
 
-	cout << "\n App " << name << " Added Successfully To The Appstore" << endl;
-
-
-	cout << endl;
-			char y = 'y';
-			cout << "\n Go Back? (y)";
-			cin >> y;
-			if (y == 'y') {
-				system("cls");
-				return app;
-
-			}}
+		}
+	}
 	catch(DeveloperDoesNotExist &e)
 	{
 		cout << "\n Specified developer not exists. ID: " << e.getID() << endl;
 		AddApplicationMenu();
 	}
-
 }
 
 

@@ -17,10 +17,25 @@
 #include "Developer.h"
 #include "Menu.h"
 #include "BST.h"
+#include <tr1/unordered_set>
 
 using namespace std;
 
-typedef priority_queue<App*> DEV_APPS;
+struct hApp {
+
+	int operator()(const App& app) const{
+		int hashVal = 0;
+		for ( int i = 0; i <app.getName().size() ; i++ )
+			hashVal = 37*hashVal + app.getName()[i];
+		return hashVal;
+	}
+
+	bool operator()(const App& app1, const App& app2) const {
+		return (app1.getName()==app2.getName() && app1.getID()==app2.getID());
+	}
+
+};
+typedef tr1::unordered_set<App, hApp, hApp> hashApp;
 
 class AppStore {
 	string name;
@@ -32,7 +47,9 @@ class AppStore {
 	vector<Developer*> developers;
 	vector<Transaction*> transactions;
 	BST<App*> appTree;
-	DEV_APPS appsToBeAceppted;
+	hashApp appsNotForSale;
+	//priority_queue<App*, vector<App*>, AppCompare> unacceptedApps;
+
 public:
 	AppStore();
 	AppStore(string name);
@@ -43,6 +60,8 @@ public:
 	bool removeApp(App* app);
 	bool removeClient(Client* cli);
 	bool removeDeveloper(Developer* dev);
+
+	void addToPQ(App *app);
 
 	App* findAppByID(int id);
 	vector<App*> findAppsByName(string name);
@@ -68,6 +87,9 @@ public:
 	void loadApps();
 	void loadApps2();
 	void assignTransactionsToApps();
+	//hashApp
+	bool sellApp(App* app);
+	bool removeSaleApp(App* app);
 
 	vector<Client*> getClients();
 	void setClients(vector<Client*> clients);

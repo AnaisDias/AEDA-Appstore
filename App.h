@@ -6,6 +6,7 @@
 #include <vector>
 #include "Developer.h"
 #include "Transaction.h"
+#include <ctime>
 
 using namespace std;
 
@@ -22,9 +23,12 @@ class App {
 	string description;
 	Developer* developer;
 	float ratings;
+	bool validated;
 	vector<int> allRatings;
 	vector<string> comments;
 	vector<Transaction*> transactions;
+	time_t submission_time;
+	bool forSale;
 
 public:
 	App();
@@ -44,6 +48,9 @@ public:
 	Developer* getDeveloper() const;
 	vector<string> getComments() const;
 	vector<Transaction*> getTransactions() const;
+	time_t getTime() const;
+	bool getValidation() const;
+	bool getSaleStatus() const;
 
 	void setID(int id);
 	void setName(string name);
@@ -55,6 +62,9 @@ public:
 	void setAllRatings(vector<int> ratings);
 	void setComments(vector<string> comments);
 	void setTransactions(vector<Transaction*> transactions);
+	void setTime(time_t time);
+	void setValidation(bool validation);
+	void setSaleStatus(bool forsale);
 
 	string translateType(int t);
 	string displayInfo();
@@ -65,14 +75,28 @@ public:
 	void addRating(int rating);
 	void updateRatings();
 	bool operator==(const App &app) const;
-	//bool operator<(const App &app) const;
-	friend bool operator<(App &app1,App &app2);
+	bool operator<(const App &app) const;
 	std::ostream & operator<<(std::ostream &out);
 
 	std::ostream & writeToFile(std::ostream &out);
 
 
 
+};
+
+struct AppCompare
+{
+	bool operator()(const App &app1, const App &app2) const
+	{
+		if(app1.getTime()<app2.getTime()) return true;
+		else if(app1.getTime()==app2.getTime()){
+			if(app1.getPrice()<app2.getPrice()) return true;
+			else if(app1.getPrice()==app2.getPrice()){
+				return app1.getName()<app2.getName();
+			}
+		}
+		return false;
+	}
 };
 
 #endif /* APP_H_ */

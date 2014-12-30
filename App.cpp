@@ -14,6 +14,8 @@ App::App() {
 	description="";
 	name="";
 	ratings = 0;
+	validated=false;
+	forSale=true;
 }
 
 App::~App() {
@@ -33,6 +35,8 @@ App::App(string name, float price, int type, string description) {
 	this->id=allIDs;
 	allIDs++;
 	this->ratings = 0;
+	this->validated=false;
+	this->forSale=true;
 }
 
 void App::resetIDs(){
@@ -190,16 +194,16 @@ bool App::operator==(const App &app) const{
 	else return false;
 }
 
-/*bool App::operator<(const App &app) const{
-	if(this->getRatings()<app.getRatings()) return true;
+bool App::operator<(const App &app) const{
+	if(this->getRatings()>app.getRatings()) return true;
 	else if(this->getRatings()==app.getRatings()){
-		if(this->getPrice()<app.getPrice()) return true;
+		if(this->getPrice()>app.getPrice()) return true;
 		else if(this->getPrice()==app.getPrice()){
-			return this->getType()<app.getType();
+			return this->getType()>app.getType();
 		}
 	}
 	return false;
-}*/
+}
 
 string App::translateType(int t){
 	switch(t){
@@ -278,21 +282,31 @@ std::ostream & App::writeToFile(std::ostream &out){
 	return out;
 }
 
-bool operator<(App &app1, App &app2)
-{
-	if(app1.ratings<app2.ratings){
-		cout << "APP 1 RATINGS :" << app1.ratings << endl;
-		return true;
-
-	}
-	else if(app1.ratings==app2.ratings){
-		if(app1.price<app2.price) return true;
-		else if(app1.price==app2.price){
-			return app1.type<app2.type;
-		}
-	}
-	return false;
+void App::setTime(time_t time){
+	this->submission_time = time;
 }
+
+time_t App::getTime() const{
+	return submission_time;
+}
+
+bool App::getValidation() const{
+	return validated;
+}
+
+void App::setValidation(bool validation){
+	this->validated=validation;
+}
+
+bool App::getSaleStatus() const{
+	return forSale;
+}
+
+void App::setSaleStatus(bool forsale){
+	this->forSale=forsale;
+}
+
+
 
 
 
