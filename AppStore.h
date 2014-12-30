@@ -90,6 +90,8 @@ public:
 	//hashApp
 	bool sellApp(App* app);
 	bool removeSaleApp(App* app);
+	vector<App> getUnsoldAppsByDeveloper(Developer *dev);
+	vector<App*> getAppsForSale();
 
 	vector<Client*> getClients();
 	void setClients(vector<Client*> clients);

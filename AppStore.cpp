@@ -94,6 +94,27 @@ bool AppStore::removeSaleApp(App* app){
 	}
 }
 
+vector<App> AppStore::getUnsoldAppsByDeveloper(Developer *dev){
+	vector<App> apps;
+	hashApp::iterator it = appsNotForSale.begin();
+	while(it!=appsNotForSale.end()){
+		if(it->getDeveloper()->getID()==dev->getID()) apps.push_back(*it);
+		it++;
+	}
+	return apps;
+
+}
+
+vector<App*> AppStore::getAppsForSale(){
+	vector<App*> sale;
+	for(int i=0;i<apps.size();i++){
+		if(apps[i]->getSaleStatus()){
+			sale.push_back(apps[i]);
+		}
+	}
+	return sale;
+}
+
 vector<Client*> AppStore::getClients() {
 	return clients;
 }
