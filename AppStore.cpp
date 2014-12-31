@@ -51,11 +51,23 @@ void AppStore::addDeveloper(Developer* dev) {
 	developers.push_back(dev);
 }
 
+void AppStore::addUser(User* user){
+	users.push_back(user);
+}
+
 string AppStore::getName() {
 	return name;
 }
 void AppStore::setName(string name) {
 	this->name = name;
+}
+
+User* AppStore::getLoggedInUser() const{
+	return loggedInUser;
+}
+
+void AppStore::setLoggedInUser(User* user){
+	loggedInUser=user;
 }
 
 vector<App*> AppStore::getApps() {
@@ -75,7 +87,7 @@ void AppStore::setAppTree(BST<App*> apps){
 }
 
 bool AppStore::sellApp(App* app){
-	hashApp::iterator it = appsNotForSale.find(*app);
+	hashApp::iterator it = appsNotForSale.find(app);
 	if(it == appsNotForSale.end()) return false;
 	else{
 		app->setSaleStatus(true);
@@ -89,16 +101,16 @@ bool AppStore::removeSaleApp(App* app){
 	if(app->getSaleStatus()==false) return false;
 	else{
 		app->setSaleStatus(false);
-		pair<hashApp::iterator, bool> it = appsNotForSale.insert(*app);
+		pair<hashApp::iterator, bool> it = appsNotForSale.insert(app);
 		return it.second;
 	}
 }
 
-vector<App> AppStore::getUnsoldAppsByDeveloper(Developer *dev){
-	vector<App> apps;
+vector<App*> AppStore::getUnsoldAppsByDeveloper(Developer *dev){
+	vector<App*> apps;
 	hashApp::iterator it = appsNotForSale.begin();
 	while(it!=appsNotForSale.end()){
-		if(it->getDeveloper()->getID()==dev->getID()) apps.push_back(*it);
+		if((*it)->getDeveloper()->getID()==dev->getID()) apps.push_back(*it);
 		it++;
 	}
 	return apps;
@@ -106,6 +118,16 @@ vector<App> AppStore::getUnsoldAppsByDeveloper(Developer *dev){
 }
 
 vector<App*> AppStore::getAppsForSale(){
+	vector<App*> sale;
+	for(int i=0;i<apps.size();i++){
+		if(apps[i]->getSaleStatus()){
+			sale.push_back(apps[i]);
+		}
+	}
+	return sale;
+}
+
+vector<App*> AppStore::getAppsForSaleFromVector(vector<App*> apps){
 	vector<App*> sale;
 	for(int i=0;i<apps.size();i++){
 		if(apps[i]->getSaleStatus()){
@@ -245,6 +267,13 @@ Transaction* AppStore::findTransactionByID(int id){
 		if(transactions[i]->getID()==id) return transactions[i];
 	}
 	throw TransactionDoesNotExist(id);
+	return NULL;
+}
+
+User* AppStore::findUserByUsername(string username){
+	for(int i=0; i<users.size();i++){
+		if(users[i]->getUsername()==username) return users[i];
+	}
 	return NULL;
 }
 
@@ -441,6 +470,35 @@ void AppStore::AllAppsList(){
 				return;
 			}
 }
+
+void AppStore::AppsNotForSaleList(){
+	cout << "\n APPS NOT FOR SALE" << endl;
+		cout << " ---------------------------------------------------------" << endl;
+		cout << endl;
+
+		string input;
+		if(appsNotForSale.empty()){
+			cout << " No apps. Press any key to go back" <<endl;
+			cin.get();
+			return;
+		}
+		hashApp::iterator it = appsNotForSale.begin();
+		while(it!=appsNotForSale.end()){
+			cout << (*(*it)).displayInfo();
+			cout << endl;
+			it++;
+		}
+
+
+		char y = 'y';
+		cout << "\n Go Back? (y)";
+		cin >> y;
+		if (y == 'y') {
+			system("cls");
+			return;
+		}
+}
+
 void AppStore::RateApps() {
 	string name;
 	string rate;
@@ -550,8 +608,13 @@ App* AppStore::AddApplicationMenu() {
 	cin >> type;
 	cout << endl << " Add a short description (no commas): ";
 	cin.get(); getline(cin,desc);
+	if(this->getLoggedInUser()->getType()==3){
+		dev=getLoggedInUser()->getID();
+	}
+	else{
 	cout << endl << " Developer's ID: ";
 	cin >> dev;
+	}
 
 	App *app;
 	try{
@@ -618,11 +681,102 @@ void AppStore::RemoveApplicationMenu() {
 			}
 }
 
+void AppStore::RemoveSaleMenu(){
+	string input;
+	vector<App*> devAppsForSale = getDeveloperAppsForSale(this->getLoggedInUser()->getID());
+		if(devAppsForSale.empty()){
+			cout << "No apps. Press any key to go back" <<endl;
+			cout << endl;
+					char y = 'y';
+					cout << "\n Go Back? (y)";
+					cin >> y;
+					if (y == 'y') {
+						system("cls");
+						return;
+					}
+		}
+		for(unsigned int i=0; i<devAppsForSale.size(); i++){
+			cout << devAppsForSale[i]->displayInfo() << endl;
+		}
+		cout << " Select app by ID or enter 'r' to return: ";
+		cin >> input;
+		if(input == "r") {
+			system("cls");
+			return;
+		}
+
+		App *app = findAppByID(atoi(input.c_str()));
+		if(app->getDeveloper()->getID()!=this->getLoggedInUser()->getID()){
+			cout << "You don't have the permission to remove this app's sale" << endl;
+
+		}
+		else{
+		removeSaleApp(app);
+
+		cout << " " << app->getName() << " is not for sale anymore." << endl;
+		cout << endl;
+		}
+				char y = 'y';
+				cout << "\n Go Back? (y)";
+				cin >> y;
+				if (y == 'y') {
+					system("cls");
+					return;
+				}
+}
+
+void AppStore::StartSaleMenu(){
+	string input;
+	Developer* dev=findDeveloperByID(this->getLoggedInUser()->getID());
+		vector<App*> devAppsUnsold = getUnsoldAppsByDeveloper(dev);
+			if(devAppsUnsold.empty()){
+				cout << "No apps. Press any key to go back" <<endl;
+				cout << endl;
+						char y = 'y';
+						cout << "\n Go Back? (y)";
+						cin >> y;
+						if (y == 'y') {
+							system("cls");
+							return;
+						}
+			}
+			for(unsigned int i=0; i<devAppsUnsold.size(); i++){
+				cout << devAppsUnsold[i]->displayInfo() << endl;
+			}
+			cout << " Select app by ID or enter 'r' to return: ";
+			cin >> input;
+			if(input == "r") {
+				system("cls");
+				return;
+			}
+
+			App *app = findAppByID(atoi(input.c_str()));
+			if(app->getDeveloper()->getID()!=this->getLoggedInUser()->getID()){
+				cout << "You don't have the permission to start selling this app" << endl;
+
+			}
+			else{
+			sellApp(app);
+
+			cout << " " << app->getName() << " is for sale again." << endl;
+			cout << endl;
+			}
+					char y = 'y';
+					cout << "\n Go Back? (y)";
+					cin >> y;
+					if (y == 'y') {
+						system("cls");
+						return;
+					}
+}
+
 void AppStore::AppManagementMenu(App* app){
 
 	string name;
 	int type, dev, rating;
 	char choice;
+
+
 	system("cls");
 	cout << "\n APP MANAGEMENT: ID=" << app->getID() << endl;
 	cout << " ---------------------------------------------------------" << endl;
@@ -1960,7 +2114,7 @@ void AppStore::loadUsers()
 			i++;
 
 			//user = new User(username,password,type);
-			user->setId(id);
+			user->setID(id);
 			users.push_back(user);
 			cout << "User added" << endl;
 		}

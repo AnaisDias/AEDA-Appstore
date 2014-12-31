@@ -19,7 +19,7 @@ class User {
 	int id;
 	static int allIDs;
 public:
-	User(int type, string password, string username);
+	User(int type, string password, string username, int id);
 	~User();
 	int getType();
 	void setType(int type);
@@ -27,8 +27,8 @@ public:
 	void setUsername(string username);
 	string getPassword();
 	void setPassword(string password);
-	int getId();
-	void setId(int id);
+	int getID();
+	void setID(int id);
 
 	std::ostream & operator<<(std::ostream &out);
 	std::ostream & writeToFile(std::ostream &out);

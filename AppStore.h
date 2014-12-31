@@ -24,19 +24,19 @@ using namespace std;
 
 struct hApp {
 
-	int operator()(const App& app) const{
+	int operator()(const App *app) const{
 		int hashVal = 0;
-		for (unsigned int i = 0; i<app.getName().size() ; i++ )
-			hashVal = 37*hashVal + app.getName()[i];
+		for (unsigned int i = 0; i<app->getName().size() ; i++ )
+			hashVal = 37*hashVal + app->getName()[i];
 		return hashVal;
 	}
 
-	bool operator()(const App& app1, const App& app2) const {
-		return (app1.getName()==app2.getName() && app1.getID()==app2.getID());
+	bool operator()(const App *app1, const App *app2) const {
+		return (app1->getName()==app2->getName() && app1->getID()==app2->getID());
 	}
 
 };
-typedef tr1::unordered_set<App, hApp, hApp> hashApp;
+typedef tr1::unordered_set<App*, hApp, hApp> hashApp;
 
 struct AppCompare
 {
@@ -65,6 +65,7 @@ class AppStore {
 	vector<Transaction*> transactions;
 	BST<App*> appTree;
 	hashApp appsNotForSale;
+	User* loggedInUser;
 	//priority_queue<App*, vector<App*>, AppCompare> unacceptedApps;
 
 public:
@@ -74,6 +75,7 @@ public:
 	void addApp(App* app);
 	void addClient(Client* cli);
 	void addDeveloper(Developer* dev);
+	void addUser(User* user);
 	bool removeApp(App* app);
 	bool removeClient(Client* cli);
 	bool removeDeveloper(Developer* dev);
@@ -90,11 +92,16 @@ public:
 	Developer* findDeveloperByID(int id);
 	Transaction* findTransactionByID(int id);
 
+	User* findUserByUsername(string username);
+
 	//Gets e Sets
 
 
 	string getName();
 	void setName(string name);
+
+	User* getLoggedInUser() const;
+	void setLoggedInUser(User* user);
 
 	vector<App*> getApps();
 	BST<App*> getAppTree();
@@ -107,8 +114,12 @@ public:
 	//hashApp
 	bool sellApp(App* app);
 	bool removeSaleApp(App* app);
-	vector<App> getUnsoldAppsByDeveloper(Developer *dev);
+	vector<App*> getUnsoldAppsByDeveloper(Developer *dev);
 	vector<App*> getAppsForSale();
+
+	vector<App*> getAppsForSaleFromVector(vector<App*> apps);
+
+	vector<App*> getDeveloperAppsForSale(int id);
 
 	vector<Client*> getClients();
 	void setClients(vector<Client*> clients);
@@ -140,9 +151,12 @@ public:
 	void AppsListName();
 	void AppsListType();
 	void AllAppsList();
+	void AppsNotForSaleList();
 	void RateApps();
 	App* AddApplicationMenu(); //uses addApp
 	void RemoveApplicationMenu(); //uses removeApp
+	void RemoveSaleMenu();
+	void StartSaleMenu();
 	void AppManagementMenu(App* app);
 	void addDeveloperMenu();
 

@@ -8,14 +8,12 @@
 #include "User.h"
 #include <sstream>
 
-int User::allIDs=0;
 
-User::User(int type, string username, string password) {
+User::User(int type, string username, string password, int id) {
 	this->type = type;
 	this->username = username;
 	this->password = password;
-	this->id=allIDs;
-	allIDs++;
+	this->id=id;
 }
 
 User::~User() {
@@ -46,11 +44,11 @@ void User::setPassword(string password)
 	this->password = password;
 }
 
-int User::getId(){
+int User::getID(){
 	return id;
 }
 
-void User::setId(int id){
+void User::setID(int id){
 	this->id=id;
 }
 
