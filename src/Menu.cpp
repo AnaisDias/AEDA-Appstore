@@ -6,7 +6,7 @@ void AppsMenu(AppStore as) {
 
 	char choice;
 
-	if(as.getLoggedInUser()->getType()==1||as.getLoggedInUser()->getType()==3){
+	if(as.getLoggedInUser()->getType()==1){
 
 	cout << "\n APPS " << endl;
 	cout << " ---------------------------------------------------------" << endl;
@@ -619,6 +619,9 @@ void Register(AppStore as)
 	string username;
 	string password;
 	string type;
+	User* user;
+	User* user1;
+	User* user2;
 
 		cout << "\n Register OR 0 TO EXIT" << endl;
 		cout << " ---------------------------------------------------------" << endl;
@@ -628,53 +631,125 @@ void Register(AppStore as)
 		if(username=="0"){
 			system("cls");
 			ExitMenu(as);
-			break;
+			return;
 		}
 		cout << "   PASSWORD:" << endl;
 		cin >> password;
 		if(password=="0"){
 			system("cls");
 			ExitMenu(as);
-			break;
+			return;
 		}
 		cout << "   TYPE OF USER: (write developer or client):" << endl;
 		cin >> type;
 		if(type=="0"){
 			system("cls");
 			ExitMenu(as);
-			break;
+			return;
 		}
 		else if(type!="developer"&&type!="client"){
 			system("cls");
 			cout << "Invalid type!" << endl;
 			Register(as);
-			break;
+			return;
 		}
 
 		if(as.findUserByUsername(username)!=NULL){
 			system("cls");
 			cout << "Username already taken, choose a different one";
 			Register(as);
-			break;
+			return;
 		}
 
 		else{
 			if(type=="developer"){
-				//pedir info de developer
-				//Developer* dev=new Developer()
-				//User* user = new User(3,username,password,dev->getID());
-				//as.addUser(user);
-				//cout << "Registration successful!" << endl;
-				//Menu
+				cout << " Insert the following information: " << endl << endl;
+				cout << "   1 - Individual Developer" << endl;
+				cout << "   2 - Enterprise" << endl;
+
+
+
+				char type;
+				string name, address, company;
+				int nif, code;
+				cout << "\n Option: ";
+				cin >> type;
+				system("cls");
+				switch(type)
+				{
+				case '1':
+					cout << "\n CREATING INDIVIDUAL DEVELOPER" << endl;
+					cout << " ---------------------------------------------------------" << endl;
+
+					cout << "\n Name: ";
+					cin >> name;
+					cout << "\n Adress: ";
+					cin.get();
+					getline(cin,address);
+					cout << endl << "\n NIF: ";
+					cin >> nif;
+					Individual *ind;
+					ind = new Individual(name, address, nif);
+					as.addDeveloper(ind);
+					user = new User(3,username,password,ind->getID());
+					as.addUser(user);
+					system("cls");
+					cout << "Registration successful!" << endl;
+					InitialMenu(as);
+					break;
+				case '2':
+					cout << "\n CREATING ENTERPRISE DEVELOPER" << endl;
+					cout << " ---------------------------------------------------------" << endl;
+
+					cout << "\n Name: ";
+					cin >> name;
+					cout << endl << "\n Adress: ";
+					cin.get();
+					cin.get();
+					getline(cin,address);
+					cout << endl << "\n NIF: ";
+					cin >> nif;
+					cout << endl << "\n Company Name: ";
+					cin >> company;
+					cout << endl << "\n Code: ";
+					cin >> code;
+					Company *comp;
+					comp = new Company(company, code, name, address, nif);
+					as.addDeveloper(comp);
+					user1 = new User(3,username,password,comp->getID());
+					as.addUser(user1);
+					system("cls");
+					cout << "Registration successful!" << endl;
+					InitialMenu(as);
+					break;
+				default:
+					system("cls");
+					InitialMenu(as);
+					return;
+					break;
+				}
 			}
 			else if(type=="client"){
-				//pedir info de cliente
-				//int age;
-				//Client* client=new Client(username,age);
-				//User* user = new User(2,username,password,client->getID();
-				//as.addUser(user);
-				//cout << "Registration successful!" << endl;
-				//Menu
+				string name;
+				int age;
+				cout << "\n NEW CLIENT" << endl;
+				cout << " ---------------------------------------------------------" << endl;
+				cout << endl;
+
+				cout << " Name: ";
+				cin >> name;
+				cout << endl;
+				cout << " Age: ";
+				cin >> age;
+
+				Client *cli = new Client(name, age);
+				as.addClient(cli);
+				user2 = new User(2,username,password,cli->getID());
+				as.addUser(user2);
+				system("cls");
+				cout << "Registration successful!" << endl;
+				InitialMenu(as);
+				return;
 			}
 		}
 }
@@ -691,7 +766,7 @@ void LogInMenu(AppStore as)
 		if(username=="0"){
 			system("cls");
 			ExitMenu(as);
-			break;
+			return;
 		}
 		cout << "   PASSWORD:" << endl;
 		cin >> password;
@@ -699,7 +774,7 @@ void LogInMenu(AppStore as)
 		if(password=="0"){
 			system("cls");
 			ExitMenu(as);
-			break;
+			return;
 		}
 
 		User* user = as.findUserByUsername(username);
@@ -713,14 +788,14 @@ void LogInMenu(AppStore as)
 				system("cls");
 				cout << "Login unsuccessful" << endl;
 				InitialMenu(as);
-				break;
+				return;
 			}
 		}
 		else{
 			system("cls");
 			cout << "Login unsuccessful" << endl;
 			InitialMenu(as);
-			break;
+			return;
 		}
 
 

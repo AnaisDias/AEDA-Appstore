@@ -137,6 +137,16 @@ vector<App*> AppStore::getAppsForSaleFromVector(vector<App*> apps){
 	return sale;
 }
 
+vector<App*> AppStore::getDeveloperAppsForSale(int id){
+	vector<App*> sale;
+		for(int i=0;i<apps.size();i++){
+			if(apps[i]->getSaleStatus() && apps[i]->getDeveloper()->getID()==id){
+				sale.push_back(apps[i]);
+			}
+		}
+		return sale;
+}
+
 vector<Client*> AppStore::getClients() {
 	return clients;
 }
@@ -775,8 +785,12 @@ void AppStore::AppManagementMenu(App* app){
 	string name;
 	int type, dev, rating;
 	char choice;
+	Transaction *trans;
+	vector<App*> appsTrans;
+	Client *cli;
 
-
+	if(this->getLoggedInUser()->getType()==1 ||(this->getLoggedInUser()->getType()==3 && app->getDeveloper()->getID()==this->getLoggedInUser()->getID()))
+	{
 	system("cls");
 	cout << "\n APP MANAGEMENT: ID=" << app->getID() << endl;
 	cout << " ---------------------------------------------------------" << endl;
@@ -864,6 +878,56 @@ void AppStore::AppManagementMenu(App* app){
 				system("cls");
 				return;
 			}}
+
+	else if(this->getLoggedInUser()->getType()==2){
+		system("cls");
+		cout << "\n APP MENU: ID=" << app->getID() << endl;
+		cout << " ---------------------------------------------------------" << endl;
+		cout << "\n What do you wish to do? " << endl;
+		cout << endl;
+		cout << "   1 - Buy app" << endl;
+		cout << "   2 - Add rating" << endl;
+
+		cout << "\n   0 - Go Back" << endl<< endl << endl;
+		cout << " Option: ";
+		cin >> choice;
+
+		switch(choice) {
+
+
+					case '1':
+						system("cls");
+						cli=findClientByID(this->getLoggedInUser()->getID());
+						appsTrans.push_back(app);
+						trans = new Transaction();
+						trans->setClient(cli);
+						cli->addTransaction(trans);
+						trans->setApps(appsTrans);
+						break;
+					case '2':
+						system("cls");
+						cout << "\n Insert new rating: ";
+						cin >> rating;
+						app->addRating(rating);
+						appTree.remove(app);
+						appTree.insert(app);
+						cout << endl << "Rating added: " << rating << endl;
+						break;
+					case '0':
+						system("cls");
+						return;
+					default:
+						system("cls");
+						AppManagementMenu(app);
+						break;
+		}
+	}
+
+	else{
+		cout << "You don't have the permission to access this app" << endl;
+		return;
+	}
+}
 /////////////////////////
 //////SUB CLIENT ////////
 /////////////////////////
@@ -1115,6 +1179,8 @@ void AppStore::ClientManagementMenu(Client* cli){
 	string name;
 	int  age;
 	char choice;
+
+	if(this->getLoggedInUser()->getType()==1){
 	system("cls");
 	cout << "\n CLIENT MANAGEMENT: ID=" << cli->getID() << endl << endl;
 	cout << " ---------------------------------------------------------" << endl;
@@ -1161,6 +1227,11 @@ void AppStore::ClientManagementMenu(Client* cli){
 		system("cls");
 		ClientManagementMenu(cli);
 		break;
+	}
+	}
+	else{
+		cout << "You don't have the permission to access this menu" << endl;
+		return;
 	}
 
 }
@@ -1317,7 +1388,7 @@ void AppStore::AppsCreated() {
 
 void AppStore::SalesData() {
 
-	cout << "\n Choose Developer id: ";
+	cout << "\n Choose Developer ID: ";
 	int input;
 	cin >> input;
 
@@ -1461,6 +1532,10 @@ void AppStore::DevManagementMenu(Individual* ind){
 		int nif;
 		App *app;
 		char choice;
+
+		if(this->getLoggedInUser()->getType()==1 || (this->getLoggedInUser()->getType()==3 && this->getLoggedInUser()->getID()==ind->getID())){
+
+
 		system("cls");
 		cout << "\n DEVELOPER MANAGEMENT: ID=" << ind->getID() << endl;
 		cout << " ---------------------------------------------------------" << endl;
@@ -1509,8 +1584,11 @@ void AppStore::DevManagementMenu(Individual* ind){
 				DevManagementMenu(ind);
 				break;
 			}
-
-
+		}
+		else{
+			cout << "You don't have the permission to access this menu" << endl;
+			return;
+		}
 }
 
 
@@ -1522,6 +1600,7 @@ void AppStore::DevManagementMenu(Company* comp){
 			int nif, code;
 			App *app;
 	char choice;
+	if(this->getLoggedInUser()->getType()==1 || (this->getLoggedInUser()->getType()==3 && this->getLoggedInUser()->getID()==comp->getID())){
 	cout << "\n EDITING ENTERPRISE DEVELOPER" << endl;
 		cout << " ---------------------------------------------------------" << endl;
 
@@ -1591,6 +1670,12 @@ void AppStore::DevManagementMenu(Company* comp){
 		system("cls");
 		return;
 	}}
+
+	else{
+		cout << "You don't have the permission to access this menu" << endl;
+		return;
+	}
+}
 
 /////////////////////////
 //////SUB TRANS /////////

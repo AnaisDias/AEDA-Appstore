@@ -40,13 +40,13 @@ typedef tr1::unordered_set<App*, hApp, hApp> hashApp;
 
 struct AppCompare
 {
-	bool operator()(const App &app1, const App &app2) const
+	bool operator()(const App* app1, const App* app2) const
 	{
-		if(app1.getTime()<app2.getTime()) return true;
-		else if(app1.getTime()==app2.getTime()){
-			if(app1.getPrice()<app2.getPrice()) return true;
-			else if(app1.getPrice()==app2.getPrice()){
-				return app1.getName()<app2.getName();
+		if(app1->getTime()<app2->getTime()) return true;
+		else if(app1->getTime()==app2->getTime()){
+			if(app1->getPrice()<app2->getPrice()) return true;
+			else if(app1->getPrice()==app2->getPrice()){
+				return app1->getName()<app2->getName();
 			}
 		}
 		return false;
