@@ -13,10 +13,10 @@ int main(){
 	AppStr.assignPublishedAppsToDevs();
 	AppStr.loadClients();
 	AppStr.loadTransactions();
+	AppStr.loadUsers();
 	AppStr.assignTransactionsToApps();
 	system("cls");
-
-	Menu(AppStr);
+	InitialMenu(AppStr);
 
 	return 0;
 }

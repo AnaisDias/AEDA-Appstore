@@ -1860,7 +1860,7 @@ void AppStore::saveApps()
 
 	system("cls");
 	file.close();
-	cout << "\n Apps saved." << endl;
+	cout << "\n Message: Apps saved." << endl;
 }
 
 void AppStore::saveDevelopers()
@@ -1877,7 +1877,7 @@ void AppStore::saveDevelopers()
 	}
 	system("cls");
 	file.close();
-	cout << "\n Developers saved." << endl;
+	cout << "\n Message: Developers saved." << endl;
 }
 
 void AppStore::saveClients()
@@ -1894,7 +1894,7 @@ void AppStore::saveClients()
 	}
 	system("cls");
 	file.close();
-	cout << "\n Clients saved." << endl;
+	cout << "\n Message: Clients saved." << endl;
 }
 
 void AppStore::saveUsers()
@@ -1911,7 +1911,7 @@ void AppStore::saveUsers()
 	}
 	system("cls");
 	file.close();
-	cout << "\n Users saved." << endl;
+	cout << "\n Message: Users saved." << endl;
 }
 
 void AppStore::saveTransactions()
@@ -1928,7 +1928,7 @@ void AppStore::saveTransactions()
 	}
 	system("cls");
 	file.close();
-	cout << "\n Transactions saved." << endl;
+	cout << "\n Message: Transactions saved." << endl;
 }
 
 /**********************************************************
@@ -1937,7 +1937,7 @@ void AppStore::saveTransactions()
 
 void AppStore::loadApps()
 {
-	cout << "\n Loading Apps..." << endl;
+	cout << "\n Message: Loading Apps..." << endl;
 
 	ifstream file;
 	file.open("apps.txt");
@@ -2008,14 +2008,14 @@ void AppStore::loadApps()
 			}
 	}
 	file.close();
-	cout <<"\n Apps Loaded." << endl;
+	cout <<"\n Message: Apps Loaded." << endl;
 }
 
 
 
 void AppStore::loadDevelopers()
 {
-	cout << "\n Loading Developers..." << endl;
+	cout << "\n Message: Loading Developers..." << endl;
 
 	ifstream file;
 	file.open("developers.txt", ios::in);
@@ -2055,7 +2055,7 @@ void AppStore::loadDevelopers()
 				ind = new Individual(name,address, nif);
 				ind->setID(id);
 				developers.push_back(ind);
-				cout << "Individual added" << endl;
+				cout << " Message: Individual added" << endl;
 			}
 			else if(type == 2)
 			{
@@ -2067,17 +2067,17 @@ void AppStore::loadDevelopers()
 				comp = new Company(bName, code, name,address, nif);
 				comp->setID(id);
 				developers.push_back(comp);
-				cout << "Company added" << endl;
+				cout << " Message: Company added" << endl;
 			}
 		}
 	}
 	file.close();
-	cout <<"\n Developers Loaded." << endl;
+	cout <<"\n Message: Developers Loaded." << endl;
 }
 
 void AppStore::loadClients()
 {
-	cout << "\n Loading Clients...";
+	cout << "\n Message: Loading Clients...";
 
 	ifstream file;
 	file.open("clients.txt", ios::in);
@@ -2111,16 +2111,16 @@ void AppStore::loadClients()
 			client = new Client(username,age);
 			client->setID(id);
 			clients.push_back(client);
-			cout << "Client added" << endl;
+			cout << "Message: Client added" << endl;
 		}
 	}
 	file.close();
-	cout << "\n Clients Loaded.";
+	cout << "\n Message: Clients Loaded.";
 }
 
 void AppStore::loadTransactions()
 {
-	cout << "\n Loading Transactions...";
+	cout << "\n Message: Loading Transactions...";
 
 	ifstream file;
 	file.open("transactions.txt", ios::in);
@@ -2164,12 +2164,12 @@ void AppStore::loadTransactions()
 				}
 			}
 			file.close();
-			cout << "\n Clients Loaded.\n ";
+			cout << "\n Message: Clients Loaded.\n ";
 }
 
 void AppStore::loadUsers()
 {
-	cout << "\n Loading Users...";
+	cout << "\n Message: Loading Users...";
 
 	ifstream file;
 	file.open("users.txt", ios::in);
@@ -2198,14 +2198,14 @@ void AppStore::loadUsers()
 			type = atoi(fields[i].c_str());
 			i++;
 
-			//user = new User(username,password,type);
+			user = new User(type, username, password, id);
 			user->setID(id);
 			users.push_back(user);
-			cout << "User added" << endl;
+			cout << " Message: User added" << endl;
 		}
 	}
 	file.close();
-	cout << "\n Users Loaded.";
+	cout << "\n Message: Users Loaded.";
 }
 
 

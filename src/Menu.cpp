@@ -600,16 +600,18 @@ void SaveMenu(AppStore as)
 			as.saveApps();
 			as.saveTransactions();
 			system("cls");
-			cout << "\n All saved.\n" << endl;
+			cout << "\n Message: All saved.\n" << endl;
 			SaveMenu(as);
 			break;
 
-	case '9':exit(0);
-			break;
+	case '9':
+		exit(0);
+		break;
 
-	default:system("cls");
-			SaveMenu(as);
-			break;
+	default:
+		system("cls");
+		InitialMenu(as);
+		break;
 	}
 
 }
@@ -623,51 +625,53 @@ void Register(AppStore as)
 	User* user1;
 	User* user2;
 
-		cout << "\n Register OR 0 TO EXIT" << endl;
+		cout << "\n REGISTER OR PRESS 0 TO GO BACK" << endl;
 		cout << " ---------------------------------------------------------" << endl;
-		cout << "   0 - EXIT\n" << endl;
-		cout << "\n   USERNAME:" << endl;
-		cin >> username;
+		cout << "\n USERNAME: ";
+		cin.get();
+		getline(cin,username);
 		if(username=="0"){
 			system("cls");
-			ExitMenu(as);
+			InitialMenu(as);
 			return;
 		}
-		cout << "   PASSWORD:" << endl;
-		cin >> password;
+		cout << endl;
+		cout << " PASSWORD: ";
+		getline(cin,password);
 		if(password=="0"){
 			system("cls");
-			ExitMenu(as);
+			InitialMenu(as);
 			return;
 		}
-		cout << "   TYPE OF USER: (write developer or client):" << endl;
+		cout << endl;
+		cout << " TYPE OF USER (write developer or client): ";
 		cin >> type;
+		cout << endl;
 		if(type=="0"){
 			system("cls");
-			ExitMenu(as);
+			InitialMenu(as);
 			return;
 		}
 		else if(type!="developer"&&type!="client"){
 			system("cls");
-			cout << "Invalid type!" << endl;
+			cout << " Message: Invalid type!" << endl;
 			Register(as);
 			return;
 		}
 
 		if(as.findUserByUsername(username)!=NULL){
 			system("cls");
-			cout << "Username already taken, choose a different one";
+			cout << " Message: Username already taken, choose a different one";
 			Register(as);
 			return;
 		}
 
 		else{
 			if(type=="developer"){
-				cout << " Insert the following information: " << endl << endl;
-				cout << "   1 - Individual Developer" << endl;
+				cout << " What type of developer you are? " << endl << endl;
+				cout << " ---------------------------------------------------------" << endl;
+				cout << "   1 - Individual" << endl;
 				cout << "   2 - Enterprise" << endl;
-
-
 
 				char type;
 				string name, address, company;
@@ -694,7 +698,7 @@ void Register(AppStore as)
 					user = new User(3,username,password,ind->getID());
 					as.addUser(user);
 					system("cls");
-					cout << "Registration successful!" << endl;
+					cout << " Message: Registration successful!" << endl;
 					InitialMenu(as);
 					break;
 				case '2':
@@ -704,7 +708,6 @@ void Register(AppStore as)
 					cout << "\n Name: ";
 					cin >> name;
 					cout << endl << "\n Adress: ";
-					cin.get();
 					cin.get();
 					getline(cin,address);
 					cout << endl << "\n NIF: ";
@@ -719,7 +722,9 @@ void Register(AppStore as)
 					user1 = new User(3,username,password,comp->getID());
 					as.addUser(user1);
 					system("cls");
-					cout << "Registration successful!" << endl;
+					cout << " Message: Registration successful!" << endl;
+					as.saveUsers();
+					as.saveDevelopers();
 					InitialMenu(as);
 					break;
 				default:
@@ -737,7 +742,8 @@ void Register(AppStore as)
 				cout << endl;
 
 				cout << " Name: ";
-				cin >> name;
+				cin.get();
+				getline(cin, name);
 				cout << endl;
 				cout << " Age: ";
 				cin >> age;
@@ -747,8 +753,11 @@ void Register(AppStore as)
 				user2 = new User(2,username,password,cli->getID());
 				as.addUser(user2);
 				system("cls");
-				cout << "Registration successful!" << endl;
+				cout << " Message: Registration successful!" << endl;
+				as.saveUsers();
+				as.saveClients();
 				InitialMenu(as);
+
 				return;
 			}
 		}
@@ -759,47 +768,46 @@ void LogInMenu(AppStore as)
 	string username;
 	string password;
 
-		cout << "\n LOG IN OR 0 TO EXIT" << endl;
+		cout << "\n LOG IN OR PRESS 0 TO GO BACK" << endl;
 		cout << " ---------------------------------------------------------" << endl;
-		cout << "\n   USERNAME:" << endl;
+		cout << "\n USERNAME: ";
 		cin >> username;
 		if(username=="0"){
 			system("cls");
-			ExitMenu(as);
+			InitialMenu(as);
 			return;
 		}
-		cout << "   PASSWORD:" << endl;
+
+		cout << endl;
+		cout << " PASSWORD: ";
 		cin >> password;
-		cout << "   0 - EXIT\n" << endl;
 		if(password=="0"){
 			system("cls");
-			ExitMenu(as);
+			InitialMenu(as);
 			return;
 		}
 
 		User* user = as.findUserByUsername(username);
 		if(as.findUserByUsername(username)!=NULL){
 			if(user->getPassword()==password){
-				cout << "Login successful" << endl;
+				system("cls");
+				cout << " Message: Login successful" << endl;
 				as.setLoggedInUser(user);
 				Menu(as);
 			}
 			else{
 				system("cls");
-				cout << "Login unsuccessful" << endl;
+				cout << " Message: Login unsuccessful" << endl;
 				InitialMenu(as);
 				return;
 			}
 		}
 		else{
 			system("cls");
-			cout << "Login unsuccessful" << endl;
+			cout << " Message: Login unsuccessful" << endl;
 			InitialMenu(as);
 			return;
 		}
-
-
-
 }
 
 void InitialMenu(AppStore as)
@@ -827,7 +835,7 @@ void InitialMenu(AppStore as)
 		break;
 	case '0':
 		system("cls");
-		ExitMenu(as);
+		exit(0);
 		break;
 	default:
 		system("cls");
