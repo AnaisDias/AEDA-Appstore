@@ -7,7 +7,7 @@
 
 #ifndef APPSTORE_H_
 #define APPSTORE_H_
-#pragma once
+
 
 #include<vector>
 #include<queue>
@@ -19,6 +19,7 @@
 #include "BST.h"
 #include "User.h"
 #include <tr1/unordered_set>
+#pragma once
 
 using namespace std;
 
@@ -175,9 +176,7 @@ public:
 	void AddDev();
 	void RemoveDev();
 	void ShowAllDev();
-	void DevManagementMenu(Developer* dev){}
-	void DevManagementMenu(Individual* ind);
-	void DevManagementMenu(Company* comp);
+
 
 	//TRANSACTIONS//
 	void TransApps();

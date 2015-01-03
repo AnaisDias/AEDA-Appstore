@@ -11,9 +11,12 @@
 #include <string>
 #include "App.h"
 
+
 using namespace std;
 
+
 class App;
+class AppStore;
 
 class Developer {
 	static int allIDs;
@@ -31,6 +34,7 @@ public:
 
 	virtual int devtype(){}
 	virtual std::ostream & writeToFile(std::ostream &out);
+	virtual void DevManagementMenu(AppStore* as){}
 
 	/////////////////////
 	int getID() const;
@@ -69,6 +73,7 @@ public:
 	int devtype(){
 		return 1;
 	}
+	void DevManagementMenu(AppStore* as);
 };
 
 class Company: public Developer
@@ -100,6 +105,8 @@ public:
 	{
 		this->code = code;
 	}
+
+	void DevManagementMenu(AppStore* as);
 
 };
 

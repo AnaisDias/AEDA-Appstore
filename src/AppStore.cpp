@@ -1307,7 +1307,7 @@ void AppStore::ShowAllDev()
 		return;
 	}
 	else try{
-		DevManagementMenu(findDeveloperByID(in));
+		findDeveloperByID(in)->DevManagementMenu(this);
 	}
 	catch (DeveloperDoesNotExist &e1){
 		cout << "\n Message: Specified Developer does not exist. ID: " << e1.getID();
@@ -1528,7 +1528,7 @@ void AppStore::RemoveDev() {
 
 
 }
-
+/*
 void AppStore::DevManagementMenu(Individual* ind){
 
 	string name, address, busName;
@@ -1682,7 +1682,7 @@ void AppStore::DevManagementMenu(Company* comp){
 		return;
 	}
 }
-
+*/
 /////////////////////////
 //////SUB TRANS /////////
 /////////////////////////

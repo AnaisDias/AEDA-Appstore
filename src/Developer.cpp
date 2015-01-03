@@ -6,6 +6,7 @@
  */
 
 #include "Developer.h"
+#include "AppStore.h"
 #include <iostream>
 #include <sstream>
 
@@ -184,4 +185,153 @@ string Developer::displayNameDev() {
 	out << "Dev Name: " << name << endl;
 
 	return out.str();
+}
+
+void Individual::DevManagementMenu(AppStore* as){
+	string name, address, busName;
+			int nif;
+			App *app;
+			char choice;
+
+			if(as->getLoggedInUser()->getType()==1 || (as->getLoggedInUser()->getType()==3 && as->getLoggedInUser()->getID()==this->getID())){
+
+
+			system("cls");
+			cout << "\n DEVELOPER MANAGEMENT: ID=" << getID() << endl;
+			cout << " ---------------------------------------------------------" << endl;
+
+
+				cout << "\n EDITING INDIVIDUAL DEVELOPER" << endl;
+				cout << " ---------------------------------------------------------" << endl;
+
+				cout << "   1 - Change Name" << endl;
+				cout << "   2 - Change Address" << endl;
+				cout << "   3 - Change Nif" << endl;
+				cout << "   4 - Publish App" << endl;
+				cout << " Option: ";
+				cin >> choice;
+
+				switch(choice)
+				{
+
+				case '1':
+					system("cls");
+					cout << "\n Insert a new name: " ;
+					cin >> name;
+					setName(name);
+					break;
+				case '2':
+					system("cls");
+					cout << "\n Insert a new address:";
+					cin.get();
+					getline(cin,address);
+					setAddress(address);
+					break;
+				case'3':
+					system("cls");
+					cout<< "\n Insert a new Nif: ";
+					cin >> nif;
+					setNif(nif);
+					break;
+				case '4':
+					system("cls");
+					cout << "\n PUBLISHING NEW APP: " << endl;
+					app = as->AddApplicationMenu();
+					addApp(app);
+					break;
+				default:
+					system("cls");
+					DevManagementMenu(as);
+					break;
+				}
+			}
+			else{
+				cout << "You don't have the permission to access this menu" << endl;
+				return;
+			}
+}
+
+void Company::DevManagementMenu(AppStore* as){
+	string name, address, busName;
+		int nif, code;
+		App *app;
+		char choice;
+
+		if(as->getLoggedInUser()->getType()==1 || (as->getLoggedInUser()->getType()==3 && as->getLoggedInUser()->getID()==this->getID()) ){
+
+			cout << "\n EDITING ENTERPRISE DEVELOPER" << endl;
+			cout << " ---------------------------------------------------------" << endl;
+
+			cout << "   1 - Change Name" << endl;
+			cout << "   2 - Change Address" << endl;
+			cout << "   3 - Change Nif" << endl;
+			cout << "   4 - Publish App" << endl;
+			cout << "   5 - Company Name" << endl;
+			cout << "   6 - Change Code" << endl;
+			cout << " Option: ";
+			cin >> choice;
+
+			switch(choice)
+			{
+
+			case '1':
+				system("cls");
+				cout << "\n Insert a new name: " ;
+				cin >> name;
+				setName(name);
+				break;
+			case '2':
+				system("cls");
+				cout << "\n Insert a new address:";
+				cin.get();
+				getline(cin,address);
+				setAddress(address);
+				break;
+			case'3':
+				system("cls");
+				cout<< "\n Insert a new Nif: ";
+				cin >> nif;
+				setNif(nif);
+				break;
+			case '4':
+				system("cls");
+				cout << "\n PUBLISHING NEW APP: " << endl;
+				app = as->AddApplicationMenu();
+				addApp(app);
+				break;
+			case '5':
+				system("cls");
+				cout << "\n Insert new Company Name: ";
+				cin >> busName;
+				setCompanyName(busName);
+				break;
+			case'6':
+				system("cls");
+				cout << "\n Insert new code: ";
+				cin >> code;
+				setCode(code);
+				break;
+
+			default:
+				system("cls");
+				DevManagementMenu(as);
+				break;
+
+			}
+
+
+			cout << endl;
+			char y = 'y';
+			cout << "\n Go Back? (y)";
+			cin >> y;
+			if (y == 'y') {
+				system("cls");
+				return;
+			}}
+
+		else{
+			cout << "oops" << endl;
+			cout << "You don't have the permission to access this menu" << endl;
+			return;
+		}
 }
