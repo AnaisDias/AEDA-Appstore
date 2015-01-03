@@ -910,50 +910,52 @@ void AppStore::AproveNewApps()
 {
 	App *app;
 
-	cout << "\n APPS FOR APROVE " << endl;
-		cout << " ---------------------------------------------------------" << endl;
-		cout << endl;
+	cout << "\n APPS TO APPROVE " << endl;
+	cout << " ---------------------------------------------------------" << endl;
+	cout << endl;
 
-		string input;
-		if(unacceptedApps.empty()){
-			cout << " Message: No apps to aprove. Press any key to go back" <<endl;
-			cin.get();
-			return;
+	string input;
+	if(unacceptedApps.empty()){
+		cout << " Message: No apps to aprove. Press any key to go back" <<endl;
+		cin.get();
+		return;
+	}
+	else{
+		appsPQ buf = unacceptedApps;
+		while(!buf.empty())
+		{
+			cout << buf.top()->displayInfo() << endl;
+			buf.pop();
 		}
-		else{
-			appsPQ buf = unacceptedApps;
-			while(!buf.empty())
-			{
-				cout << buf.top()->displayInfo() << endl;
-				buf.pop();
-			}
-		}
+	}
 
-		cout << endl << " Select an app to aprove by ID or enter 'r' to return: ";
-		cin >> input;
-		int in = atoi(input.c_str());
-		if(input == "r") {
-			system("cls");
-			return;
+	cout << endl << " Select an app by ID to manage it, enter 'a' to approve the top app or enter 'r' to return: ";
+	cin >> input;
+	int in = atoi(input.c_str());
+	if(input == "r") {
+		system("cls");
+		return;
+	}
+	else if(input == "a") {
+		app = unacceptedApps.top();
+		app->setValidation(true);
+		apps.push_back(app);
+		removeFromPQ(app);
+		saveApps();
+		return;
+	}
+	else{
+		try{
+			app = findUnacceptedAppsByID(in);
 		}
-		else{
-
-			if(in == unacceptedApps.top()->getID())
-			{
-				try{
-					app = findUnacceptedAppsByID(in);
-				}
-				catch (AppDoesNotExist &e1){
-					cout << "\n Message: Specified app does not exist. ID: " << e1.getID() << endl;
-					cin.get();cin.get();
-				}
-				app->setValidation(true);
-				apps.push_back(app);
-				removeFromPQ(app);
-				saveApps();
-			}
+		catch (AppDoesNotExist &e1){
+			cout << "\n Message: Specified app does not exist. ID: " << e1.getID() << endl;
+			cin.get();cin.get();
 		}
+		AppManagementMenu(app);
+	}
 }
+
 /////////////////////////
 //////SUB CLIENT ////////
 /////////////////////////
