@@ -18,14 +18,7 @@ App::App() {
 	forSale=true;
 }
 
-App::~App() {
-	/*delete developer;
-	for(int i=0; i<transactions.size(); i++){
-		delete transactions[i];
-		transactions.erase(transactions.begin()+i);
-		i--;
-	}*/
-}
+App::~App() {}
 
 App::App(string name, float price, int type, string description) {
 	this->name = name;
@@ -131,12 +124,17 @@ void App::setTransactions(vector<Transaction*> transactions){
 //OTHER FUNCTIONS
 
 string App::displayInfo(){
+
+	struct tm * timeinfo;
+	timeinfo = localtime(&submission_time);
+
 	stringstream out;
 	out << " App ID: " << id << endl;
 		out << " Name: " << name << endl;
 		out << " Price: " << price << endl;
 		out << " Type: " << type << ". " << translateType(type) << endl;
 		out << " Rating: " << ratings << endl;
+		out << " Submission: " << asctime(timeinfo) << endl;
 		out << " Description: " << description << endl;
 		if(developer!=NULL){
 		out << " Developer: " << developer->getName() << endl << endl;
@@ -145,7 +143,7 @@ string App::displayInfo(){
 }
 
 void App::displayComments(){
-	for(int i=0; i<comments.size(); i++){
+	for(unsigned int i=0; i<comments.size(); i++){
 		cout << comments[i] << endl;
 	}
 	cout << endl;
@@ -156,7 +154,7 @@ void App::addTransaction(Transaction* transaction){
 }
 
 bool App::removeTransaction(Transaction* transaction){
-	for(int i=0; i<transactions.size(); i++){
+	for(unsigned int i=0; i<transactions.size(); i++){
 		if(transaction==transactions[i]){
 			transactions.erase(transactions.begin() + i);
 			return true;
@@ -177,7 +175,7 @@ void App::addRating(int rating){
 
 void App::updateRatings(){
 	float updatedR=0;
-	for(int i=0; i<allRatings.size(); i++){
+	for(unsigned int i=0; i<allRatings.size(); i++){
 		updatedR+=allRatings[i];
 	}
 
@@ -251,12 +249,15 @@ string App::translateType(int t){
 }
 
 std::ostream & App::operator<<(std::ostream &out){
+	struct tm * timeinfo;
+	timeinfo = localtime(&submission_time);
 	out << "App ID: " << id << endl;
 	out << "Name: " << name << endl;
 	out << "Price: " << price << endl;
 	out << "Type: " << type << ". " << translateType(type) << endl;
 	out << "Rating: " << ratings << endl;
 	out << "Description: " << description << endl;
+	out << "Submission: " << asctime(timeinfo) << endl;
 	out << "Developer: " << developer->getName() << endl << endl;
 	return out;
 }
@@ -268,16 +269,16 @@ std::ostream & App::writeToFile(std::ostream &out){
 	out << validated << ",";
 	out << submission_time << ",";
 	out << allRatings.size() << ",";
-	for(int i=0; i<allRatings.size();i++){
+	for(unsigned int i=0; i<allRatings.size();i++){
 		out << allRatings[i] << ",";
 	}
 	out << "/endRatings," << comments.size() << ",";
-	for(int i=0; i<comments.size();i++){
+	for(unsigned int i=0; i<comments.size();i++){
 		out << comments[i] << ",";
 	}
 	out << "/endComments," << transactions.size() << ",";
 
-	for(int i=0; i<transactions.size(); i++){
+	for(unsigned int i=0; i<transactions.size(); i++){
 		out << transactions[i]->getID();
 		if(i!=transactions.size()) out << ",";
 	}

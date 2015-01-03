@@ -9,3 +9,4 @@
 8,mafalda,23,0,
 9,paulo,17,0,
 10,sara,16,0,
+11,Sofia Oliveira Reis,20,0,

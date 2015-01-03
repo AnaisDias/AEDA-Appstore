@@ -11,15 +11,12 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include <time.h>
 
 using namespace std;
 
 AppStore::AppStore():appTree(new App()) {
 	this->name = "APP STORE";
-}
-
-AppStore::AppStore(string name):appTree(new App()) {
-	this->name = name;
 }
 
 AppStore::~AppStore() {
@@ -120,7 +117,7 @@ vector<App*> AppStore::getUnsoldAppsByDeveloper(Developer *dev){
 
 vector<App*> AppStore::getAppsForSale(){
 	vector<App*> sale;
-	for(int i=0;i<apps.size();i++){
+	for(unsigned int i=0;i<apps.size();i++){
 		if(apps[i]->getSaleStatus()){
 			sale.push_back(apps[i]);
 		}
@@ -130,7 +127,7 @@ vector<App*> AppStore::getAppsForSale(){
 
 vector<App*> AppStore::getAppsForSaleFromVector(vector<App*> apps){
 	vector<App*> sale;
-	for(int i=0;i<apps.size();i++){
+	for(unsigned int i=0;i<apps.size();i++){
 		if(apps[i]->getSaleStatus()){
 			sale.push_back(apps[i]);
 		}
@@ -140,7 +137,7 @@ vector<App*> AppStore::getAppsForSaleFromVector(vector<App*> apps){
 
 vector<App*> AppStore::getDeveloperAppsForSale(int id){
 	vector<App*> sale;
-		for(int i=0;i<apps.size();i++){
+		for(unsigned int i=0;i<apps.size();i++){
 			if(apps[i]->getSaleStatus() && apps[i]->getDeveloper()->getID()==id){
 				sale.push_back(apps[i]);
 			}
@@ -179,12 +176,9 @@ bool AppStore::removeApp(App* app) {
 		if ((*apps[i]) == (*app)){
 			apps.erase(apps.begin()+i);
 			i--;
-
 			return true;
 		}
-
 	}
-
 	appTree.remove(app);
 	return false;
 }
@@ -196,8 +190,6 @@ bool AppStore::removeClient(Client* client){
 			i--;
 			return true;
 		}
-
-
 	}
 	return false;
 }
@@ -205,14 +197,12 @@ bool AppStore::removeClient(Client* client){
 bool AppStore::removeDeveloper(Developer *dev){
 	for (unsigned int i = 0; i < developers.size(); i++) {
 		if ((*developers[i]) == (*dev)){
-
 				developers.erase(developers.begin()+i);
 				i--;
 				return true;
 		}
 	}
 		return false;
-
 }
 
 App* AppStore::findAppByID(int id){
@@ -282,7 +272,7 @@ Transaction* AppStore::findTransactionByID(int id){
 }
 
 User* AppStore::findUserByUsername(string username){
-	for(int i=0; i<users.size();i++){
+	for(unsigned int i=0; i<users.size();i++){
 		if(users[i]->getUsername()==username) return users[i];
 	}
 	return NULL;
@@ -295,65 +285,65 @@ User* AppStore::findUserByUsername(string username){
 /////////////////////////
 
 void AppStore::top10Apps(){
+
 	vector<App*> top10 = topTenApps();
 	string input;
 
-		unsigned int var;
-		if(top10.size() < 10) var = top10.size();
-		else var = 10;
+	unsigned int var;
+	if(top10.size() < 10) var = top10.size();
+	else var = 10;
 
-		cout << "\n TOP 10 APPS" << endl;
-		cout << " ---------------------------------------------------------" << endl;
-		cout << endl;
-		for(unsigned int i=0; i<var; i++){
-			cout << top10[i]->displayInfo() << endl;
-		}
+	cout << "\n TOP 10 APPS" << endl;
+	cout << " ---------------------------------------------------------" << endl;
+	cout << endl;
+	for(unsigned int i=0; i<var; i++){
+		cout << top10[i]->displayInfo() << endl;
+	}
 
+	cout << endl << " Select app by ID or enter 'r' to return: ";
+	cin >> input;
+	int in = atoi(input.c_str());
+	if(input == "r") return;
 
-		cout << endl << " Select app by ID or enter 'r' to return: ";
-		cin >> input;
-		int in = atoi(input.c_str());
-		if(input == "r") return;
-
-		else try{
-			AppManagementMenu(findAppByID(in));
-
-		}
-		catch (AppDoesNotExist &e1){
-			system("cls");
-			cout << "\n MESSAGE: Specified app does not exist. ID: " << e1.getID();
-
-		}
-
+	else try{
+		AppManagementMenu(findAppByID(in));
+	}
+	catch (AppDoesNotExist &e1){
+		system("cls");
+		cout << "\n MESSAGE: Specified app does not exist. ID: " << e1.getID();
+		cin.get();
+	}
 }
 
 void AppStore::AppsListName() {
+
 	string input;
 	string input2;
 	vector<App*> appsN;
+
 	cout << "\n Enter app name: ";
 	cin >> input;
-	appsN=findAppsByName(input);
 
+	appsN=findAppsByName(input);
 	system("cls");
 	cout << "\n Apps List By NAME: " << endl;
+
 	if(appsN.empty()) {
 		cout << "\n No apps with the requested name. Press any key to go back" <<endl;
 		cout << endl;
-				char y = 'y';
-				cout << "\n Go Back? (y)";
-				cin >> y;
-				if (y == 'y') {
-					system("cls");
-					return;
-				}
+		char y = 'y';
+		cout << "\n Go Back? (y)";
+		cin >> y;
+		if (y == 'y') {
+			system("cls");
+			return;
+		}
 	}
 	else{
 		for(unsigned int i=0; i<appsN.size();i++){
 			cout << appsN[i]->displayInfo() << endl;
 		}
 	}
-
 	cout << endl << " Select app by ID or enter 'r' to return: ";
 	cin >> input2;
 	int in = atoi(input2.c_str());
@@ -365,22 +355,17 @@ void AppStore::AppsListName() {
 		AppManagementMenu(findAppByID(in));
 	}
 	catch (AppDoesNotExist &e1){
-		cout << "\n Specified app does not exist. ID: " << e1.getID() << endl;
+		cout << "\n Message: Specified app does not exist. ID: " << e1.getID() << endl;
+		cin.get();
 	}
-	cout << endl;
-			char y = 'y';
-			cout << "\n Go Back? (y)";
-			cin >> y;
-			if (y == 'y') {
-				system("cls");
-				return;
-			}
 }
 
 void AppStore::AppsListType() {
+
 	int type;
 	string input;
 	vector<App*> appstype;
+
 	cout << "\n APPS BY TYPE: "<<endl;
 	cout << " ---------------------------------------------------------" << endl;
 	cout << "\n  1. Entertainment" << endl;
@@ -401,20 +386,20 @@ void AppStore::AppsListType() {
 	system("cls");
 	cout << endl;
 	if(appstype.empty()){
-		cout << " No apps with the requested type. Press any key to go back" <<endl;
+		cout << " Message: No apps with the requested type. Press any key to go back" <<endl;
 		cout << endl;
-				char y = 'y';
-				cout << "\n Go Back? (y)";
-				cin >> y;
-				if (y == 'y') {
-					system("cls");
-					return;
-				}
+		char y = 'y';
+		cout << "\n Go Back? (y)";
+		cin >> y;
+		if (y == 'y') {
+			system("cls");
+			return;
+		}
 	}
 	else{
-	for(unsigned int i=0; i<appstype.size(); i++){
-		cout << appstype[i]->displayInfo() << endl;
-	}
+		for(unsigned int i=0; i<appstype.size(); i++){
+			cout << appstype[i]->displayInfo() << endl;
+		}
 	}
 
 	cout << endl << " Select app by ID or enter 'r' to return: ";
@@ -424,22 +409,13 @@ void AppStore::AppsListType() {
 		system("cls");
 		return;
 	}
-
 	else try{
 		AppManagementMenu(findAppByID(in));
 	}
 	catch (AppDoesNotExist &e1){
-		cout << " Specified app does not exist. ID: " << e1.getID() << endl;
+		cout << " Message: Specified app does not exist. ID: " << e1.getID() << endl;
+		cin.get();
 	}
-	cout << endl;
-			char y = 'y';
-			cout << "\n Go Back? (y)";
-			cin >> y;
-			if (y == 'y') {
-				system("cls");
-				return;
-			}
-
 }
 
 void AppStore::AllAppsList(){
@@ -449,7 +425,7 @@ void AppStore::AllAppsList(){
 
 	string input;
 	if(apps.empty()){
-		cout << " No apps. Press any key to go back" <<endl;
+		cout << " Message: No apps. Press any key to go back" <<endl;
 		cin.get();
 		return;
 	}
@@ -470,44 +446,37 @@ void AppStore::AllAppsList(){
 		AppManagementMenu(findAppByID(in));
 	}
 	catch (AppDoesNotExist &e1){
-		cout << " Specified app does not exist. ID: " << e1.getID() << endl;
+		cout << " Message: Specified app does not exist. ID: " << e1.getID() << endl;
+		cin.get();
 	}
-	cout << endl;
-			char y = 'y';
-			cout << "\n Go Back? (y)";
-			cin >> y;
-			if (y == 'y') {
-				system("cls");
-				return;
-			}
 }
 
 void AppStore::AppsNotForSaleList(){
 	cout << "\n APPS NOT FOR SALE" << endl;
-		cout << " ---------------------------------------------------------" << endl;
+	cout << " ---------------------------------------------------------" << endl;
+	cout << endl;
+
+	string input;
+	if(appsNotForSale.empty()){
+		cout << " Message: No apps. Press any key to go back" <<endl;
+		cin.get();
+		return;
+	}
+	hashApp::iterator it = appsNotForSale.begin();
+	while(it!=appsNotForSale.end()){
+		cout << (*(*it)).displayInfo();
 		cout << endl;
-
-		string input;
-		if(appsNotForSale.empty()){
-			cout << " No apps. Press any key to go back" <<endl;
-			cin.get();
-			return;
-		}
-		hashApp::iterator it = appsNotForSale.begin();
-		while(it!=appsNotForSale.end()){
-			cout << (*(*it)).displayInfo();
-			cout << endl;
-			it++;
-		}
+		it++;
+	}
 
 
-		char y = 'y';
-		cout << "\n Go Back? (y)";
-		cin >> y;
-		if (y == 'y') {
-			system("cls");
-			return;
-		}
+	char y = 'y';
+	cout << "\n Go Back? (y)";
+	cin >> y;
+	if (y == 'y') {
+		system("cls");
+		return;
+	}
 }
 
 void AppStore::RateApps() {
@@ -523,14 +492,8 @@ void AppStore::RateApps() {
 
 	if(apps.empty()){
 		cout << "\n No apps. Press any key to go back" <<endl;
-		cout << endl;
-				char y = 'y';
-				cout << "\n Go Back? (y)";
-				cin >> y;
-				if (y == 'y') {
-					system("cls");
-					return;
-				}
+		cin.get();
+		cin.get();
 	}
 	for(unsigned int i=0; i<apps.size(); i++){
 		cout << apps[i]->displayInfo();
@@ -545,11 +508,10 @@ void AppStore::RateApps() {
 	}
 	else{
 		try{
-
 			app = findAppByID(in);
 			}
 		catch (AppDoesNotExist &e1){
-			cout << "\n Specified app does not exist. ID: " << e1.getID() << endl;
+			cout << "\n Message: Specified app does not exist. ID: " << e1.getID() << endl;
 		}
 		system("cls");
 		cout << "\n RATE:" << endl;
@@ -577,8 +539,6 @@ void AppStore::RateApps() {
 					system("cls");
 					return;
 				}
-
-
 	}
 }
 
@@ -586,7 +546,10 @@ void AppStore::addToPQ(App *app){
 	unacceptedApps.push(app);
 }
 
+
 App* AppStore::AddApplicationMenu() {
+
+	time_t submission;
 	string name, desc;
 	int type, dev;
 	float price;
@@ -615,7 +578,8 @@ App* AppStore::AddApplicationMenu() {
 	cout << " Option: ";
 	cin >> type;
 	cout << endl << " Add a short description (no commas): ";
-	cin.get(); getline(cin,desc);
+	cin.get();
+	getline(cin,desc);
 	if(this->getLoggedInUser()->getType()==3){
 		dev=getLoggedInUser()->getID();
 	}
@@ -628,9 +592,10 @@ App* AppStore::AddApplicationMenu() {
 	try{
 		app = new App(name, price, type, desc);
 		app->setDeveloper(findDeveloperByID(dev));
-
+		time(&submission);
+		app->setTime(submission);
 		addToPQ(app);
-
+		saveApps();
 		cout << "\n Message: App " << name << " Added Successfully To The Appstore" << endl;
 		cout << endl;
 		char y = 'y';
@@ -787,93 +752,92 @@ void AppStore::AppManagementMenu(App* app){
 
 	if(this->getLoggedInUser()->getType()==1 ||(this->getLoggedInUser()->getType()==3 && app->getDeveloper()->getID()==this->getLoggedInUser()->getID()))
 	{
-	system("cls");
-	cout << "\n APP MANAGEMENT: ID=" << app->getID() << endl;
-	cout << " ---------------------------------------------------------" << endl;
-	cout << "\n What do you wish to do? " << endl;
-	cout << endl;
-	cout << "   1 - Change name" << endl;
-	cout << "   2 - Change type" << endl;
-	cout << "   3 - Change developer" << endl;
-	cout << "   4 - Add rating" << endl;
-	cout << "   5 - Remove app" << endl;
+		system("cls");
+		cout << "\n APP MANAGEMENT: ID=" << app->getID() << endl;
+		cout << " ---------------------------------------------------------" << endl;
+		cout << "\n What do you wish to do? " << endl;
+		cout << endl;
+		cout << "   1 - Change name" << endl;
+		cout << "   2 - Change type" << endl;
+		cout << "   3 - Change developer" << endl;
+		cout << "   4 - Add rating" << endl;
+		cout << "   5 - Remove app" << endl;
 
-	cout << "\n   0 - Go Back" << endl<< endl << endl;
-	cout << " Option: ";
-	cin >> choice;
-
-
-	switch(choice) {
+		cout << "\n   0 - Go Back" << endl<< endl << endl;
+		cout << " Option: ";
+		cin >> choice;
 
 
-			case '1': system("cls");
+		switch(choice) {
+
+
+		case '1':
+			system("cls");
 			cout << "\n Insert new name: ";
-					cin >> name;
-					app->setName(name);
-					cout << endl << " Name changed to " << name << endl;
-					break;
-			case '2':
-				system("cls");
-				cout << endl << "\n Type: "<<endl;
-				cout << " ---------------------------------------------------------" << endl;
-				cout << "\n  1. Entertainment" << endl;
-				cout << "  2. Finances" << endl;
-				cout << "  3. Games" << endl;
-				cout << "  4. Fitness" << endl;
-				cout << "  5. Lifestyle" << endl;
-				cout << "  6. Music" << endl;
-				cout << "  7. Photography" << endl;
-				cout << "  8. Productivity" << endl;
-				cout << "  9. Social Networks" << endl;
-				cout << "  10. Sports" << endl;
-				cout << "  11. Traveling" << endl;
-				cout << "  12. Utilities" << endl << endl;
-				cout << "  Option: ";
-				cin >> type;
-				app->setType(type);
-				appTree.remove(app);
-				appTree.insert(app);
-				cout << endl << " Type changed to " << type << endl;
-				break;
-			case '3':
-				system("cls");
-
-				cout << "\n Insert new developer ID: ";
-				cin >> dev;
-				app->setDeveloper(findDeveloperByID(dev));
-				cout << endl << "Developer's new ID is " << dev << endl;
-				break;
-			case '4':
-				system("cls");
-				cout << "\n Insert new rating: ";
-				cin >> rating;
-				app->addRating(rating);
-				appTree.remove(app);
-				appTree.insert(app);
-				cout << endl << "Rating added: " << rating << endl;
-
-				break;
-			case '5':
-				removeApp(app);
-				appTree.remove(app);
-				cout << "\n App successfully removed. ";
-				break;
-			case '0':
-				system("cls");
-				return;
-			default:
-				system("cls");
-				AppManagementMenu(app);
-				break;
-	}
-	cout << endl;
-			char y = 'y';
-			cout << "\n Go Back? (y)";
-			cin >> y;
-			if (y == 'y') {
-				system("cls");
-				return;
-			}}
+			cin >> name;
+			app->setName(name);
+			cout << endl << " Name changed to " << name << endl;
+			break;
+		case '2':
+			system("cls");
+			cout << endl << "\n Type: "<<endl;
+			cout << " ---------------------------------------------------------" << endl;
+			cout << "\n  1. Entertainment" << endl;
+			cout << "  2. Finances" << endl;
+			cout << "  3. Games" << endl;
+			cout << "  4. Fitness" << endl;
+			cout << "  5. Lifestyle" << endl;
+			cout << "  6. Music" << endl;
+			cout << "  7. Photography" << endl;
+			cout << "  8. Productivity" << endl;
+			cout << "  9. Social Networks" << endl;
+			cout << "  10. Sports" << endl;
+			cout << "  11. Traveling" << endl;
+			cout << "  12. Utilities" << endl << endl;
+			cout << "  Option: ";
+			cin >> type;
+			app->setType(type);
+			appTree.remove(app);
+			appTree.insert(app);
+			cout << endl << " Type changed to " << type << endl;
+			break;
+		case '3':
+			system("cls");
+			cout << "\n Insert new developer ID: ";
+			cin >> dev;
+			app->setDeveloper(findDeveloperByID(dev));
+			cout << endl << "Developer's new ID is " << dev << endl;
+			break;
+		case '4':
+			system("cls");
+			cout << "\n Insert new rating: ";
+			cin >> rating;
+			app->addRating(rating);
+			appTree.remove(app);
+			appTree.insert(app);
+			cout << endl << "Rating added: " << rating << endl;
+			break;
+		case '5':
+			removeApp(app);
+			appTree.remove(app);
+			cout << "\n App successfully removed. ";
+			break;
+		case '0':
+			system("cls");
+			return;
+		default:
+			system("cls");
+			AppManagementMenu(app);
+			break;
+		}
+		cout << endl;
+		char y = 'y';
+		cout << "\n Go Back? (y)";
+		cin >> y;
+		if (y == 'y') {
+			system("cls");
+			return;
+		}}
 
 	else if(this->getLoggedInUser()->getType()==2){
 		system("cls");
@@ -891,31 +855,31 @@ void AppStore::AppManagementMenu(App* app){
 		switch(choice) {
 
 
-					case '1':
-						system("cls");
-						cli=findClientByID(this->getLoggedInUser()->getID());
-						appsTrans.push_back(app);
-						trans = new Transaction();
-						trans->setClient(cli);
-						cli->addTransaction(trans);
-						trans->setApps(appsTrans);
-						break;
-					case '2':
-						system("cls");
-						cout << "\n Insert new rating: ";
-						cin >> rating;
-						app->addRating(rating);
-						appTree.remove(app);
-						appTree.insert(app);
-						cout << endl << "Rating added: " << rating << endl;
-						break;
-					case '0':
-						system("cls");
-						return;
-					default:
-						system("cls");
-						AppManagementMenu(app);
-						break;
+		case '1':
+			system("cls");
+			cli=findClientByID(this->getLoggedInUser()->getID());
+			appsTrans.push_back(app);
+			trans = new Transaction();
+			trans->setClient(cli);
+			cli->addTransaction(trans);
+			trans->setApps(appsTrans);
+			break;
+		case '2':
+			system("cls");
+			cout << "\n Insert new rating: ";
+			cin >> rating;
+			app->addRating(rating);
+			appTree.remove(app);
+			appTree.insert(app);
+			cout << endl << "Rating added: " << rating << endl;
+			break;
+		case '0':
+			system("cls");
+			return;
+		default:
+			system("cls");
+			AppManagementMenu(app);
+			break;
 		}
 	}
 
@@ -925,10 +889,27 @@ void AppStore::AppManagementMenu(App* app){
 	}
 }
 
+void AppStore::removeFromPQ(App *app)
+{
+	unacceptedApps.pop();
+}
+
+App* AppStore::findUnacceptedAppsByID(int id)
+{
+	appsPQ buf = unacceptedApps;
+	while(!buf.empty())
+	{
+		if(buf.top()->getID()==id) return buf.top();
+		buf.pop();
+	}
+	throw AppDoesNotExist(id);
+	return NULL;
+}
+
 void AppStore::AproveNewApps()
 {
-	cin.get();
-	cin.get();
+	App *app;
+
 	cout << "\n APPS FOR APROVE " << endl;
 		cout << " ---------------------------------------------------------" << endl;
 		cout << endl;
@@ -955,15 +936,22 @@ void AppStore::AproveNewApps()
 			system("cls");
 			return;
 		}
+		else{
 
-		else try{
-			App *app = findAppByID(in);
-			app->setValidation(true);
-			apps.push_back(app);
-			//erase from unacpptedApps
-		}
-		catch (AppDoesNotExist &e1){
-			cout << " Message: Specified app does not exist. ID: " << e1.getID() << endl;
+			if(in == unacceptedApps.top()->getID())
+			{
+				try{
+					app = findUnacceptedAppsByID(in);
+				}
+				catch (AppDoesNotExist &e1){
+					cout << "\n Message: Specified app does not exist. ID: " << e1.getID() << endl;
+					cin.get();cin.get();
+				}
+				app->setValidation(true);
+				apps.push_back(app);
+				removeFromPQ(app);
+				saveApps();
+			}
 		}
 }
 /////////////////////////
@@ -975,10 +963,10 @@ void AppStore::ClientsList() {
 	cout << " ---------------------------------------------------------" << endl;
 
 	string input;
-		if(clients.empty()){
-			cout << "\n No clients." <<endl;
-			return;
-		}
+	if(clients.empty()){
+		cout << "\n No clients." <<endl;
+		return;
+	}
 	for(unsigned int i = 0; i < clients.size(); i++)
 	{
 		cout << clients[i]->displayInfo() << endl;
@@ -1737,16 +1725,22 @@ void AppStore::saveApps()
 	ofstream file;
 	file.open("apps.txt", ios::trunc);
 
-
 	for(; it != apps.end(); it++)
 	{
 		(*it)->writeToFile(file);
 		file << endl;
 	}
 
+	appsPQ buf = unacceptedApps;
+	while(!buf.empty())
+	{
+		buf.top()->writeToFile(file);
+		file << endl;
+		buf.pop();
+	}
+
 	system("cls");
 	file.close();
-	cout << "\n Message: Apps saved." << endl;
 }
 
 void AppStore::saveDevelopers()
@@ -1761,9 +1755,9 @@ void AppStore::saveDevelopers()
 		(*it)->writeToFile(file);
 		file << endl;
 	}
+
 	system("cls");
 	file.close();
-	cout << "\n Message: Developers saved." << endl;
 }
 
 void AppStore::saveClients()
@@ -1780,7 +1774,6 @@ void AppStore::saveClients()
 	}
 	system("cls");
 	file.close();
-	cout << "\n Message: Clients saved." << endl;
 }
 
 void AppStore::saveUsers()
@@ -1797,7 +1790,6 @@ void AppStore::saveUsers()
 	}
 	system("cls");
 	file.close();
-	cout << "\n Message: Users saved." << endl;
 }
 
 void AppStore::saveTransactions()
@@ -1814,7 +1806,6 @@ void AppStore::saveTransactions()
 	}
 	system("cls");
 	file.close();
-	cout << "\n Message: Transactions saved." << endl;
 }
 
 /**********************************************************
@@ -1823,8 +1814,6 @@ void AppStore::saveTransactions()
 
 void AppStore::loadApps()
 {
-	cout << "\n Message: Loading Apps..." << endl;
-
 	ifstream file;
 	file.open("apps.txt");
 
@@ -1832,6 +1821,7 @@ void AppStore::loadApps()
 	int id, devId, numR, numC, type, sale, validation;
 	float price, rating;
 	string name, description, comment;
+	time_t submisson;
 	string line, line1, readline;
 	vector<string> fields;
 	int firstread = 0;
@@ -1848,14 +1838,12 @@ void AppStore::loadApps()
 			string field;
 			while (getline(ss, field, ',')){
 				fields.push_back(field);
-				cout << field << endl;
 			}
 
 			id = atoi(fields[i].c_str());
 			cout << id << endl;
 			i++;
 			name = fields[i];
-			cout << name << endl;
 			i++;
 			price = atof(fields[i].c_str());
 			i++;
@@ -1864,18 +1852,19 @@ void AppStore::loadApps()
 			description = fields[i];
 			i++;
 			devId = atoi(fields[i].c_str());
-			cout << devId << endl;
 			i++;
 			sale = atoi(fields[i].c_str());
 			i++;
 			validation = atoi(fields[i].c_str());
 			i++;
-
+			submisson = atoi(fields[i].c_str());
+			i++;
 			numR = atoi(fields[i].c_str());
-
 
 			app= new App(name,price,type,description);
 			app->setDeveloper(findDeveloperByID(devId));
+			app->setTime(submisson);
+
 			if(sale==1) app->setSaleStatus(true);
 			else { app->setSaleStatus(false);}
 			if(validation == 1) app->setValidation(true);
@@ -1903,15 +1892,12 @@ void AppStore::loadApps()
 			}
 	}
 	file.close();
-	cout <<"\n Message: Apps Loaded." << endl;
 }
 
 
 
 void AppStore::loadDevelopers()
 {
-	cout << "\n Message: Loading Developers..." << endl;
-
 	ifstream file;
 	file.open("developers.txt", ios::in);
 
@@ -1950,7 +1936,6 @@ void AppStore::loadDevelopers()
 				ind = new Individual(name,address, nif);
 				ind->setID(id);
 				developers.push_back(ind);
-				cout << " Message: Individual added" << endl;
 			}
 			else if(type == 2)
 			{
@@ -1962,18 +1947,14 @@ void AppStore::loadDevelopers()
 				comp = new Company(bName, code, name,address, nif);
 				comp->setID(id);
 				developers.push_back(comp);
-				cout << " Message: Company added" << endl;
 			}
 		}
 	}
 	file.close();
-	cout <<"\n Message: Developers Loaded." << endl;
 }
 
 void AppStore::loadClients()
 {
-	cout << "\n Message: Loading Clients...";
-
 	ifstream file;
 	file.open("clients.txt", ios::in);
 
@@ -2006,17 +1987,13 @@ void AppStore::loadClients()
 			client = new Client(username,age);
 			client->setID(id);
 			clients.push_back(client);
-			cout << "Message: Client added" << endl;
 		}
 	}
 	file.close();
-	cout << "\n Message: Clients Loaded.";
 }
 
 void AppStore::loadTransactions()
 {
-	cout << "\n Message: Loading Transactions...";
-
 	ifstream file;
 	file.open("transactions.txt", ios::in);
 
@@ -2044,7 +2021,6 @@ void AppStore::loadTransactions()
 					i++;
 
 					numA = atoi(fields[i].c_str());
-					cout << numA << endl;
 					i++;
 					transaction = new Transaction();
 					transaction->setID(id);
@@ -2059,13 +2035,10 @@ void AppStore::loadTransactions()
 				}
 			}
 			file.close();
-			cout << "\n Message: Clients Loaded.\n ";
 }
 
 void AppStore::loadUsers()
 {
-	cout << "\n Message: Loading Users...";
-
 	ifstream file;
 	file.open("users.txt", ios::in);
 
@@ -2082,8 +2055,8 @@ void AppStore::loadUsers()
 				fields.push_back(field);
 			}
 			int i=0;
-			User *user;
 
+			User *user;
 			id = atoi(fields[i].c_str());
 			i++;
 			username = fields[i];
@@ -2096,11 +2069,10 @@ void AppStore::loadUsers()
 			user = new User(type, username, password, id);
 			user->setID(id);
 			users.push_back(user);
-			cout << " Message: User added" << endl;
 		}
 	}
 	file.close();
-	cout << "\n Message: Users Loaded.";
+
 }
 
 

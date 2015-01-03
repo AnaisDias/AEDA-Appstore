@@ -704,6 +704,8 @@ void Register(AppStore as)
 					as.addDeveloper(ind);
 					user = new User(3,username,password,ind->getID());
 					as.addUser(user);
+					as.saveUsers();
+					as.saveDevelopers();
 					system("cls");
 					cout << " Message: Registration successful!" << endl;
 					InitialMenu(as);

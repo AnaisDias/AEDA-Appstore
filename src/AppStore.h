@@ -1,5 +1,5 @@
 /*
- * AppStore.h
+c * AppStore.h
  *
  *  Created on: 18 de Out de 2014
  *      Author: Sofia
@@ -43,7 +43,7 @@ struct AppCompare
 {
 	bool operator()(const App* app1, const App* app2) const
 	{
-		if(app1->getTime()<app2->getTime()) return true;
+		if(app1->getTime()>app2->getTime()) return true;
 		else if(app1->getTime()==app2->getTime()){
 			if(app1->getPrice()<app2->getPrice()) return true;
 			else if(app1->getPrice()==app2->getPrice()){
@@ -69,7 +69,6 @@ class AppStore {
 	appsPQ unacceptedApps;
 public:
 	AppStore();
-	AppStore(string name);
 	~AppStore();
 	void addApp(App* app);
 	void addClient(Client* cli);
@@ -80,21 +79,19 @@ public:
 	bool removeDeveloper(Developer* dev);
 
 	void addToPQ(App *app);
+	void removeFromPQ(App *app);
 
 	App* findAppByID(int id);
 	vector<App*> findAppsByName(string name);
 	vector<App*> findAppsByType(int type);
 	vector<App*> topTenApps();
 
-
 	Client* findClientByID(int id);
 	Developer* findDeveloperByID(int id);
 	Transaction* findTransactionByID(int id);
+	App* findUnacceptedAppsByID(int id);
 
 	User* findUserByUsername(string username);
-
-	//Gets e Sets
-
 
 	string getName();
 	void setName(string name);
@@ -133,6 +130,8 @@ public:
 	void loadUsers();
 	void assignPublishedAppsToDevs();
 
+	void saveUnacceptedApps();
+	void loadUnacceptedApps();
 	vector<Transaction*> getTransactions();
 	void setTransactions(vector<Transaction *> transactions);
 	void saveTransactions();
