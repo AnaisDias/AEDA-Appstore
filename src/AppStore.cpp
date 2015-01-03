@@ -43,6 +43,7 @@ AppStore::~AppStore() {
 void AppStore::addApp(App* app) {
 	apps.push_back(app);
 	appTree.insert(app);
+	if(!app->getSaleStatus()) appsNotForSale.insert(app);
 }
 void AppStore::addClient(Client* cli) {
 	clients.push_back(cli);
@@ -967,6 +968,7 @@ void AppStore::ClientsList() {
 							}
 	}
 
+	cout << "Enter 'r' to return: " << endl;
 	cin >> input;
 
 		if(input == "r") {
@@ -1297,7 +1299,7 @@ void AppStore::ShowAllDev()
 		cout << (*(*it)).displayInfo();
 		cout << endl << endl;;
 	}
-	cout << "\n Select app by ID or enter 'r' to return: ";
+	cout << "\n Select developer by ID or enter 'r' to return: ";
 	cin >> input;
 	int in = atoi(input.c_str());
 	if(input == "r") {
@@ -1597,11 +1599,13 @@ void AppStore::DevManagementMenu(Company* comp){
 
 
 	string name, address, busName;
-			int nif, code;
-			App *app;
+	int nif, code;
+	App *app;
 	char choice;
-	if(this->getLoggedInUser()->getType()==1 || (this->getLoggedInUser()->getType()==3 && this->getLoggedInUser()->getID()==comp->getID())){
-	cout << "\n EDITING ENTERPRISE DEVELOPER" << endl;
+
+	if(this->getLoggedInUser()->getType()==1 || (this->getLoggedInUser()->getType()==3 && this->getLoggedInUser()->getID()==comp->getID()) ){
+
+		cout << "\n EDITING ENTERPRISE DEVELOPER" << endl;
 		cout << " ---------------------------------------------------------" << endl;
 
 		cout << "   1 - Change Name" << endl;
@@ -1662,16 +1666,17 @@ void AppStore::DevManagementMenu(Company* comp){
 		}
 
 
-	cout << endl;
-	char y = 'y';
-	cout << "\n Go Back? (y)";
-	cin >> y;
-	if (y == 'y') {
-		system("cls");
-		return;
-	}}
+		cout << endl;
+		char y = 'y';
+		cout << "\n Go Back? (y)";
+		cin >> y;
+		if (y == 'y') {
+			system("cls");
+			return;
+		}}
 
 	else{
+		cout << "oops" << endl;
 		cout << "You don't have the permission to access this menu" << endl;
 		return;
 	}
@@ -1943,7 +1948,7 @@ void AppStore::loadApps()
 	file.open("apps.txt");
 
 	App *app;
-	int id, devId, numR, numC, type;
+	int id, devId, numR, numC, type, sale;
 	float price, rating;
 	string name, description, comment;
 	string line, line1, readline;
@@ -1980,11 +1985,15 @@ void AppStore::loadApps()
 			devId = atoi(fields[i].c_str());
 			cout << devId << endl;
 			i++;
+			sale = atoi(fields[i].c_str());
+			i++;
 			numR = atoi(fields[i].c_str());
 
 			cout << numR << endl;
 			app= new App(name,price,type,description);
 			app->setDeveloper(findDeveloperByID(devId));
+			if(sale==1) app->setSaleStatus(true);
+			else { app->setSaleStatus(false);}
 			for(int j=0; j<numR; j++){
 				rating = atoi(fields[i].c_str());
 				i++;

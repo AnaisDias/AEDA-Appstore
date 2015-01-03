@@ -264,6 +264,7 @@ std::ostream & App::operator<<(std::ostream &out){
 std::ostream & App::writeToFile(std::ostream &out){
 	out << id << "," << name << "," << price << "," ;
 	out << type <<"," << description << "," << developer->getID() << ",";
+	out << forSale << ",";
 	out << allRatings.size() << ",";
 	for(int i=0; i<allRatings.size();i++){
 		out << allRatings[i] << ",";

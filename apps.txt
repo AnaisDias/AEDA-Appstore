@@ -1,31 +1,31 @@
-0,facebook,0,9,connect with your friends,1,1,5,/endRatings,3,great app,fast,cool app,/endComments,0,/endTransactions
-1,netflix,2,1,watch films and tvshows,2,2,5,2,/endRatings,2,love breaking bad,works fast on my iphone,/endComments,1,2,/endTransactions
-2,BES,0,2,check your bank account from your smartphone,1,0,/endRatings,3,could be more fast,great for practical uses,useful,/endComments,0,/endTransactions
-3,sudokupro,3,3,play sudoku like never before,1,0,/endRatings,1,love playing it while on the train,/endComments,1,0,/endTransactions
-4,workoutplus,15,4,work out with these simple yet fast workout videos,1,0,/endRatings,3,too expensive,didnt work for me,finally a great app,/endComments,1,1,/endTransactions
-5,winindining,1,5,find the best places to go out on a date and have an exquisite dinner,2,0,/endRatings,1,best app ever,/endComments,1,0,/endTransactions
-6,soundcloud,0,6,find the best music out there,1,0,/endRatings,2,found great covers,great design,/endComments,0,/endTransactions
-7,vscocam,0,7,edit your photos with aesthetical filters,0,0,/endRatings,3,tumblrlike photos,cool effects,wow,/endComments,0,/endTransactions
-8,ccleaner,7,8,clean your smartphone and get additional free space,1,0,/endRatings,1,got 1gb,/endComments,0,/endTransactions
-9,espn,6,10,watch matches live for free,2,0,/endRatings,3,lags a lot,too slow,awesome,/endComments,0,/endTransactions
-10,dream,1,11,explore the several getaways available,1,0,/endRatings,2,great suggestions,intuitive app,/endComments,0,/endTransactions
-11,myalarmclock,0.95,12,track your hours of sleep,1,0,/endRatings,1,useful due to my worklife,/endComments,0,/endTransactions
-12,meogo,0,1,tv everywhere,1,0,/endRatings,2,keeps getting better,revolutional,/endComments,0,/endTransactions
-13,imbnet,0.89,2,mbnet on the go,1,0,/endRatings,1,needs an ipad version,/endComments,0,/endTransactions
-14,dragonz,0,3,train your dragonz and defeat the master,1,0,/endRatings,2,rad,sick graphics,/endComments,0,/endTransactions
-15,nutriwell,0,4,eat well with nutriwell,2,0,/endRatings,2,great health planning,stay healthy with this app,/endComments,1,2,/endTransactions
-16,foursquare,0,5,check in and know where your friends are,0,0,/endRatings,1,now im a stalker lol,/endComments,0,/endTransactions
-17,spotify,0,6,stream music for free,1,0,/endRatings,2,best music app,no taylor swift,/endComments,0,/endTransactions
-18,moldiv,0,7,edit your photos,1,0,/endRatings,1,cool effects,/endComments,0,/endTransactions
-19,weekcalendar,1.99,8,best calendar app worldwide,2,0,/endRatings,1,great design but slow,/endComments,0,/endTransactions
-20,sporttv,4.99,10,watch your favourite sports matches live,0,0,/endRatings,3,slbbbb,cool,efficient,/endComments,0,/endTransactions
-21,abreu,0,11,plan your trips on your mobile phone,1,0,/endRatings,2,doesnt work,disappointing,/endComments,0,/endTransactions
-22,locky,0.89,12,make your secrets invisible,1,0,/endRatings,2,so far so good,great app,/endComments,0,/endTransactions
-23,flappybird,0,3,save the bird,2,0,/endRatings,4,lol,cool game,addictive,why,/endComments,0,/endTransactions
-24,youtubetomp3,0.5,6,convert youtube videos to mp3,1,0,/endRatings,2,bad quality,fast,/endComments,0,/endTransactions
-25,instasize,0,7,make your photos to fit the instagram format for free,2,0,/endRatings,1,great effects too,/endComments,0,/endTransactions
-26,secretstory,0,10,watch live now from the house,1,0,/endRatings,2,gossip,yas,/endComments,0,/endTransactions
-27,perfectabs,3,4,best videos to get a six pack,1,0,/endRatings,2,took me 3 months but ive made it,love fries too much lol,/endComments,0,/endTransactions
-28,santander,0,2,check your santander account on your smartphone now,1,0,/endRatings,1,a few bugs,/endComments,0,/endTransactions
-29,colorkeyboard,1.2,12,change your keyboard colour,0,0,/endRatings,1,user friendly,/endComments,0,/endTransactions
-30,cenas,2,6,love this app,0,0,/endRatings,0,/endComments,0,/endTransactions
+0,facebook,0,9,connect with your friends,1,1,1,5,/endRatings,3,great app,fast,cool app,/endComments,0,/endTransactions
+1,netflix,2,1,watch films and tvshows,2,1,2,5,2,/endRatings,2,love breaking bad,works fast on my iphone,/endComments,1,2,/endTransactions
+2,BES,0,2,check your bank account from your smartphone,1,0,0,/endRatings,3,could be more fast,great for practical uses,useful,/endComments,0,/endTransactions
+3,sudokupro,3,3,play sudoku like never before,1,1,0,/endRatings,1,love playing it while on the train,/endComments,1,0,/endTransactions
+4,workoutplus,15,4,work out with these simple yet fast workout videos,1,1,0,/endRatings,3,too expensive,didnt work for me,finally a great app,/endComments,1,1,/endTransactions
+5,winindining,1,5,find the best places to go out on a date and have an exquisite dinner,2,1,0,/endRatings,1,best app ever,/endComments,1,0,/endTransactions
+6,soundcloud,0,6,find the best music out there,1,1,0,/endRatings,2,found great covers,great design,/endComments,0,/endTransactions
+7,vscocam,0,7,edit your photos with aesthetical filters,0,1,0,/endRatings,3,tumblrlike photos,cool effects,wow,/endComments,0,/endTransactions
+8,ccleaner,7,8,clean your smartphone and get additional free space,1,0,0,/endRatings,1,got 1gb,/endComments,0,/endTransactions
+9,espn,6,10,watch matches live for free,2,1,0,/endRatings,3,lags a lot,too slow,awesome,/endComments,0,/endTransactions
+10,dream,1,11,explore the several getaways available,1,0,0,/endRatings,2,great suggestions,intuitive app,/endComments,0,/endTransactions
+11,myalarmclock,0.95,12,track your hours of sleep,1,1,0,/endRatings,1,useful due to my worklife,/endComments,0,/endTransactions
+12,meogo,0,1,tv everywhere,1,1,0,/endRatings,2,keeps getting better,revolutional,/endComments,0,/endTransactions
+13,imbnet,0.89,2,mbnet on the go,1,1,0,/endRatings,1,needs an ipad version,/endComments,0,/endTransactions
+14,dragonz,0,3,train your dragonz and defeat the master,1,1,0,/endRatings,2,rad,sick graphics,/endComments,0,/endTransactions
+15,nutriwell,0,4,eat well with nutriwell,2,1,0,/endRatings,2,great health planning,stay healthy with this app,/endComments,1,2,/endTransactions
+16,foursquare,0,5,check in and know where your friends are,0,1,0,/endRatings,1,now im a stalker lol,/endComments,0,/endTransactions
+17,spotify,0,6,stream music for free,1,1,0,/endRatings,2,best music app,no taylor swift,/endComments,0,/endTransactions
+18,moldiv,0,7,edit your photos,1,0,0,/endRatings,1,cool effects,/endComments,0,/endTransactions
+19,weekcalendar,1.99,8,best calendar app worldwide,2,1,0,/endRatings,1,great design but slow,/endComments,0,/endTransactions
+20,sporttv,4.99,10,watch your favourite sports matches live,0,1,0,/endRatings,3,slbbbb,cool,efficient,/endComments,0,/endTransactions
+21,abreu,0,11,plan your trips on your mobile phone,1,1,0,/endRatings,2,doesnt work,disappointing,/endComments,0,/endTransactions
+22,locky,0.89,12,make your secrets invisible,1,0,0,/endRatings,2,so far so good,great app,/endComments,0,/endTransactions
+23,flappybird,0,3,save the bird,2,0,0,/endRatings,4,lol,cool game,addictive,why,/endComments,0,/endTransactions
+24,youtubetomp3,0.5,6,convert youtube videos to mp3,1,1,0,/endRatings,2,bad quality,fast,/endComments,0,/endTransactions
+25,instasize,0,7,make your photos to fit the instagram format for free,2,1,0,/endRatings,1,great effects too,/endComments,0,/endTransactions
+26,secretstory,0,10,watch live now from the house,1,1,0,/endRatings,2,gossip,yas,/endComments,0,/endTransactions
+27,perfectabs,3,4,best videos to get a six pack,1,1,0,/endRatings,2,took me 3 months but ive made it,love fries too much lol,/endComments,0,/endTransactions
+28,santander,0,2,check your santander account on your smartphone now,1,1,0,/endRatings,1,a few bugs,/endComments,0,/endTransactions
+29,colorkeyboard,1.2,12,change your keyboard colour,0,0,0,/endRatings,1,user friendly,/endComments,0,/endTransactions
+30,cenas,2,6,love this app,0,1,0,/endRatings,0,/endComments,0,/endTransactions
