@@ -1284,13 +1284,13 @@ void AppStore::IndividualDevList() {
 
 void AppStore::ShowAllDev()
 {
+
 	cout << "\n DEVELOPERS LIST" << endl;
 	cout << " ---------------------------------------------------------" << endl;
 
-
 	string input;
 	if(developers.empty()){
-		cout << "No Developers. Press any key to go back" <<endl;
+		cout << " Message: No Developers. Press any key to go back" <<endl;
 		cin.get();
 		return;
 	}
@@ -1306,12 +1306,13 @@ void AppStore::ShowAllDev()
 		system("cls");
 		return;
 	}
-
 	else try{
 		DevManagementMenu(findDeveloperByID(in));
 	}
 	catch (DeveloperDoesNotExist &e1){
-		cout << "\n Specified Developer does not exist. ID: " << e1.getID() << endl;
+		cout << "\n Message: Specified Developer does not exist. ID: " << e1.getID();
+		cin.get();
+		cin.get();
 	}
 
 }
@@ -2011,8 +2012,7 @@ void AppStore::loadApps()
 				app->addComment(comment);
 
 			}
-			apps.push_back(app);
-			appTree.insert(app);
+			addApp(app);
 			firstread++;
 			}
 	}
