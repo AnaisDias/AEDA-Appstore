@@ -318,8 +318,6 @@ void Company::DevManagementMenu(AppStore* as){
 				break;
 
 			}
-
-
 			cout << endl;
 			char y = 'y';
 			cout << "\n Go Back? (y)";
@@ -327,11 +325,13 @@ void Company::DevManagementMenu(AppStore* as){
 			if (y == 'y') {
 				system("cls");
 				return;
-			}}
+			}
+		}
 
 		else{
 			cout << "oops" << endl;
 			cout << "You don't have the permission to access this menu" << endl;
 			return;
 		}
+
 }

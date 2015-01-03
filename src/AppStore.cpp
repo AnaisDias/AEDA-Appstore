@@ -582,11 +582,8 @@ void AppStore::RateApps() {
 	}
 }
 
-void AppStore::addToPQ(App *app)
-{
-	priority_queue<App*> appsRes;
-
-
+void AppStore::addToPQ(App *app){
+	unacceptedApps.push(app);
 }
 
 App* AppStore::AddApplicationMenu() {
@@ -632,11 +629,9 @@ App* AppStore::AddApplicationMenu() {
 		app = new App(name, price, type, desc);
 		app->setDeveloper(findDeveloperByID(dev));
 
-		//addApp(app);
 		addToPQ(app);
 
-		cout << "\n App " << name << " Added Successfully To The Appstore" << endl;
-
+		cout << "\n Message: App " << name << " Added Successfully To The Appstore" << endl;
 		cout << endl;
 		char y = 'y';
 		cout << "\n Go Back? (y)";
@@ -928,6 +923,48 @@ void AppStore::AppManagementMenu(App* app){
 		cout << "You don't have the permission to access this app" << endl;
 		return;
 	}
+}
+
+void AppStore::AproveNewApps()
+{
+	cin.get();
+	cin.get();
+	cout << "\n APPS FOR APROVE " << endl;
+		cout << " ---------------------------------------------------------" << endl;
+		cout << endl;
+
+		string input;
+		if(unacceptedApps.empty()){
+			cout << " Message: No apps to aprove. Press any key to go back" <<endl;
+			cin.get();
+			return;
+		}
+		else{
+			appsPQ buf = unacceptedApps;
+			while(!buf.empty())
+			{
+				cout << buf.top()->displayInfo() << endl;
+				buf.pop();
+			}
+		}
+
+		cout << endl << " Select an app to aprove by ID or enter 'r' to return: ";
+		cin >> input;
+		int in = atoi(input.c_str());
+		if(input == "r") {
+			system("cls");
+			return;
+		}
+
+		else try{
+			App *app = findAppByID(in);
+			app->setValidation(true);
+			apps.push_back(app);
+			//erase from unacpptedApps
+		}
+		catch (AppDoesNotExist &e1){
+			cout << " Message: Specified app does not exist. ID: " << e1.getID() << endl;
+		}
 }
 /////////////////////////
 //////SUB CLIENT ////////
@@ -1332,8 +1369,6 @@ void AppStore::EnterpriseList() {
 		system("cls");
 		return;
 	}
-
-
 }
 
 void AppStore::ShowAppsByName(int id)
@@ -1528,161 +1563,6 @@ void AppStore::RemoveDev() {
 
 
 }
-/*
-void AppStore::DevManagementMenu(Individual* ind){
-
-	string name, address, busName;
-		int nif;
-		App *app;
-		char choice;
-
-		if(this->getLoggedInUser()->getType()==1 || (this->getLoggedInUser()->getType()==3 && this->getLoggedInUser()->getID()==ind->getID())){
-
-
-		system("cls");
-		cout << "\n DEVELOPER MANAGEMENT: ID=" << ind->getID() << endl;
-		cout << " ---------------------------------------------------------" << endl;
-
-
-			cout << "\n EDITING INDIVIDUAL DEVELOPER" << endl;
-			cout << " ---------------------------------------------------------" << endl;
-
-			cout << "   1 - Change Name" << endl;
-			cout << "   2 - Change Address" << endl;
-			cout << "   3 - Change Nif" << endl;
-			cout << "   4 - Publish App" << endl;
-			cout << " Option: ";
-			cin >> choice;
-
-			switch(choice)
-			{
-
-			case '1':
-				system("cls");
-				cout << "\n Insert a new name: " ;
-				cin >> name;
-				ind->setName(name);
-				break;
-			case '2':
-				system("cls");
-				cout << "\n Insert a new address:";
-				cin.get();
-				getline(cin,address);
-				ind->setAddress(address);
-				break;
-			case'3':
-				system("cls");
-				cout<< "\n Insert a new Nif: ";
-				cin >> nif;
-				ind->setNif(nif);
-				break;
-			case '4':
-				system("cls");
-				cout << "\n PUBLISHING NEW APP: " << endl;
-				app = AddApplicationMenu();
-				ind->addApp(app);
-				break;
-			default:
-				system("cls");
-				DevManagementMenu(ind);
-				break;
-			}
-		}
-		else{
-			cout << "You don't have the permission to access this menu" << endl;
-			return;
-		}
-}
-
-
-
-void AppStore::DevManagementMenu(Company* comp){
-
-
-	string name, address, busName;
-	int nif, code;
-	App *app;
-	char choice;
-
-	if(this->getLoggedInUser()->getType()==1 || (this->getLoggedInUser()->getType()==3 && this->getLoggedInUser()->getID()==comp->getID()) ){
-
-		cout << "\n EDITING ENTERPRISE DEVELOPER" << endl;
-		cout << " ---------------------------------------------------------" << endl;
-
-		cout << "   1 - Change Name" << endl;
-		cout << "   2 - Change Address" << endl;
-		cout << "   3 - Change Nif" << endl;
-		cout << "   4 - Publish App" << endl;
-		cout << "   5 - Company Name" << endl;
-		cout << "   6 - Change Code" << endl;
-		cout << " Option: ";
-		cin >> choice;
-
-		switch(choice)
-		{
-
-		case '1':
-			system("cls");
-			cout << "\n Insert a new name: " ;
-			cin >> name;
-			comp->setName(name);
-			break;
-		case '2':
-			system("cls");
-			cout << "\n Insert a new address:";
-			cin.get();
-			getline(cin,address);
-			comp->setAddress(address);
-			break;
-		case'3':
-			system("cls");
-			cout<< "\n Insert a new Nif: ";
-			cin >> nif;
-			comp->setNif(nif);
-			break;
-		case '4':
-			system("cls");
-			cout << "\n PUBLISHING NEW APP: " << endl;
-			app = AddApplicationMenu();
-			comp->addApp(app);
-			break;
-		case '5':
-			system("cls");
-			cout << "\n Insert new Company Name: ";
-			cin >> busName;
-			comp->setCompanyName(busName);
-			break;
-		case'6':
-			system("cls");
-			cout << "\n Insert new code: ";
-			cin >> code;
-			comp->setCode(code);
-			break;
-
-		default:
-			system("cls");
-			DevManagementMenu(comp);
-			break;
-
-		}
-
-
-		cout << endl;
-		char y = 'y';
-		cout << "\n Go Back? (y)";
-		cin >> y;
-		if (y == 'y') {
-			system("cls");
-			return;
-		}}
-
-	else{
-		cout << "oops" << endl;
-		cout << "You don't have the permission to access this menu" << endl;
-		return;
-	}
-}
-*/
 /////////////////////////
 //////SUB TRANS /////////
 /////////////////////////
@@ -1949,7 +1829,7 @@ void AppStore::loadApps()
 	file.open("apps.txt");
 
 	App *app;
-	int id, devId, numR, numC, type, sale;
+	int id, devId, numR, numC, type, sale, validation;
 	float price, rating;
 	string name, description, comment;
 	string line, line1, readline;
@@ -1988,13 +1868,18 @@ void AppStore::loadApps()
 			i++;
 			sale = atoi(fields[i].c_str());
 			i++;
+			validation = atoi(fields[i].c_str());
+			i++;
+
 			numR = atoi(fields[i].c_str());
 
-			cout << numR << endl;
+
 			app= new App(name,price,type,description);
 			app->setDeveloper(findDeveloperByID(devId));
 			if(sale==1) app->setSaleStatus(true);
 			else { app->setSaleStatus(false);}
+			if(validation == 1) app->setValidation(true);
+			else app->setValidation(false);
 			for(int j=0; j<numR; j++){
 				rating = atoi(fields[i].c_str());
 				i++;
@@ -2012,7 +1897,8 @@ void AppStore::loadApps()
 				app->addComment(comment);
 
 			}
-			addApp(app);
+			if(validation == 1) addApp(app);
+			else if(validation == 0) addToPQ(app);
 			firstread++;
 			}
 	}

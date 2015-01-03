@@ -19,6 +19,7 @@ void AppsMenu(AppStore as) {
 	cout << "   6 - Add app" << endl;
 	cout << "   7 - Remove app" << endl;
 	cout << "   8 - Apps not for sale" << endl;
+	cout << "   9 - Aprove New Apps" << endl;
 	cout << endl;
 	cout << "   0 - Go back" << endl;
 	cout << endl;
@@ -69,6 +70,12 @@ void AppsMenu(AppStore as) {
 	case '8':
 		system("cls");
 		as.AppsNotForSaleList();
+		system("cls");
+		AppsMenu(as);
+		break;
+	case '9':
+		system("cls");
+		as.AproveNewApps();
 		system("cls");
 		AppsMenu(as);
 		break;

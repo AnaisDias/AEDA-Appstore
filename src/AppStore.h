@@ -158,6 +158,7 @@ public:
 	void StartSaleMenu();
 	void AppManagementMenu(App* app);
 	void addDeveloperMenu();
+	void AproveNewApps();
 
 	//CLIENT//
 	void ClientsList();
