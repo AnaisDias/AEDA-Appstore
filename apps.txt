@@ -1,8 +1,8 @@
-1,facebook,0,9,connect with your friends,1,1,1,1420301863,1,1,/endRatings,5,0,3,0,/endRatings,0,/endComments,0,/endTransactions
+1,facebook,0,9,connect with your friends,1,1,1,1420301863,1,1,/endRatings,5,0,3,0,/endRatings,0,/endComments,1,2,/endTransactions
 2,BES,0,2,check your bank account from your smartphone,1,0,1,1420301863,0,/endRatings,0,/endComments,0,/endTransactions
-3,workoutplus,15,4,work out with these simple yet fast workout videos,1,1,1,1420301863,0,/endRatings,0,/endComments,0,/endTransactions
-4,vscocam,0,7,edit your photos with aesthetical filters,0,1,1,1420301863,0,/endRatings,0,/endComments,0,/endTransactions
-5,ccleaner,7,8,clean your smartphone and get additional free space,1,0,1,1420301863,0,/endRatings,0,/endComments,0,/endTransactions
+3,workoutplus,15,4,work out with these simple yet fast workout videos,1,1,1,1420301863,2,2,5,/endRatings,0,/endComments,1,0,/endTransactions
+4,vscocam,0,7,edit your photos with aesthetical filters,0,1,1,1420301863,3,3,5,4,/endRatings,0,/endComments,1,1,/endTransactions
+5,ccleaner,7,8,clean your smartphone and get additional free space,1,0,1,1420301863,0,/endRatings,0,/endComments,1,0,/endTransactions
 6,dream,1,11,explore the several getaways available,1,0,1,1420301863,0,/endRatings,0,/endComments,0,/endTransactions
 7,imbnet,0.89,2,mbnet on the go,1,1,1,1420301863,0,/endRatings,0,/endComments,0,/endTransactions
 8,foursquare,0,5,check in and know where your friends are,0,1,1,1420301863,0,/endRatings,0,/endComments,0,/endTransactions
@@ -10,9 +10,9 @@
 10,weekcalendar,1.99,8,best calendar app worldwide,2,1,1,1420301863,0,/endRatings,0,/endComments,0,/endTransactions
 11,sporttv,4.99,10,watch your favourite sports matches live,0,1,1,1420301863,0,/endRatings,0,/endComments,0,/endTransactions
 12,locky,0.89,12,make your secrets invisible,1,0,1,1420301863,0,/endRatings,0,/endComments,0,/endTransactions
-13,flappybird,0,3,save the bird,2,0,1,1420301863,0,/endRatings,0,/endComments,0,/endTransactions
+13,flappybird,0,3,save the bird,2,0,1,1420301863,2,2,1,/endRatings,2,so addictive,love it,/endComments,0,/endTransactions
 14,instasize,0,7,make your photos to fit the instagram format for free,2,1,1,1420301863,0,/endRatings,0,/endComments,0,/endTransactions
-15,santander,0,2,check your santander account on your smartphone now,1,1,1,1420301863,0,/endRatings,0,/endComments,0,/endTransactions
-18,StudiezPro,3.9,8,vfwgfweg rwb,4,1,1,1420301863,0,/endRatings,0,/endComments,0,/endTransactions
-16,colorkeyboard,1.2,12,change your keyboard colour,0,0,0,1420301863,0,/endRatings,0,/endComments,0,/endTransactions
-17,cenas,2,6,love this app,0,1,0,1420302194,0,/endRatings,0,/endComments,0,/endTransactions
+15,santander,0,2,check your santander account on your smartphone now,1,1,1,1420301863,0,/endRatings,0,/endComments,1,2,/endTransactions
+16,StudiezPro,3.9,8,vfwgfweg rwb,4,1,1,1420301863,0,/endRatings,0,/endComments,0,/endTransactions
+17,colorkeyboard,1.2,12,change your keyboard colour,0,0,1,1420301863,0,/endRatings,0,/endComments,0,/endTransactions
+18,cenas,2,6,love this app,0,1,0,1420302194,0,/endRatings,0,/endComments,0,/endTransactions

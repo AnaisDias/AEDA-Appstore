@@ -11,7 +11,7 @@ void AppsMenu(AppStore as) {
 	cout << "\n APPS " << endl;
 	cout << " ---------------------------------------------------------" << endl;
 	cout << endl;
-	cout << "   1 - Top 10 Rated Apps" << endl; //need to implement sale apps
+	cout << "   1 - Top 10 Rated Apps" << endl;
 	cout << "   2 - Search Apps by Name" << endl;
 	cout << "   3 - List Apps by Type" << endl;
 	cout << "   4 - Show all apps" << endl;
@@ -19,7 +19,7 @@ void AppsMenu(AppStore as) {
 	cout << "   6 - Add app" << endl;
 	cout << "   7 - Remove app" << endl;
 	cout << "   8 - Apps not for sale" << endl;
-	cout << "   9 - Aprove New Apps" << endl;
+	cout << "   9 - Approve New Apps" << endl;
 	cout << endl;
 	cout << "   0 - Go back" << endl;
 	cout << endl;
@@ -76,7 +76,7 @@ void AppsMenu(AppStore as) {
 		break;
 	case '9':
 		system("cls");
-		as.AproveNewApps();
+		as.ApproveNewApps();
 		system("cls");
 		AppsMenu(as);
 		break;
@@ -477,9 +477,9 @@ void TransactionMenu(AppStore as) {
 	cout << " ---------------------------------------------------------" << endl;
 	cout << endl;
 	cout << "   1 - List by Apps" << endl;
-	cout << "   2 - List by CLients" << endl;
+	cout << "   2 - List by Clients" << endl;
 	cout << "   3 - List by Developers" << endl;
-	cout << "   4 - Show All Transactions" << endl;
+	cout << "   4 - Show all transactions" << endl;
 	cout << endl;
 	cout << "   0 - Go back";
 	cout << endl;
@@ -872,6 +872,7 @@ void Menu(AppStore as) {
     cout << "   2 - CLIENTS" << endl;
     cout << "   3 - DEVELOPERS" << endl;
     cout << "   4 - TRANSACTIONS\n" << endl;
+    cout << "   5 - LOGOUT" << endl;
     cout << "   0 - EXIT\n" << endl;
     cout << " Option: ";
     cin >> choice;
@@ -900,6 +901,12 @@ void Menu(AppStore as) {
     	system("cls");
     	TransactionMenu(as);
     	Menu(as);
+    	break;
+    case '5':
+    	system("cls");
+    	as.setLoggedInUser(NULL);
+    	cout << endl << "Successful logout! " << endl << endl;
+    	InitialMenu(as);
     	break;
 
     case '0':

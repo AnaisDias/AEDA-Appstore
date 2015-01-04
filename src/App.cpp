@@ -135,6 +135,8 @@ string App::displayInfo(){
 		out << " Type: " << type << ". " << translateType(type) << endl;
 		out << " Rating: " << ratings << endl;
 		out << " Submission: " << asctime(timeinfo) << endl;
+		out << " Sale status: "; if(forSale){ out <<  "For sale" << endl;}
+		else if(!forSale){ out << "Not for sale" << endl;}
 		out << " Description: " << description << endl;
 		if(developer!=NULL){
 		out << " Developer: " << developer->getName() << endl << endl;
