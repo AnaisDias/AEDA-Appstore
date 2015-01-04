@@ -7,6 +7,11 @@
 #include "Transaction.h"
 #include <ctime>
 
+/*
+ *
+ *
+ */
+
 using namespace std;
 
 class Developer;
@@ -30,7 +35,7 @@ class App {
 
 public:
 	/*
-	 * Constructs and initializes an App by deafult.
+	 * Constructs and initializes an App by default.
 	 */
 	App();
 	/*
@@ -59,79 +64,79 @@ public:
 	/*
 	 * Gets the App ID.
 	 *
-	 * @return the ID App.
+	 * @return id.
 	 */
 	int getID() const;
 	/*
 	 * Gets the App Name.
 	 *
-	 * @return the Name App.
+	 * @return name
 	 */
 	string getName() const;
 	/*
 	 * Gets the App Price.
 	 *
-	 * @return the Price App.
+	 * @return price
 	 */
 	float getPrice() const;
 	/*
 	 * Gets the App Type.
 	 *
-	 * @return the Type App.
+	 * @return type
 	 */
 	int getType() const;
 	/*
 	 * Gets the App Description.
 	 *
-	 * @return the Description App.
+	 * @return description
 	 */
 	string getDescription() const;
 	/*
 	 * Gets the App Rating.
 	 *
-	 * @return the Rating App.
+	 * @return ratings
 	 */
 	float getRatings() const;
 	/*
 	 * Gets all App ratings.
 	 *
-	 * @return vector with all App ratings.
+	 * @return allRatings
 	 */
 	vector<int> getAllRatings() const;
 	/*
 	 * Gets the App Developer.
 	 *
-	 * @return the Developer App.
+	 * @return developer
 	 */
 	Developer* getDeveloper() const;
 	/*
 	 * Gets all App comments.
 	 *
-	 * @return vector with all App comments.
+	 * @return comments
 	 */
 	vector<string> getComments() const;
 	/*
 	 * Gets all App Transactions.
 	 *
-	 * @return vector with all App transactions.
+	 * @return transactions
 	 */
 	vector<Transaction*> getTransactions() const;
 	/*
 	 * Gets the App submission time.
 	 *
-	 * @return the submission_time App.
+	 * @return submission_time
 	 */
 	time_t getTime() const;
 	/*
 	 * Gets the App validation.
 	 *
-	 * @return the validation App.
+	 * @return validated
 	 */
 	bool getValidation() const;
 	/*
 	 * Gets the App Sale Status.
 	 *
-	 * @return the Sale Status App.
+	 * @return forSale
 	 */
 	bool getSaleStatus() const;
 	/*
@@ -236,7 +241,7 @@ public:
 	string translateType(int t);
 	/*
 	 * Displays all of the App's info available.
-	 * @return the information
+	 * @return out.str()
 	 */
 	string displayInfo();
 	/*

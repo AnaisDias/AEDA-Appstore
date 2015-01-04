@@ -1,3 +1,10 @@
+/*
+ * User.h
+ *
+ *  Created on: 30/12/2014
+ *      Author: Sofia Reis
+ */
+
 #ifndef USER_H_
 #define USER_H_
 
@@ -12,6 +19,8 @@ class User {
 	int id;
 	static int allIDs;
 public:
+	/*
+
 	 /*
 	 * Constructs and initializes an User with a specific type,
 	 * password, username and id.
@@ -32,7 +41,7 @@ public:
 	~User();
 	/*
 	 * Gets User's type
-	 * @return User's type
+	 * @return type
 	 */
 	int getType();
 	/*
@@ -43,7 +52,7 @@ public:
 	void setType(int type);
 	/*
 	 * Gets User's Username
-	 * @return User's Username
+	 * @return username
 	 */
 	string getUsername();
 	/*
@@ -54,7 +63,7 @@ public:
 	void setUsername(string username);
 	/*
 	 * Gets User's Password
-	 * @return User's Password
+	 * @return password
 	 */
 	string getPassword();
 	/*
@@ -65,7 +74,7 @@ public:
 	void setPassword(string password);
 	/*
 	 * Gets User's id
-	 * @return User's id
+	 * @return id
 	 */
 	int getID();
 	/*

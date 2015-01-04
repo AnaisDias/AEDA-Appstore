@@ -1,3 +1,9 @@
+/*
+ * Developer.h
+ *
+ *  Created on: 7 de Out de 2014
+ *      Author: Sofia
+ */
 #ifndef DEVELOPER_H_
 #define DEVELOPER_H_
 
@@ -24,7 +30,7 @@ public:
 	 */
 	Developer();
 	/*
-	 * Constructs and initializes an Developer with a specific name,
+	 * Constructs and initializes a Developer with a specific name,
 	 * address and nif.
 	 *
 	 * @param name
@@ -58,34 +64,35 @@ public:
 	virtual void DevManagementMenu(AppStore* as) {
 	}
 
+	/////////////////////
 	/*
 	 * Gets the Developer's ID.
 	 *
-	 * @return the Developer's ID
+	 * @return id
 	 */
 	int getID() const;
 	/*
 	 * Gets the Developer's name.
 	 *
-	 * @return the Developer's name
+	 * @return name
 	 */
 	string getName() const;
 	/*
 	 * Gets the Developer's address.
 	 *
-	 * @return the Developer's address
+	 * @return address
 	 */
 	string getAddress() const;
 	/*
 	 * Gets the Developer's NIF.
 	 *
-	 * @return the Developer's NIF
+	 * @return nif
 	 */
 	int getNif() const;
 	/*
 	 * Gets the Developer's Apps.
 	 *
-	 * @return the Developer's Apps
+	 * @return appsPublished
 	 */
 	vector<App*> getApps() const;
 
@@ -124,6 +131,7 @@ public:
 	 * 				the Dev's apps.
 	 */
 	void setApps(vector<App*> apps);
+	/////////////////////
 	/*
 	 * Adds Dev's earnings
 	 *
@@ -196,12 +204,12 @@ public:
 	std::ostream & writeToFile(std::ostream &out);
 	/*
 	 * Displays Individual Developer's Info
-	 * @return Individual Developer's Info
+	 * @return  Developer::displayInfo()
 	 */
 	string displayInfo();
 	/*
 	 * Devtype
-	 * @return developer's type
+	 * @return 1
 	 */
 	int devtype() {
 		return 1;
@@ -248,26 +256,26 @@ public:
 	std::ostream & writeToFile(std::ostream &out);
 	/*
 	 * Developer's type.
-	 * @return dev's type
+	 * @return 2
 	 */
 	int devtype() {
 		return 2;
 	}
 	/*
 	 * Displays Company's Info
-	 * @return Company's Info
+	 * @return out.str()
 	 */
 	string displayInfo();
 	/*
 	 * Gets Company's businessName
-	 * @return Company's businessName
+	 * @return businessName
 	 */
 	string getCompanyName() {
 		return businessName;
 	}
 	/*
 	 * Gets Company's code
-	 * @return Company's code
+	 * @return code
 	 */
 	int getCode() {
 		return code;

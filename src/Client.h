@@ -1,3 +1,9 @@
+/*
+ * Client.h
+ *
+ *  Created on: 7 de Out de 2014
+ *      Author: Sofia
+ */
 #ifndef CLIENT_H_
 #define CLIENT_H_
 
@@ -36,6 +42,7 @@ public:
 	 */
 	~Client();
 
+	/////////////////////
 	/*
 	 * Resets all Clients' IDs
 	 */
@@ -43,25 +50,25 @@ public:
 	/*
 	 * Gets the Client username
 	 *
-	 * @return the client's username.
+	 * @return username
 	 */
 	string getUsername() const;
 	/*
 	 * Gets the Client age
 	 *
-	 * @return the client's age.
+	 * @return age
 	 */
 	int getAge() const;
 	/*
 	 * Gets the Client ID
 	 *
-	 * @return the client's ID.
+	 * @return id
 	 */
 	int getID() const;
 	/*
 	 * Gets all Clients' Transactions.
 	 *
-	 * @return vector with all Client transactions.
+	 * @return transactions
 	 */
 	vector<Transaction*> getTransactions() const;
 	/*
@@ -85,6 +92,8 @@ public:
 	 * 				the client's ID
 	 */
 	void setID(int id);
+
+	/////////////////////
 
 	/*
 	 * Adds Client's transaction.
@@ -122,13 +131,13 @@ public:
 	/*
 	 * Displays Client's info.
 	 *
-	 * @return client's info
+	 * @return out.str()
 	 */
 	string displayInfo();
 	/*
 	 * Displays Client's name.
 	 *
-	 * @return client's name
+	 * @return out.srt()
 	 */
 	string displayName();
 
