@@ -171,7 +171,6 @@ void AppStore::setTransactions(vector<Transaction *> transactions)
 }
 
 bool AppStore::removeApp(App* app) {
-	cout << apps.size() << endl;
 	for (unsigned int i = 0; i < apps.size(); i++) {
 		if ((*apps[i]) == (*app)){
 			apps.erase(apps.begin()+i);
@@ -382,15 +381,9 @@ void AppStore::AppsListType() {
 	system("cls");
 	cout << endl;
 	if(appstype.empty()){
-		cout << " Message: No apps with the requested type. Press any key to go back" <<endl;
-		cout << endl;
-		char y = 'y';
-		cout << "\n Go Back? (y)";
-		cin >> y;
-		if (y == 'y') {
-			system("cls");
-			return;
-		}
+		cout << " Message: No apps with the requested type. Press any key to leave.";
+		cin.get();
+		cin.get();
 	}
 	else{
 		for(unsigned int i=0; i<appstype.size(); i++){
@@ -456,6 +449,7 @@ void AppStore::AppsNotForSaleList(){
 	if(appsNotForSale.empty()){
 		cout << " Message: No apps. Press any key to go back" <<endl;
 		cin.get();
+		cin.get();
 		return;
 	}
 	hashApp::iterator it = appsNotForSale.begin();
@@ -465,14 +459,10 @@ void AppStore::AppsNotForSaleList(){
 		it++;
 	}
 
-
-	char y = 'y';
-	cout << "\n Go Back? (y)";
-	cin >> y;
-	if (y == 'y') {
-		system("cls");
-		return;
-	}
+	cout << " Message: Press any key to go back.";
+	cin.get();
+	cin.get();
+	return;
 }
 
 void AppStore::RateApps() {
@@ -592,16 +582,9 @@ App* AppStore::AddApplicationMenu() {
 		app->setTime(submission);
 		addToPQ(app);
 		saveApps();
-		cout << "\n Message: App " << name << " Added Successfully To The Appstore" << endl;
-		cout << endl;
-		char y = 'y';
-		cout << "\n Go Back? (y)";
-		cin >> y;
-		if (y == 'y') {
-			system("cls");
-			return app;
-
-		}
+		cout << "\n Message: App " << name << " Added Successfully To The Appstore. Press any key to leave." << endl;
+		cin.get(); cin.get();
+		return app;
 	}
 	catch(DeveloperDoesNotExist &e)
 	{
@@ -770,7 +753,8 @@ void AppStore::AppManagementMenu(App* app){
 		case '1':
 			system("cls");
 			cout << "\n Insert new name: ";
-			cin >> name;
+			cin.get();
+			getline(cin, name);
 			app->setName(name);
 			cout << endl << " Name changed to " << name << endl;
 			break;
@@ -802,11 +786,13 @@ void AppStore::AppManagementMenu(App* app){
 			cout << "\n Insert new developer ID: ";
 			cin >> dev;
 			app->setDeveloper(findDeveloperByID(dev));
-			cout << endl << "Developer's new ID is " << dev << endl;
+			//SE O DEVELOPER NÃO EXISTIR THROW clientenao existente
+			cout << endl << " Developer's new ID is " << dev << endl;
 			break;
 		case '4':
 			system("cls");
-			cout << "\n Insert new rating: ";
+			cout << "\n Insert new rating(1-5): ";
+			//Obrigar a que seja entre 1 e 5
 			cin >> rating;
 			app->addRating(rating);
 			appTree.remove(app);
@@ -818,9 +804,9 @@ void AppStore::AppManagementMenu(App* app){
 			appTree.remove(app);
 			cout << "\n App successfully removed. ";
 			break;
-		case '0':
+		/*case '0':
 			system("cls");
-			return;
+			return;*/
 		default:
 			system("cls");
 			AppManagementMenu(app);
@@ -858,12 +844,12 @@ void AppStore::AppManagementMenu(App* app){
 			break;
 		case '2':
 			system("cls");
-			cout << "\n Insert new rating: ";
+			cout << "\n Insert new rating(1-5): ";
 			cin >> rating;
 			app->addRating(rating);
 			appTree.remove(app);
 			appTree.insert(app);
-			cout << endl << "Rating added: " << rating << endl;
+			cout << endl << " Rating added: " << rating << endl;
 			break;
 		case '0':
 			system("cls");
@@ -876,7 +862,7 @@ void AppStore::AppManagementMenu(App* app){
 	}
 
 	else{
-		cout << "You don't have the permission to access this app" << endl;
+		cout << " Message: You don't have the permission to access this app." << endl;
 		return;
 	}
 }
@@ -908,7 +894,8 @@ void AppStore::AproveNewApps()
 
 	string input;
 	if(unacceptedApps.empty()){
-		cout << " Message: No apps to aprove. Press any key to go back" <<endl;
+		cout << " Message: No apps to aprove. Press any key to leave.";
+		cin.get();
 		cin.get();
 		return;
 	}
@@ -977,24 +964,10 @@ void AppStore::ClientsList() {
 		ClientManagementMenu(findClientByID(in));
 	}
 	catch (ClientDoesNotExist &e1){
-		cout << "\n Specified client does not exist. ID: " << e1.getID() << endl;
-		char y;
-							cout << "\n Go Back? (y)";
-							cin >> y;
-							if (y == 'y') {
-								system("cls");
-								return;
-							}
+		cout << "\n Message: Specified client does not exist. ID: " << e1.getID();
+		cin.get();
+		cin.get();
 	}
-
-	cout << "Enter 'r' to return: " << endl;
-	cin >> input;
-
-		if(input == "r") {
-			system("cls");
-			return;
-		}
-
 }
 
 void AppStore::PurchasedApps() {
@@ -1003,12 +976,8 @@ void AppStore::PurchasedApps() {
 	string input;
 	if(clients.empty()){
 		cout << "No clients. Press any key to go back" <<endl;
-		char input;
-			cout << "\n\n Enter 'r' to return: ";
-			cin >> input;
-
-			if(input == 'r') return;
-			system("cls");
+		cin.get();
+		cin.get();
 	}
 	for(unsigned int i = 0; i < clients.size(); i++)
 	{
@@ -1025,7 +994,7 @@ void AppStore::PurchasedApps() {
 
 		else try{
 				vector<Transaction*> trans = findClientByID(in)->getTransactions();
-				if(trans.empty()) cout << " No purchases. " << endl << endl;
+				if(trans.empty()) cout << " No purchases. " << endl;
 				for(unsigned int i=0; i<trans.size();i++){
 					vector<App*> tApps=trans[i]->getApps();
 					for(unsigned int j=0; j<tApps.size();j++){
@@ -1034,7 +1003,9 @@ void AppStore::PurchasedApps() {
 				}
 			}
 			catch (ClientDoesNotExist &e1){
-				cout << " Specified client does not exist. ID: " << e1.getID() << endl;
+				cout << " Message: Specified client does not exist. ID: " << e1.getID();
+				cin.get();
+				cin.get();
 			}
 
 			cout << endl;
@@ -1225,7 +1196,7 @@ void AppStore::ClientManagementMenu(Client* cli){
 	cout << "\n Insert new name: ";
 	cin >> name;
 	cli->setUsername(name);
-	cout << endl << "Name changed to " << name << endl;
+	cout << endl << " Name changed to " << name <<". Press any key to leave.";
 	break;
 
 	case '2':
@@ -1249,6 +1220,8 @@ void AppStore::ClientManagementMenu(Client* cli){
 		ClientManagementMenu(cli);
 		break;
 	}
+	cin.get();
+	cin.get();
 	}
 	else{
 		cout << "You don't have the permission to access this menu" << endl;
