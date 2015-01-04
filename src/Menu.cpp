@@ -101,7 +101,6 @@ void AppsMenu(AppStore as) {
 			cout << "   3 - List Apps by Type" << endl;
 			cout << "   4 - Show all apps" << endl;
 			cout << "   5 - Rate apps" << endl;
-			cout << "   6 - Apps not for sale" << endl;
 			cout << endl;
 			cout << "   0 - Go back" << endl;
 			cout << endl;
@@ -136,11 +135,6 @@ void AppsMenu(AppStore as) {
 			case '5':
 				system("cls");
 				as.RateApps();system("cls");
-				AppsMenu(as);
-				break;
-			case '6':
-				system("cls");
-				as.AppsNotForSaleList();system("cls");
 				AppsMenu(as);
 				break;
 			case '0':
