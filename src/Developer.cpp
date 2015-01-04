@@ -189,66 +189,73 @@ string Developer::displayNameDev() {
 
 void Individual::DevManagementMenu(AppStore* as){
 	string name, address, busName;
-			int nif;
-			App *app;
-			char choice;
+	int nif;
+	App *app;
+	char choice;
+	char y;
 
-			if(as->getLoggedInUser()->getType()==1 || (as->getLoggedInUser()->getType()==3 && as->getLoggedInUser()->getID()==this->getID())){
+	if(as->getLoggedInUser()->getType()==1 || (as->getLoggedInUser()->getType()==3 && as->getLoggedInUser()->getID()==this->getID())){
 
 
+		system("cls");
+		cout << "\n INDIVIDUAL DEVELOPER MANAGEMENT: ID=" << getID() << endl;
+		cout << " ---------------------------------------------------------" << endl;
+
+		cout << "   1 - Change Name" << endl;
+		cout << "   2 - Change Address" << endl;
+		cout << "   3 - Change Nif" << endl;
+		cout << "   4 - Publish App" << endl;
+		cout << endl;
+		cout << "   0 - Go Back" << endl;
+		cout << endl;
+		cout << " Option: ";
+		cin >> choice;
+
+		switch(choice)
+		{
+
+		case '1':
 			system("cls");
-			cout << "\n DEVELOPER MANAGEMENT: ID=" << getID() << endl;
-			cout << " ---------------------------------------------------------" << endl;
-
-
-				cout << "\n EDITING INDIVIDUAL DEVELOPER" << endl;
-				cout << " ---------------------------------------------------------" << endl;
-
-				cout << "   1 - Change Name" << endl;
-				cout << "   2 - Change Address" << endl;
-				cout << "   3 - Change Nif" << endl;
-				cout << "   4 - Publish App" << endl;
-				cout << " Option: ";
-				cin >> choice;
-
-				switch(choice)
-				{
-
-				case '1':
-					system("cls");
-					cout << "\n Insert a new name: " ;
-					cin >> name;
-					setName(name);
-					break;
-				case '2':
-					system("cls");
-					cout << "\n Insert a new address:";
-					cin.get();
-					getline(cin,address);
-					setAddress(address);
-					break;
-				case'3':
-					system("cls");
-					cout<< "\n Insert a new Nif: ";
-					cin >> nif;
-					setNif(nif);
-					break;
-				case '4':
-					system("cls");
-					cout << "\n PUBLISHING NEW APP: " << endl;
-					app = as->AddApplicationMenu();
-					addApp(app);
-					break;
-				default:
-					system("cls");
-					DevManagementMenu(as);
-					break;
-				}
-			}
-			else{
-				cout << "You don't have the permission to access this menu" << endl;
-				return;
-			}
+			cout << "\n Insert a new name: " ;
+			cin.get();
+			getline(cin,name);
+			setName(name);
+			break;
+		case '2':
+			system("cls");
+			cout << "\n Insert a new address:";
+			cin.get();
+			getline(cin,address);
+			setAddress(address);
+			break;
+		case'3':
+			system("cls");
+			cout<< "\n Insert a new Nif: ";
+			cin >> nif;
+			setNif(nif);
+			break;
+		case '4':
+			system("cls");
+			cout << "\n PUBLISHING NEW APP: " << endl;
+			app = as->AddApplicationMenu();
+			addApp(app);
+			break;
+		case '0':
+			system("cls");
+			return;
+			break;
+		default:
+			system("cls");
+			DevManagementMenu(as);
+			break;
+		}
+		cout << "\n Developer Sucessfully Edited. Press y to go back.";
+		cin >> y;
+	}
+	else{
+		cout << " Message: You don't have the permission to access this menu." << endl;
+		return;
+	}
 }
 
 void Company::DevManagementMenu(AppStore* as){
@@ -256,10 +263,11 @@ void Company::DevManagementMenu(AppStore* as){
 		int nif, code;
 		App *app;
 		char choice;
+		char y;
 
 		if(as->getLoggedInUser()->getType()==1 || (as->getLoggedInUser()->getType()==3 && as->getLoggedInUser()->getID()==this->getID()) ){
 
-			cout << "\n EDITING ENTERPRISE DEVELOPER" << endl;
+			cout << "\n ENTERPRISE DEVELOPER MANAGEMENT: ID=" << getID() << endl;
 			cout << " ---------------------------------------------------------" << endl;
 
 			cout << "   1 - Change Name" << endl;
@@ -268,6 +276,9 @@ void Company::DevManagementMenu(AppStore* as){
 			cout << "   4 - Publish App" << endl;
 			cout << "   5 - Company Name" << endl;
 			cout << "   6 - Change Code" << endl;
+			cout << endl;
+			cout << "   0 - Go back" << endl;
+			cout << endl;
 			cout << " Option: ";
 			cin >> choice;
 
@@ -277,7 +288,8 @@ void Company::DevManagementMenu(AppStore* as){
 			case '1':
 				system("cls");
 				cout << "\n Insert a new name: " ;
-				cin >> name;
+				cin.get();
+				getline(cin,name);
 				setName(name);
 				break;
 			case '2':
@@ -302,7 +314,8 @@ void Company::DevManagementMenu(AppStore* as){
 			case '5':
 				system("cls");
 				cout << "\n Insert new Company Name: ";
-				cin >> busName;
+				cin.get();
+				getline(cin,busName);
 				setCompanyName(busName);
 				break;
 			case'6':
@@ -311,21 +324,18 @@ void Company::DevManagementMenu(AppStore* as){
 				cin >> code;
 				setCode(code);
 				break;
-
+			case'0':
+				system("cls");
+				return;
+				break;
 			default:
 				system("cls");
 				DevManagementMenu(as);
 				break;
 
 			}
-			cout << endl;
-			char y = 'y';
-			cout << "\n Go Back? (y)";
+			cout << "\n Developer Sucessfully Edited. Press y to go back.";
 			cin >> y;
-			if (y == 'y') {
-				system("cls");
-				return;
-			}
 		}
 
 		else{

@@ -1,11 +1,3 @@
-//exceptions ideas
-
-//repeatedAppName
-//outOfRangeRating
-//clientDoesNotExist
-//appDoesNotExist
-//developerDoesNotExist
-//fileDoesNotExist (when loading appstore)
 #ifndef EXCEPTIONS_H_
 #define EXCEPTIONS_H_
 

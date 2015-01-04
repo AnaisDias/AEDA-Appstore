@@ -175,10 +175,10 @@ bool AppStore::removeApp(App* app) {
 		if ((*apps[i]) == (*app)){
 			apps.erase(apps.begin()+i);
 			i--;
+			appTree.remove(app);
 			return true;
 		}
 	}
-	appTree.remove(app);
 	return false;
 }
 
@@ -331,8 +331,10 @@ void AppStore::AppsListName() {
 	cout << " ---------------------------------------------------------" << endl;
 
 	if(appsN.empty()) {
-		cout << "\n No apps with the requested name. Press any key to go back" <<endl;
-		cin.get();
+		cout << "\n No apps with the requested name. Press y to go back." <<endl;
+		char y;
+		cin >> y;
+		system("cls");
 		return;
 	}
 	else{
@@ -340,20 +342,23 @@ void AppStore::AppsListName() {
 			cout << appsN[i]->displayInfo() << endl;
 		}
 
-	cout << endl << " Select app by ID or enter 'r' to return: ";
-	cin >> input2;
-	int in = atoi(input2.c_str());
-	if(input2 == "r") {
-		system("cls");
-		return;
-	}
-	else try{
-		AppManagementMenu(findAppByID(in));
-	}
-	catch (AppDoesNotExist &e1){
-		cout << "\n Message: Specified app does not exist. ID: " << e1.getID() << endl;
-		cin.get();
-	}
+		cout << endl << " Select app by ID or enter 'r' to return: ";
+		cin >> input2;
+		int in = atoi(input2.c_str());
+		if(input2 == "r") {
+			system("cls");
+			return;
+		}
+		else try{
+			AppManagementMenu(findAppByID(in));
+		}
+		catch (AppDoesNotExist &e1){
+			cout << "\n Message: Specified app does not exist. ID: " << e1.getID() << endl;
+			char y;
+			cout << "Press y to go back.";
+			cin >> y;
+			system("cls");
+		}
 	}
 }
 
@@ -384,30 +389,36 @@ void AppStore::AppsListType() {
 	system("cls");
 	cout << endl;
 	if(appstype.empty()){
-		cout << " Message: No apps with the requested type. Press any key to leave.";
-		cin.get();
-		cin.get();
+		cout << " Message: No apps with the requested type. Press y to go back.";
+		char y;
+		cin >> y;
+		system("cls");
 	}
 	else{
+		cout << "\n APPS BY TYPE=" << type << ": "<<endl;
+			cout << " ---------------------------------------------------------" << endl;
 		for(unsigned int i=0; i<appstype.size(); i++){
 			cout << appstype[i]->displayInfo() << endl;
+			cout << endl << " Select app by ID or enter 'r' to return: ";
+			cin >> input;
+			int in = atoi(input.c_str());
+			if(input == "r") {
+				system("cls");
+				return;
+			}
+			else try{
+				AppManagementMenu(findAppByID(in));
+			}
+			catch (AppDoesNotExist &e1){
+				cout << " Message: Specified app does not exist. ID: " << e1.getID() << endl;
+				cin.get();
+			}
 		}
+
+
 	}
 
-	cout << endl << " Select app by ID or enter 'r' to return: ";
-	cin >> input;
-	int in = atoi(input.c_str());
-	if(input == "r") {
-		system("cls");
-		return;
-	}
-	else try{
-		AppManagementMenu(findAppByID(in));
-	}
-	catch (AppDoesNotExist &e1){
-		cout << " Message: Specified app does not exist. ID: " << e1.getID() << endl;
-		cin.get();
-	}
+
 }
 
 void AppStore::AllAppsList(){
@@ -417,7 +428,7 @@ void AppStore::AllAppsList(){
 
 	string input;
 	if(apps.empty()){
-		cout << " Message: No apps. Press any key to go back" <<endl;
+		cout << " Message: No apps. Press y to go back" <<endl;
 		cin.get();
 		return;
 	}
@@ -471,7 +482,7 @@ void AppStore::AppsNotForSaleList(){
 
 void AppStore::RateApps() {
 	string name;
-	string rate;
+	int rate;
 	string input;
 	App *app;
 
@@ -502,7 +513,11 @@ void AppStore::RateApps() {
 			app = findAppByID(in);
 			}
 		catch (AppDoesNotExist &e1){
-			cout << "\n Message: Specified app does not exist. ID: " << e1.getID() << endl;
+			cout << "\n Message: Specified app does not exist. ID: " << e1.getID() <<". Press y to go back.";
+			char y;
+			cin >> y;
+			system("cls");
+			return;
 		}
 		system("cls");
 		cout << "\n RATE:" << endl;
@@ -516,20 +531,18 @@ void AppStore::RateApps() {
 		cout << "\n   0 - Go Back" << endl;
 		cout << "\n Option: ";
 		cin >> rate;
-
-		if(rate=="0") return;
-
-		app->addRating(atoi(rate.c_str()));
-
-		cout << "\n Rating added successfully!" << endl;
-		cout << endl;
-				char y = 'y';
-				cout << "\n Go Back? (y)";
-				cin >> y;
-				if (y == 'y') {
-					system("cls");
-					return;
-				}
+		if(rate==0) return;
+		if(rate>=1 && rate<=5){
+		app->addRating(rate);
+		cout << "\n Rating added successfully! Press y to go back.";
+		char y;
+		cin >> y;
+		}
+		else{
+			cout << "\n Message: Invalid Rate. Press y to go back." << endl;
+			char y;
+			cin >> y;
+		}
 	}
 }
 
@@ -550,7 +563,8 @@ App* AppStore::AddApplicationMenu() {
 	cout << endl;
 	cout << " Insert the following information: " << endl << endl;
 	cout << " Name: ";
-	cin >> name;
+	cin.get();
+	getline(cin,name);
 	cout << endl << " Price: ";
 	cin >> price;
 	cout << endl << " Type: " << endl;
@@ -575,8 +589,8 @@ App* AppStore::AddApplicationMenu() {
 		dev=getLoggedInUser()->getID();
 	}
 	else{
-	cout << endl << " Developer's ID: ";
-	cin >> dev;
+		cout << endl << " Developer's ID: ";
+		cin >> dev;
 	}
 
 	App *app;
@@ -587,8 +601,9 @@ App* AppStore::AddApplicationMenu() {
 		app->setTime(submission);
 		addToPQ(app);
 		saveApps();
-		cout << "\n Message: App " << name << " Added Successfully To The Appstore. Press any key to leave." << endl;
-		cin.get(); cin.get();
+		cout << "\n Message: App " << name << " Added Successfully To The Appstore. Press y to go back." << endl;
+		char y;
+		cin >> y;
 		return app;
 	}
 	catch(DeveloperDoesNotExist &e)
@@ -602,19 +617,17 @@ App* AppStore::AddApplicationMenu() {
 void AppStore::RemoveApplicationMenu() {
 	string input;
 	if(apps.empty()){
-		cout << "No apps. Press any key to go back" <<endl;
-		cout << endl;
-				char y = 'y';
-				cout << "\n Go Back? (y)";
-				cin >> y;
-				if (y == 'y') {
-					system("cls");
-					return;
-				}
+		cout << "\n No apps available. Press y to go back";
+		char y = 'y';
+		cin >> y;
+		system("cls");
+		return;
 	}
+
 	for(unsigned int i=0; i<apps.size(); i++){
 		cout << apps[i]->displayInfo() << endl;
 	}
+
 	cout << " Select app by ID or enter 'r' to return: ";
 	cin >> input;
 	if(input == "r") {
@@ -622,18 +635,16 @@ void AppStore::RemoveApplicationMenu() {
 		return;
 	}
 
-	App *app = findAppByID(atoi(input.c_str()));
-	removeApp(app);
+	try{
+		App *app = findAppByID(atoi(input.c_str()));
+		removeApp(app);
+		cout << " " << app->getName() << " was deleted. Press y to go back." << endl;
+	}catch(AppDoesNotExist &e){
+		cout << "\n Message: Specified app not exists. ID: " << e.getID() <<". Press y to go back.";
+	}
 
-	cout << " " << app->getName() << " was deleted." << endl;
-	cout << endl;
-			char y = 'y';
-			cout << "\n Go Back? (y)";
-			cin >> y;
-			if (y == 'y') {
-				system("cls");
-				return;
-			}
+	char y;
+	cin >> y;
 }
 
 void AppStore::RemoveSaleMenu(){
@@ -738,7 +749,7 @@ void AppStore::AppManagementMenu(App* app){
 	{
 		system("cls");
 		cout << "\n APP MANAGEMENT: ID=" << app->getID() << endl;
-		cout << " ---------------------------------------------------------" << endl;
+		cout << " ---------------------------------------------------------";
 		cout << "\n What do you wish to do? " << endl;
 		cout << endl;
 		cout << "   1 - Change name" << endl;
@@ -751,10 +762,7 @@ void AppStore::AppManagementMenu(App* app){
 		cout << " Option: ";
 		cin >> choice;
 
-
 		switch(choice) {
-
-
 		case '1':
 			system("cls");
 			cout << "\n Insert new name: ";
@@ -765,7 +773,7 @@ void AppStore::AppManagementMenu(App* app){
 			break;
 		case '2':
 			system("cls");
-			cout << endl << "\n Type: "<<endl;
+			cout << "\n Type: "<<endl;
 			cout << " ---------------------------------------------------------" << endl;
 			cout << "\n  1. Entertainment" << endl;
 			cout << "  2. Finances" << endl;
@@ -781,46 +789,62 @@ void AppStore::AppManagementMenu(App* app){
 			cout << "  12. Utilities" << endl << endl;
 			cout << "  Option: ";
 			cin >> type;
-			app->setType(type);
-			appTree.remove(app);
-			appTree.insert(app);
-			cout << endl << " Type changed to " << type << endl;
+			if(type>=1 && type<=12){
+				app->setType(type);
+				appTree.remove(app);
+				appTree.insert(app);
+				cout << endl << " Type changed to " << type << endl;
+			}else
+			{
+				cout << "\n Message: Type not available.";
+			}
 			break;
 		case '3':
-			system("cls");
-			cout << "\n Insert new developer ID: ";
-			cin >> dev;
-			app->setDeveloper(findDeveloperByID(dev));
-			//SE O DEVELOPER NÃO EXISTIR THROW clientenao existente
-			cout << endl << " Developer's new ID is " << dev << endl;
+			try{
+				system("cls");
+				cout << "\n Insert new developer ID: ";
+				cin >> dev;
+				app->setDeveloper(findDeveloperByID(dev));
+				cout << endl << " Developer's new ID is " << dev << endl;
+			}
+			catch(DeveloperDoesNotExist &e)
+			{
+				cout << "\n Message: Specified developer not exists. ID: " << e.getID() << endl;
+			}
 			break;
 		case '4':
 			system("cls");
 			cout << "\n Insert new rating(1-5): ";
-			//Obrigar a que seja entre 1 e 5
 			cin >> rating;
-			app->addRating(rating);
-			appTree.remove(app);
-			appTree.insert(app);
-			cout << endl << " Rating added: " << rating << endl;
+			if(rating >=1 && rating<=5){
+				app->addRating(rating);
+				appTree.remove(app);
+				appTree.insert(app);
+				cout << endl << " Rating added: " << rating << endl;
+			}
+			else{
+				cout << "\n Message: Invalid Rating Value." << endl;
+			}
 			break;
 		case '5':
 			removeApp(app);
 			appTree.remove(app);
-			cout << "\n App successfully removed. ";
+			cout << "\n Message: App successfully removed. ";
 			break;
-		/*case '0':
+		case'0':
 			system("cls");
-			return;*/
+			break;
 		default:
 			system("cls");
 			AppManagementMenu(app);
 			break;
 		}
-		cout << endl;
-		cout << " Press any key to leave.";
-		cin.get();
-		cin.get();
+		char y;
+		cout << "\n Go Back? Press y.";
+		cin >> y;
+		system("cls");
+		return;
+
 	}
 	else if(this->getLoggedInUser()->getType()==2){
 		system("cls");
@@ -866,14 +890,13 @@ void AppStore::AppManagementMenu(App* app){
 			break;
 		}
 	}
-
 	else{
 		cout << " Message: You don't have the permission to access this app." << endl;
 		return;
 	}
 }
 
-void AppStore::removeFromPQ(App *app)
+void AppStore::removeFromPQ()
 {
 	unacceptedApps.pop();
 }
@@ -900,9 +923,8 @@ void AppStore::ApproveNewApps()
 
 	string input;
 	if(unacceptedApps.empty()){
-		cout << " Message: No apps to approve. Press any key to leave.";
-		cin.get();
-		cin.get();
+		cout << " Message: No apps to approve. Press y to leave.";
+		char y; cin >> y;
 		return;
 	}
 	else{
@@ -925,8 +947,9 @@ void AppStore::ApproveNewApps()
 		app = unacceptedApps.top();
 		app->setValidation(true);
 		apps.push_back(app);
-		removeFromPQ(app);
+		removeFromPQ();
 		saveApps();
+		cout << "\n Message: App sucessfully aproved. Press y to go back."; char y; cin >> y;
 		return;
 	}
 	else{
@@ -934,8 +957,11 @@ void AppStore::ApproveNewApps()
 			app = findUnacceptedAppsByID(in);
 		}
 		catch (AppDoesNotExist &e1){
-			cout << "\n Message: Specified app does not exist. ID: " << e1.getID() << endl;
-			cin.get();cin.get();
+			cout << "\n Message: Specified app does not exist. ID: " << e1.getID() <<". ";
+			cout << "Press y to go back.";
+			char y; cin >> y;
+			return;
+
 		}
 		AppManagementMenu(app);
 	}
@@ -951,7 +977,8 @@ void AppStore::ClientsList() {
 
 	string input;
 	if(clients.empty()){
-		cout << "\n No clients." <<endl;
+		cout << "\n No clients Available. Press y to go back.";
+		char y; cin >> y;
 		return;
 	}
 	for(unsigned int i = 0; i < clients.size(); i++)
@@ -970,9 +997,8 @@ void AppStore::ClientsList() {
 		ClientManagementMenu(findClientByID(in));
 	}
 	catch (ClientDoesNotExist &e1){
-		cout << "\n Message: Specified client does not exist. ID: " << e1.getID();
-		cin.get();
-		cin.get();
+		cout << "\n Message: Specified client does not exist. ID: " << e1.getID() <<". Press y to go back.";
+		char y; cin >> y;
 	}
 }
 
@@ -981,48 +1007,44 @@ void AppStore::PurchasedApps() {
 	cout << " ---------------------------------------------------------" << endl;
 	string input;
 	if(clients.empty()){
-		cout << "No clients. Press any key to go back" <<endl;
-		cin.get();
-		cin.get();
+		cout << "\n No clients. Press y to go back" <<endl;
+		char y; cin >> y;
+		system("cls");
+		return;
 	}
 	for(unsigned int i = 0; i < clients.size(); i++)
 	{
-			cout << clients[i]->displayInfo() << endl;
-		}
+		cout << clients[i]->displayInfo() << endl;
+	}
 
-		cout << endl << " Select client by ID or enter 'r' to return: ";
-		cin >> input;
-		int in = atoi(input.c_str());
-		if(input == "r") {
-			system("cls");
-			return;
-		}
+	cout << endl << " Select client by ID or enter 'r' to return: ";
+	cin >> input;
+	int in = atoi(input.c_str());
+	if(input == "r") {
+		system("cls");
+		return;
+	}
+	else try{
+		system("cls");
+		cout << "\n PURCHASED APPS BY "<<  findClientByID(in)->getUsername() << endl;
+		cout << " ---------------------------------------------------------" << endl;
+		vector<Transaction*> trans = findClientByID(in)->getTransactions();
+		if(trans.empty()) cout << "\n No purchases Available." << endl;
 
-		else try{
-				vector<Transaction*> trans = findClientByID(in)->getTransactions();
-				if(trans.empty()) cout << " No purchases. " << endl;
-				for(unsigned int i=0; i<trans.size();i++){
-					vector<App*> tApps=trans[i]->getApps();
-					for(unsigned int j=0; j<tApps.size();j++){
-						cout << tApps[j]->displayInfo() << endl;
-					}
-				}
+		for(unsigned int i=0; i<trans.size();i++){
+			vector<App*> tApps=trans[i]->getApps();
+			for(unsigned int j=0; j<tApps.size();j++){
+				cout << tApps[j]->displayInfo() << endl;
 			}
-			catch (ClientDoesNotExist &e1){
-				cout << " Message: Specified client does not exist. ID: " << e1.getID();
-				cin.get();
-				cin.get();
-			}
+		}
+		cout << " Press y to go back."; char y; cin >> y;
+		return;
+	}
+	catch (ClientDoesNotExist &e1){
+		cout << " Message: Specified client does not exist. ID: " << e1.getID() <<". Press y to go back.";
+	}
 
-			cout << endl;
-					char y = 'y';
-					cout << "\n Go Back? (y)";
-					cin >> y;
-					if (y == 'y') {
-						system("cls");
-						return;
-					}
-
+	char y; cin >> y;
 }
 
 void AppStore::AddClients() {
@@ -1034,7 +1056,8 @@ void AppStore::AddClients() {
 	cout << endl;
 
 	cout << " Name: ";
-	cin >> name;
+	cin.get();
+	getline(cin,name);
 	cout << endl;
 	cout << " Age: ";
 	cin >> age;
@@ -1043,59 +1066,38 @@ void AppStore::AddClients() {
 	clients.push_back(cli);
 
 	cout << endl << endl;
-	cout << " Client added successfully to the Appstore database." << endl;
+	cout << " Client added successfully to the Appstore database. Press y to go back.";
+	char y; cin >> y;
 
-	cout << endl;
-			char y = 'y';
-			cout << "\n Go Back? (y)";
-			cin >> y;
-			if (y == 'y') {
-				system("cls");
-				return;
-			}
 }
 
 void AppStore::RemoveClients() {
 
 
+	string input;
 	cout << "\n CLIENTS LIST" << endl;
-		cout << " ---------------------------------------------------------" << endl;
+	cout << " ---------------------------------------------------------" << endl;
 
 	for(unsigned int i = 0; i < clients.size(); i++)
-		{
-			cout << clients[i]->displayInfo() << endl;
-		}
+	{
+		cout << clients[i]->displayInfo() << endl;
+	}
 
-	int id;
-	cout << "\n ID of client to be removed: ";
-	cin >> id;
-
-
-	try{
-		removeClient(findClientByID(id));
-		cout << endl << "\n Client removed successfully from the Appstore database" << endl;
-
-		char y;
-					cout << "\n Go Back? (y)";
-					cin >> y;
-					if (y == 'y') {
-						system("cls");
-						return;
-					}
+	cout << endl << " Select client by ID or enter 'r' to return: ";
+	cin >> input;
+	int in = atoi(input.c_str());
+	if(input == "r") {
+		system("cls");
+		return;
+	}
+	else try{
+		removeClient(findClientByID(in));
+		cout << endl << "\n Client removed successfully from the Appstore database. Press y to go back.";
+		char y; cin >> y;
 	}
 	catch (ClientDoesNotExist &e1){
 		cout << "\n Specified client does not exist. ID: " << e1.getID() << endl;
 	}
-
-
-	cout << endl;
-			char y;
-			cout << "\n Go Back? (y)";
-			cin >> y;
-			if (y == 'y') {
-				system("cls");
-				return;
-			}
 
 }
 
@@ -1110,8 +1112,8 @@ void AppStore::BuyApp(Client *cli)
 		string input;
 		vector<App*> allapps = this->getAppsForSaleFromVector(apps);
 		if(allapps.empty()){
-			cout << " No apps. Press any key to go back" <<endl;
-
+			cout << "\n No apps Available. Press y to go back" <<endl;
+			char y; cin >> y;
 			return;
 		}
 		vector<App *>::iterator it = allapps.begin();
@@ -1129,9 +1131,15 @@ void AppStore::BuyApp(Client *cli)
 			int in = atoi(input.c_str());
 			if(input == "r") break;
 
+			try{
+				App *app = findAppByID(in);
+				appsTrans.push_back(app);
+			}catch(AppDoesNotExist &e)
+			{
+				cout << "\n Message: Specified App does not exist " << e.getID() <<". Press y to go back.";
+				char y; cin >> y;
+			}
 
-			App *app = findAppByID(in);
-			appsTrans.push_back(app);
 		}
 
 		Transaction *trans;
@@ -1139,8 +1147,6 @@ void AppStore::BuyApp(Client *cli)
 		trans->setClient(cli);
 		cli->addTransaction(trans);
 		trans->setApps(appsTrans);
-
-
 
 		cout << "\n APPS BOUGHT:" << endl << endl;
 		for(unsigned int i = 0; i < appsTrans.size(); i++)
@@ -1150,7 +1156,6 @@ void AppStore::BuyApp(Client *cli)
 
 		cout << "\n Do you have a voucher? (yes or not) ";
 		cin >> voucher;
-
 
 		if(voucher == "yes")
 		{
@@ -1163,15 +1168,10 @@ void AppStore::BuyApp(Client *cli)
 
 		transactions.push_back(trans);
 
-
-		cout << endl;
-		char y = 'y';
-		cout << "\n Go Back? (y)";
+		char y;
+		cout << "\n Press y to go back.";
 		cin >> y;
-		if (y == 'y') {
-			system("cls");
-			return;
-		}
+		system("cls");
 }
 
 void AppStore::ClientManagementMenu(Client* cli){
@@ -1180,55 +1180,60 @@ void AppStore::ClientManagementMenu(Client* cli){
 	char choice;
 
 	if(this->getLoggedInUser()->getType()==1){
-	system("cls");
-	cout << "\n CLIENT MANAGEMENT: ID=" << cli->getID() << endl << endl;
-	cout << " ---------------------------------------------------------" << endl;
-
-
-	cout << " What do you wish to do? " << endl;
-	cout << endl;
-	cout << "   1. Change username" << endl;
-	cout << "   2. Change age" << endl;
-	cout << "   3. Buy App" << endl;
-			cout << endl;
-	cout << "   0. Go back" << endl;
-	cout << "\n Option: ";
-	cin >> choice;
-
-
-	switch(choice) {
-
-	case '1':
 		system("cls");
-	cout << "\n Insert new name: ";
-	cin >> name;
-	cli->setUsername(name);
-	cout << endl << " Name changed to " << name <<". Press any key to leave.";
-	break;
+		cout << "\n CLIENT MANAGEMENT: ID=" << cli->getID() << endl << endl;
+		cout << " ---------------------------------------------------------" << endl;
 
-	case '2':
-		system("cls");
-		cout << "\n Insert new age: ";
-		cin >> age;
-		cli->setAge(age);
-		cout << endl << "\n Age changed to " << age << endl;
 
-	break;
-	case '3':
-		system("cls");
-		BuyApp(cli);
-		break;
-	case '0':
-		system("cls");
-		return;
-		break;
-	default:
-		system("cls");
-		ClientManagementMenu(cli);
-		break;
-	}
-	cin.get();
-	cin.get();
+		cout << " What do you wish to do? " << endl;
+		cout << endl;
+		cout << "   1. Change username" << endl;
+		cout << "   2. Change age" << endl;
+		cout << "   3. Buy App" << endl;
+		cout << endl;
+		cout << "   0. Go back" << endl;
+		cout << "\n Option: ";
+		cin >> choice;
+
+
+		switch(choice) {
+
+		case '1':
+			system("cls");
+			cout << "\n Insert new name: ";
+			cin.get();
+			getline(cin,name);
+			cli->setUsername(name);
+			cout << endl << " Name changed to " << name <<". Press y to go back.";
+			break;
+		case '2':
+			system("cls");
+			cout << "\n Insert new age: ";
+			cin >> age;
+			if(age>0 && age<=150){
+				cli->setAge(age);
+				cout << endl << "\n Age changed to " << age <<". Press y to go back.";;
+			}
+			else{
+				cout << "\n Message: Invalid Age. Press y to go back.";
+			}
+			break;
+		case '3':
+			system("cls");
+			BuyApp(cli);
+			return;
+			break;
+		case '0':
+			system("cls");
+			return;
+			break;
+		default:
+			system("cls");
+			ClientManagementMenu(cli);
+			break;
+		}
+		char y;
+		cin >> y;
 	}
 	else{
 		cout << "You don't have the permission to access this menu" << endl;
@@ -1243,6 +1248,9 @@ void AppStore::ClientManagementMenu(Client* cli){
 
 void AppStore::ShowIndivDev()
 {
+	cout << " INDIVIDUAL DEVELOPERS" << endl;
+	cout << " ---------------------------------------------------------" << endl;
+	cout << endl;
 	for(unsigned int i = 0; i<developers.size(); i++)
 	{
 
@@ -1255,6 +1263,9 @@ void AppStore::ShowIndivDev()
 
 void AppStore::ShowCompDev()
 {
+	cout << " ENTERPRISE DEVELOPERS" << endl;
+		cout << " ---------------------------------------------------------" << endl;
+		cout << endl;
 	for(unsigned int i = 0; i<developers.size(); i++)
 	{
 		if(developers[i]->devtype() == 2)
@@ -1271,26 +1282,22 @@ void AppStore::IndividualDevList() {
 
 	ShowIndivDev();
 
-	cout << endl;
-	char y = 'y';
-	cout << "\n Go Back? (y)";
+	char y;
+	cout << "\n Press y to go back.";
 	cin >> y;
-	if (y == 'y') {
-		system("cls");
-
-	}
+	system("cls");
 }
 
 void AppStore::ShowAllDev()
 {
-
+	char y;
 	cout << "\n DEVELOPERS LIST" << endl;
 	cout << " ---------------------------------------------------------" << endl;
 
 	string input;
 	if(developers.empty()){
-		cout << " Message: No Developers. Press any key to go back" <<endl;
-		cin.get();
+		cout << "\n Message: No Developers. Press y to go back" <<endl;
+		cin >> y;
 		return;
 	}
 	vector<Developer *>::iterator it = developers.begin();
@@ -1309,49 +1316,48 @@ void AppStore::ShowAllDev()
 		findDeveloperByID(in)->DevManagementMenu(this);
 	}
 	catch (DeveloperDoesNotExist &e1){
-		cout << "\n Message: Specified developer does not exist. ID: " << e1.getID();
-		cin.get();
-		cin.get();
+		cout << "\n Message: Specified developer does not exist. ID: " << e1.getID() <<". Press y to go back.";
+		cin >> y;
 	}
 
 }
 
 void AppStore::EnterpriseList() {
 	cout << "\n ENTERPRISE DEVELOPERS" << endl;
-		cout << " ---------------------------------------------------------" << endl;
-		cout << endl;
+	cout << " ---------------------------------------------------------" << endl;
+	cout << endl;
 
 	ShowCompDev();
 
-	cout << endl;
-	char y = 'y';
-	cout << "\n Go Back? (y)";
+	char y;
+	cout << "\n Press y to go back.";
 	cin >> y;
-	if (y == 'y') {
-		system("cls");
-		return;
-	}
+	system("cls");
 }
 
 void AppStore::ShowAppsByName(int id)
 {
+	cout << " APPS" << endl;
+	cout << " ---------------------------------------------------------" << endl;
+	cout << endl;
+
 	Developer *dev = findDeveloperByID(id);
 	vector<App*> appsN = dev->getApps();
 	for(unsigned int i = 0; i < appsN.size(); i++)
 	{
 		cout << appsN[i]->displayInfo() << endl;
 	}
+
+	cout << "\n Press y to go back." << endl;
+	char y; cin >> y;
 }
 
 void AppStore::AppsCreated() {
 	char choice;
-	char y = 'y';
 	int id;
 	cout << "\n APPS CREATED BY A DEV/ENTERPRISE:" << endl;
 	cout << " ---------------------------------------------------------" << endl;
 	cout << endl;
-
-
 	cout << "   1 - Individual Developer" << endl;
 	cout << "   2 - Enterprise" << endl << endl;
 	cout << "   0 - Go back" << endl << endl;
@@ -1364,18 +1370,20 @@ void AppStore::AppsCreated() {
 		system("cls");
 		ShowIndivDev();
 		cout << endl;
-		cout << "ID developer: ";
+		cout << " ID developer: ";
 		cin >> id;
 		cout << endl;
+		system("cls");
 		ShowAppsByName(id);
 		break;
 	case '2':
 		system("cls");
 		ShowCompDev();
 		cout << endl;
-		cout << "Apps Created By: ";
+		cout << " Apps Created By: ";
 		cin >> id;
 		cout << endl;
+		system("cls");
 		ShowAppsByName(id);
 		break;
 	case '0':
@@ -1388,31 +1396,41 @@ void AppStore::AppsCreated() {
 
 void AppStore::SalesData() {
 
-	cout << "\n Choose Developer ID: ";
+	cout << "\n CHOOSE DEVELOPER ID OR 0 TO GO BACK: ";
 	int input;
+	char y;
 	cin >> input;
+	if(input == 0) return;
+cout << endl;
 
-	Developer *dev = findDeveloperByID(input);
+	try{
+		Developer *dev = findDeveloperByID(input);
 
-	for(unsigned int i = 0; i < transactions.size(); i++)
-	{
-		vector<App *> transApp = transactions[i]->getApps();
-
-		for(unsigned int i = 0; i < transApp.size(); i++)
-		{
-			if(dev == transApp[i]->getDeveloper())
+		for(unsigned int i = 0; i < transactions.size(); i++)
 			{
-				cout << transApp[i]->displayInfo() << endl;
-			}
-		}
-	}
-	char y = 'y';
-		cout << "\n Go Back? (y)";
-		cin >> y;
-		if (y == 'y') {
-			system("cls");
-		}
+				vector<App *> transApp = transactions[i]->getApps();
 
+				for(unsigned int i = 0; i < transApp.size(); i++)
+				{
+					if(dev == transApp[i]->getDeveloper())
+					{
+						cout << transApp[i]->displayInfo() << endl;
+					}
+				}
+			}
+	}
+	catch(DeveloperDoesNotExist &e)
+	{
+		cout << "\n Message: Specified Developer does not exist: " << e.getID() << ". Press y to go back.";
+		cin >> y;
+		return;
+	}
+
+
+
+	cout << " Press y to go back.";
+
+	cin >> y;
 }
 
 
@@ -1427,9 +1445,6 @@ void AppStore::AddDev() {
 			cout << " Insert the following information: " << endl << endl;
 			cout << "   1 - Individual Developer" << endl;
 			cout << "   2 - Enterprise" << endl;
-
-
-
 			char type;
 			cout << "\n Option: ";
 			cin >> type;
@@ -1439,13 +1454,13 @@ void AppStore::AddDev() {
 			case '1':
 				cout << "\n CREATING INDIVIDUAL DEVELOPER" << endl;
 				cout << " ---------------------------------------------------------" << endl;
-
 				cout << "\n Name: ";
-				cin >> name;
+				cin.get();
+				getline(cin,name);
 				cout << "\n Adress: ";
 				cin.get();
 				getline(cin,adress);
-				cout << endl << "\n NIF: ";
+				cout << "\n NIF: ";
 				cin >> nif;
 				Individual *ind;
 				ind = new Individual(name, adress, nif);
@@ -1456,15 +1471,16 @@ void AppStore::AddDev() {
 				cout << " ---------------------------------------------------------" << endl;
 
 				cout << "\n Name: ";
-				cin >> name;
-				cout << endl << "\n Adress: ";
 				cin.get();
+				getline(cin,name);
+				cout << endl << "\n Adress: ";
 				cin.get();
 				getline(cin,adress);
 				cout << endl << "\n NIF: ";
 				cin >> nif;
 				cout << endl << "\n Company Name: ";
-				cin >> company;
+				cin.get();
+				getline(cin,company);
 				cout << endl << "\n Code: ";
 				cin >> code;
 				Company *comp;
@@ -1475,29 +1491,20 @@ void AppStore::AddDev() {
 				system("cls");
 				AddDev();
 				break;
-
 			}
 
-			cout << "\n Developer " << name << " added successfully to the Appstore" << endl;
-			cout << endl;
-
-
-	char y = 'y';
-	cout << "\n Go Back? (y)";
-	cin >> y;
-	if (y == 'y') {
-		system("cls");
-		return;
-	}
+			cout << "\n Developer " << name << " added successfully to the Appstore. Press y to go back.";
+			char y; cin >> y;
 }
 
 
 void AppStore::RemoveDev() {
 
 	string input;
+	char y;
 		if(apps.empty()){
-			cout << "\n No Developers. Press any key to go back" <<endl;
-			cin.get();
+			cout << "\n No Developers. Press y to go back" <<endl;
+			cin >> y;
 			return;
 		}
 		for(unsigned int i=0; i<developers.size(); i++){
@@ -1510,20 +1517,18 @@ void AppStore::RemoveDev() {
 			return;
 		}
 
+		try{
 		Developer *dev = findDeveloperByID(atoi(input.c_str()));
 		removeDeveloper(dev);
-
-		cout << "\n Developer removed successfully from the Appstore" << endl;
-		cout << endl;
-		char y = 'y';
-			cout << "\n Go Back? (y)";
+		}catch(DeveloperDoesNotExist &e)
+		{
+			cout << "\n Specifier Developer does not exist: " << e.getID() << ". Press y to go back.";
 			cin >> y;
-			if (y == 'y') {
-				system("cls");
-				return;
-			}
+			return;
+		}
 
-
+		cout << "\n Developer removed successfully from the Appstore. Press y to go back." << endl;
+		cin >> y;
 }
 /////////////////////////
 //////SUB TRANS /////////
