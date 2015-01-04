@@ -352,6 +352,18 @@ public:
 	vector<App*> getDeveloperAppsForSale(int id);
 
 	/*
+	 * If vector has a pointer to an app with the specified ID, this function returns true, otherwise it returns false
+	 *
+	 * @param apps
+	 * 				vector of pointers to apps
+	 * @param id
+	 * 				id of app
+	 *
+	 * @return
+	 * 				boolean value
+	 */
+	bool isIDinAppVector(vector<App*> apps, int id);
+	/*
 	 * Returns vector of pointers to all the clients in the appstore
 	 *
 	 * @return
@@ -415,7 +427,10 @@ public:
 	 * Auxiliary function to loading functions, performs the linking between apps and developers
 	 */
 	void assignPublishedAppsToDevs();
-
+	/*
+	 * Auxiliary function to loading functions, performs the linking between transactions and clients
+	 */
+	void assignTransactionsToClients();
 	/*
 	 * Returns vector of pointers to all the transactions in the appstore
 	 *

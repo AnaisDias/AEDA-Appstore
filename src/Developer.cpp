@@ -188,7 +188,7 @@ string Developer::displayNameDev() {
 }
 
 void Individual::DevManagementMenu(AppStore* as){
-	string name, address, busName;
+	string name, address, busName, nifinput;
 	int nif;
 	App *app;
 	char choice;
@@ -231,7 +231,8 @@ void Individual::DevManagementMenu(AppStore* as){
 		case'3':
 			system("cls");
 			cout<< "\n Insert a new Nif: ";
-			cin >> nif;
+			cin >> nifinput;
+			nif = atoi(nifinput.c_str());
 			setNif(nif);
 			break;
 		case '4':
@@ -259,7 +260,7 @@ void Individual::DevManagementMenu(AppStore* as){
 }
 
 void Company::DevManagementMenu(AppStore* as){
-	string name, address, busName;
+	string name, address, busName, nifinput, codeinput;
 		int nif, code;
 		App *app;
 		char choice;
@@ -302,7 +303,8 @@ void Company::DevManagementMenu(AppStore* as){
 			case'3':
 				system("cls");
 				cout<< "\n Insert a new Nif: ";
-				cin >> nif;
+				cin >> nifinput;
+				nif=atoi(nifinput.c_str());
 				setNif(nif);
 				break;
 			case '4':
@@ -321,7 +323,8 @@ void Company::DevManagementMenu(AppStore* as){
 			case'6':
 				system("cls");
 				cout << "\n Insert new code: ";
-				cin >> code;
+				cin >> codeinput;
+				code = atoi(codeinput.c_str());
 				setCode(code);
 				break;
 			case'0':

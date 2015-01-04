@@ -16,6 +16,7 @@ int main(){
 	AppStr.loadTransactions();
 	AppStr.loadUsers();
 	AppStr.assignTransactionsToApps();
+	AppStr.assignTransactionsToClients();
 	system("cls");
 	InitialMenu(AppStr);
 
