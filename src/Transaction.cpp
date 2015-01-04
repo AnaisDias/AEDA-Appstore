@@ -1,10 +1,14 @@
-/*
- * Transaction.cpp
+ /*!
+ * \file Transaction.cpp
  *
- *  Created on: 18 de Out de 2014
- *      Author: Sofia
+ * \author FEUP AEDA1415
+ * \author Sofia Reis
+ * \author Anais Dias
+ * \author Joao Viana
+ *
+ * \date Janeiro 2015
+ *
  */
-
 #include "Transaction.h"
 #include <iostream>
 #include <sstream>

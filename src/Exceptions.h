@@ -1,11 +1,15 @@
-//exceptions ideas
+/*!
+ * \file Exceptions.h
+ *
+ * \author FEUP AEDA1415
+ * \author Sofia Reis
+ * \author Anais Dias
+ * \author Joao Viana
+ *
+ * \date Janeiro 2015
+ *
+ */
 
-//repeatedAppName
-//outOfRangeRating
-//clientDoesNotExist
-//appDoesNotExist
-//developerDoesNotExist
-//fileDoesNotExist (when loading appstore)
 #ifndef EXCEPTIONS_H_
 #define EXCEPTIONS_H_
 
@@ -15,11 +19,11 @@ using namespace std;
 
 class RepeatedAppName {
 public:
-	/*
+	/*!
 	 * App's Name
 	 */
 	string name;
-	/*
+	/*!
 	 * Constructs and initializes an exception to an App with a repeated name
 	 * @param n
 	 * 				name of the App
@@ -27,7 +31,7 @@ public:
 	RepeatedAppName(string n) {
 		name = n;
 	}
-	/*
+	/*!
 	 * Gets Name
 	 * @return name
 	 */
@@ -39,11 +43,11 @@ public:
 
 class RatingOutOfRange {
 public:
-	/*
+	/*!
 	 * Rating
 	 */
 	int rat;
-	/*
+	/*!
 	 * Constructs and initializes an exception to a rating out of range
 	 * @param r
 	 * 			App's rating
@@ -51,7 +55,7 @@ public:
 	RatingOutOfRange(int r) {
 		rat = r;
 	}
-	/*
+	/*!
 	 * Gets rating
 	 * @return rat
 	 */
@@ -62,11 +66,11 @@ public:
 
 class ClientDoesNotExist {
 public:
-	/*
+	/*!
 	 * Client's ID
 	 */
 	int id;
-	/*
+	/*!
 	 * Constructs and initializes an exception to a Client that does not exist
 	 * @param i
 	 * 			Client's ID
@@ -74,7 +78,7 @@ public:
 	ClientDoesNotExist(int i) {
 		id = i;
 	}
-	/*
+	/*!
 	 * Gets Client's ID
 	 * @return id
 	 */
@@ -85,11 +89,11 @@ public:
 
 class AppDoesNotExist {
 public:
-	/**
+	/*!
 	 * App's ID
 	 */
 	int id;
-	/*
+	/*!
 	 * Constructs and initializes an exception to an App that does not exist
 	 * @param i
 	 * 			App's ID
@@ -97,7 +101,7 @@ public:
 	AppDoesNotExist(int i) {
 		id = i;
 	}
-	/*
+	/*!
 	 * Gets App's ID
 	 * @return id
 	 */
@@ -108,11 +112,11 @@ public:
 
 class DeveloperDoesNotExist {
 public:
-	/*
+	/*!
 	 * Dev's ID
 	 */
 	int id;
-	/*
+	/*!
 	 * Constructs and initializes an exception to a Developer that does not exist
 	 * @param i
 	 * 			Developer's ID
@@ -120,7 +124,7 @@ public:
 	DeveloperDoesNotExist(int i) {
 		id = i;
 	}
-	/*
+	/*!
 	 * Gets Developer's ID
 	 * @return id
 	 */
@@ -131,18 +135,19 @@ public:
 
 class TransactionDoesNotExist {
 public:
-	/*
+	/*!
 	 * Transaction's ID
 	 */
 	int id;
-	/* Constructs and initializes an exception to a Transaction that does not exist
+	/*!
+	 *  Constructs and initializes an exception to a Transaction that does not exist
 	 * @param i
 	 * 			Transaction's ID
 	 */
 	TransactionDoesNotExist(int i) {
 		id = i;
 	}
-	/*
+	/*!
 	 * Gets Transaction's ID
 	 * @return id
 	 */
@@ -153,18 +158,19 @@ public:
 
 class FileDoesNotExist {
 public:
-	/*
+	/*!
 	 * File's name
 	 */
 	string name;
-	/* Constructs and initializes an exception to a file that does not exist
+	/*!
+	 * Constructs and initializes an exception to a file that does not exist
 	 * @param i
 	 * 			File's name
 	 */
 	FileDoesNotExist(string n) {
 		name = n;
 	}
-	/*
+	/*!
 	 * Gets File name
 	 * @return name
 	 */

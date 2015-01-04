@@ -1,8 +1,13 @@
-/*
- * Developer.h
+/*!
+ * \file Developer.h
  *
- *  Created on: 7 de Out de 2014
- *      Author: Sofia
+ * \author FEUP AEDA1415
+ * \author Sofia Reis
+ * \author Anais Dias
+ * \author Joao Viana
+ *
+ * \date Janeiro 2015
+ *
  */
 #ifndef DEVELOPER_H_
 #define DEVELOPER_H_
@@ -25,11 +30,11 @@ class Developer {
 	vector<App*> appsPublished;
 
 public:
-	/*
+	/*!
 	 * Constructs and initializes a Developer by default.
 	 */
 	Developer();
-	/*
+	/*!
 	 * Constructs and initializes a Developer with a specific name,
 	 * address and nif.
 	 *
@@ -41,22 +46,22 @@ public:
 	 * 				nif of the Developer
 	 */
 	Developer(string name, string address, int nif);
-	/*
+	/*!
 	 * Destructs and erases the members of the Developer.
 	 */
 	~Developer();
-	/*
+	/*!
 	 * Developer's type
 	 */
 	virtual int devtype() {
 	}
-	/*
+	/*!
 	 * Writes to .txt file
 	 * @param out
 	 * 			output
 	 */
 	virtual std::ostream & writeToFile(std::ostream &out);
-	/*
+	/*!
 	 * Developer's management menu
 	 * @param as
 	 * 			AppStore's pointer
@@ -64,75 +69,73 @@ public:
 	virtual void DevManagementMenu(AppStore* as) {
 	}
 
-	/////////////////////
-	/*
+	/*!
 	 * Gets the Developer's ID.
 	 *
 	 * @return id
 	 */
 	int getID() const;
-	/*
+	/*!
 	 * Gets the Developer's name.
 	 *
 	 * @return name
 	 */
 	string getName() const;
-	/*
+	/*!
 	 * Gets the Developer's address.
 	 *
 	 * @return address
 	 */
 	string getAddress() const;
-	/*
+	/*!
 	 * Gets the Developer's NIF.
 	 *
 	 * @return nif
 	 */
 	int getNif() const;
-	/*
+	/*!
 	 * Gets the Developer's Apps.
 	 *
 	 * @return appsPublished
 	 */
 	vector<App*> getApps() const;
 
-	/*
+	/*!
 	 * Sets the Dev's ID.
 	 *
 	 * @param id
 	 * 				the Dev's ID.
 	 */
 	void setID(int id);
-	/*
+	/*!
 	 * Sets the Dev's name.
 	 *
 	 * @param name
 	 * 				the Dev's name.
 	 */
 	void setName(string name);
-	/*
+	/*!
 	 * Sets the Dev's address.
 	 *
 	 * @param address
 	 * 				the Dev's address.
 	 */
 	void setAddress(string address);
-	/*
+	/*!
 	 * Sets the Dev's nif.
 	 *
 	 * @param nif
 	 * 				the Dev's nif.
 	 */
 	void setNif(int nif);
-	/*
+	/*!
 	 * Sets the Dev's apps.
 	 *
 	 * @param apps
 	 * 				the Dev's apps.
 	 */
 	void setApps(vector<App*> apps);
-	/////////////////////
-	/*
+	/*!
 	 * Adds Dev's earnings
 	 *
 	 * @param earn
@@ -142,41 +145,41 @@ public:
 		earnings += earn;
 	}
 	;
-	/*
+	/*!
 	 * Adds app
 	 *
 	 * @param app
 	 * 			app
 	 */
 	void addApp(App* app);
-	/*
+	/*!
 	 * Removes app
 	 *
 	 * @param app
 	 * 			app
 	 */
 	bool removeApp(App* app);
-	/*
+	/*!
 	 * Displays Dev's Info
 	 */
 	virtual string displayInfo();
-	/*
+	/*!
 	 * Display all of Devs' Sales
 	 */
 	void displayAllSales();
-	/*
+	/*!
 	 * == operator
 	 * @param dev
 	 * 			Developer
 	 */
 	bool operator==(const Developer &dev) const;
-	/*
+	/*!
 	 * Writes to .txt file
 	 * @param out
 	 * 			output
 	 */
 	std::ostream & operator<<(std::ostream &out);
-	/*
+	/*!
 	 * Displays Dev's Name
 	 */
 	string displayNameDev();

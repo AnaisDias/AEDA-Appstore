@@ -1,10 +1,14 @@
-/*
- * User.cpp
+/*!
+ * \file User.cpp
  *
- *  Created on: 30/12/2014
- *      Author: Sofia Reis
+ * \author FEUP AEDA1415
+ * \author Sofia Reis
+ * \author Anais Dias
+ * \author Joao Viana
+ *
+ * \date Janeiro 2015
+ *
  */
-
 #include "User.h"
 #include <sstream>
 

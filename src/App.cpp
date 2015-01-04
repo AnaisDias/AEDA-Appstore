@@ -1,3 +1,15 @@
+/*!
+ * \file App.cpp
+ *
+ * \author FEUP AEDA1415
+ * \author Sofia Reis
+ * \author Anais Dias
+ * \author Joao Viana
+ *
+ * \date Janeiro 2015
+ *
+ */
+
 #include <iostream>
 #include "App.h"
 #include "Exceptions.h"
@@ -36,10 +48,6 @@ void App::resetIDs(){
 	allIDs=0;
 }
 
-
-//////////////////////////////////////
-//          GETS & SETS             //
-//////////////////////////////////////
 
 int App::getID() const{
 	return id;

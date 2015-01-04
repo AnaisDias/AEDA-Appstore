@@ -1,10 +1,15 @@
-/*
- * Developer.cpp
- *
- *  Created on: 7 de Out de 2014
- *      Author: Sofia
- */
 
+ /*!
+ * \file Developer.cpp
+ *
+ * \author FEUP AEDA1415
+ * \author Sofia Reis
+ * \author Anais Dias
+ * \author Joao Viana
+ *
+ * \date Janeiro 2015
+ *
+ */
 #include "Developer.h"
 #include "AppStore.h"
 #include <iostream>

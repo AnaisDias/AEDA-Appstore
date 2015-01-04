@@ -1,3 +1,15 @@
+/*!
+ * \file Menu.cpp
+ *
+ * \author FEUP AEDA1415
+ * \author Sofia Reis
+ * \author Anais Dias
+ * \author Joao Viana
+ *
+ * \date Janeiro 2015
+ *
+ */
+
 #include "Menu.h"
 
 void Menu(AppStore as);
@@ -639,6 +651,7 @@ void Register(AppStore as)
 		}
 		cout << endl;
 		cout << " PASSWORD: ";
+		cin.get();
 		getline(cin,password);
 		if(password=="0"){
 			system("cls");
@@ -781,7 +794,8 @@ void LogInMenu(AppStore as)
 		cout << "\n LOG IN OR PRESS 0 TO GO BACK" << endl;
 		cout << " ---------------------------------------------------------" << endl;
 		cout << "\n USERNAME: ";
-		cin >> username;
+		cin.get();
+		getline(cin,username);
 		if(username=="0"){
 			system("cls");
 			InitialMenu(as);

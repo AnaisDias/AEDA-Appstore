@@ -3,6 +3,12 @@
 
 using namespace std;
 
+/**
+\mainpage AppStore
+
+Appstore it's an aplication where you can publish your apps and buy apps from another developers. This aplication was made for AEDA - Algoritmos e Estruturas de Dados.
+* @author Sofia Reis, Anais Dias e Joao Viana
+*/
 
 int main(){
 

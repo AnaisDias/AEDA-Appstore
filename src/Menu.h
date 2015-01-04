@@ -1,3 +1,15 @@
+/*!
+ * \file Menu.h
+ *
+ * \author FEUP AEDA1415
+ * \author Sofia Reis
+ * \author Anais Dias
+ * \author Joao Viana
+ *
+ * \date Janeiro 2015
+ *
+ */
+
 #ifndef SRC_MENU_H_
 #define SRC_MENU_H_
 
@@ -15,61 +27,61 @@
 using namespace std;
 class AppStore;
 
-/*
+/*!
  * AppStore's Menu
  * @param appstore
  * 			AppStore
  */
 void Menu(AppStore appstore);
-/*
+/*!
  * Apps Menu
  * @param appstore
  * 			AppStore
  */
 void AppsMenu(AppStore appstore);
-/*
+/*!
  * Clients Menu
  * @param appstore
  * 			AppStore
  */
 void ClientMenu(AppStore appstore);
-/*
+/*!
  * Developers Menu
  * @param appstore
  * 			AppStore
  */
 void DeveloperMenu(AppStore appstore);
-/*
+/*!
  * Transactions Menu
  * @param appstore
  * 			AppStore
  */
 void TransactionMenu(AppStore appstore);
-/*
+/*!
  * Exit Menu
  * @param appstore
  * 			AppStore
  */
 void ExitMenu(AppStore appstore);
-/*
+/*!
  * Save Menu
  * @param appstore
  * 			AppStore
  */
 void SaveMenu(AppStore appstore);
-/*
+/*!
  * Log in Menu
  * @param appstore
  * 			AppStore
  */
 void LogInMenu(AppStore as);
-/*
+/*!
  * Register Menu
  * @param appstore
  * 			AppStore
  */
 void Register(AppStore as);
-/*
+/*!
  * Initial Menu
  * @param appstore
  * 			AppStore

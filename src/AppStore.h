@@ -1,3 +1,15 @@
+/*!
+ * \file AppStore.h
+ *
+ * \author FEUP AEDA1415
+ * \author Sofia Reis
+ * \author Anais Dias
+ * \author Joao Viana
+ *
+ * \date Janeiro 2015
+ *
+ */
+
 #ifndef APPSTORE_H_
 #define APPSTORE_H_
 
@@ -48,6 +60,9 @@ struct AppCompare
 
 typedef std::priority_queue<App*, vector<App*>, AppCompare> appsPQ;
 
+/*!
+ * AppStore Class.
+ */
 class AppStore {
 	string name;
 	vector<App*> apps;
@@ -60,30 +75,30 @@ class AppStore {
 	User* loggedInUser;
 	appsPQ unacceptedApps;
 public:
-	/*
+	/*!
 	 * Constructs and initializes an AppStore by default.
 	 */
 	AppStore();
-	/*
+	/*!
 	 * Destructs and erases the members of an AppStore.
 	 */
 	~AppStore();
 
-	/*
+	/*!
 	 * Gets the name of the AppStore
 	 * @return name
 	 * 				name of the AppStore
 	 */
 	string getName();
 
-	/*
+	/*!
 	 * Sets the name of the AppStore
 	 * @param name
 	 * 				name of the AppStore
 	 */
 	void setName(string name);
 
-	/*
+	/*!
 	 * Adds a pointer to an app to the AppStore
 	 *
 	 * @param app
@@ -91,7 +106,7 @@ public:
 	 */
 	void addApp(App* app);
 
-	/*
+	/*!
 	 * Adds a pointer to a client to the AppStore
 	 *
 	 * @param cli
@@ -99,7 +114,7 @@ public:
 	 */
 	void addClient(Client* cli);
 
-	/*
+	/*!
 	 * Adds a pointer to a developer to the AppStore
 	 *
 	 * @param dev
@@ -107,7 +122,7 @@ public:
 	 */
 	void addDeveloper(Developer* dev);
 
-	/*
+	/*!
 	 * Adds a pointer to a user to the AppStore
 	 *
 	 * @param user
@@ -115,7 +130,7 @@ public:
 	 */
 	void addUser(User* user);
 
-	/*
+	/*!
 	 * Removes a pointer to an app from the apps vector in the AppStore, that stores all apps.
 	 *
 	 * @param app
@@ -124,7 +139,7 @@ public:
 	 */
 	bool removeApp(App* app);
 
-	/*
+	/*!
 	 * Removes a pointer to a client from the clients vector in the AppStore, that stores all clients.
 	 *
 	 * @param cli
@@ -133,7 +148,7 @@ public:
 	 */
 	bool removeClient(Client* cli);
 
-	/*
+	/*!
 	 * Removes a pointer to a developer from the developers vector in the AppStore, that stores all developers.
 	 *
 	 * @param dev
@@ -143,7 +158,7 @@ public:
 	bool removeDeveloper(Developer* dev);
 
 
-	/*
+	/*!
 	 * Adds a pointer to an app to the priority queue that stores apps that were not yet accepted
 	 *
 	 * @param app
@@ -151,13 +166,13 @@ public:
 	 */
 	void addToPQ(App *app);
 
-	/*
+	/*!
 	 * Pops the top app from the priority queue that stores apps that were not yet accepted
 	 *
 	 */
 	void removeFromPQ();
 
-	/*
+	/*!
 	 * Searches app which has the id passed as argument
 	 *
 	 * @param id
@@ -166,7 +181,7 @@ public:
 	 */
 	App* findAppByID(int id);
 
-	/*
+	/*!
 	 * Searches all apps which have the name passed as argument
 	 *
 	 * @param name
@@ -175,7 +190,7 @@ public:
 	 */
 	vector<App*> findAppsByName(string name);
 
-	/*
+	/*!
 	 * Searches all apps which have the type passed as argument
 	 *
 	 * @param type
@@ -184,14 +199,14 @@ public:
 	 */
 	vector<App*> findAppsByType(int type);
 
-	/*
+	/*!
 	 * Assembles a vector of the top ten apps, by going through the first ten apps in the binary search tree of the Appstore
 	 *
 	 * @return vector of pointers to the top ten apps
 	 */
 	vector<App*> topTenApps();
 
-	/*
+	/*!
 	 * Searches client which has the id passed as argument
 	 *
 	 * @param id
@@ -200,7 +215,7 @@ public:
 	 */
 	Client* findClientByID(int id);
 
-	/*
+	/*!
 	 * Searches developer which has the id passed as argument
 	 *
 	 * @param id
@@ -209,7 +224,7 @@ public:
 	 */
 	Developer* findDeveloperByID(int id);
 
-	/*
+	/*!
 	 * Searches transaction which has the id passed as argument
 	 *
 	 * @param id
@@ -218,7 +233,7 @@ public:
 	 */
 	Transaction* findTransactionByID(int id);
 
-	/*
+	/*!
 	 * Searches unaccepted app which has the id passed as argument in the priority queue
 	 *
 	 * @param id
@@ -227,7 +242,7 @@ public:
 	 */
 	App* findUnacceptedAppsByID(int id);
 
-	/*
+	/*!
 	 * Searches user which has the username passed as argument
 	 *
 	 * @param username
@@ -236,35 +251,35 @@ public:
 	 */
 	User* findUserByUsername(string username);
 
-	/*
+	/*!
 	 * Returns pointer to the currently logged in user
 	 *
 	 * @return pointer to user that is currently logged in
 	 */
 	User* getLoggedInUser() const;
 
-	/*
+	/*!
 	 * Sets the currently logged in user to the pointer passed as parameter
 	 *
 	 * @param pointer to user
 	 */
 	void setLoggedInUser(User* user);
 
-	/*
+	/*!
 	 * Returns all the apps in the appstore
 	 *
 	 * @return vector of pointers to all the apps
 	 */
 	vector<App*> getApps();
 
-	/*
+	/*!
 	 * Returns the appstore's binary search tree
 	 *
 	 * @return Appstore's binary search tree
 	 */
 	BST<App*> getAppTree();
 
-	/*
+	/*!
 	 * Sets all the apps in the appstore
 	 *
 	 * @param vector of pointers to all the apps
@@ -272,29 +287,29 @@ public:
 	void setApps(vector<App*> apps);
 
 
-	/*
+	/*!
 	 * Sets the appstore's binary search tree
 	 *
 	 * @param binary search tree
 	 */
 	void setAppTree(BST<App*> apps);
 
-	/*
+	/*!
 	 * Saves all the apps in the appstore to a txt file
 	 */
 	void saveApps();
 
-	/*
+	/*!
 	 * Loads all the apps to the appstore from a txt file
 	 */
 	void loadApps();
 
-	/*
+	/*!
 	 * Auxiliary function to loading functions, performs the linking between transactions and apps
 	 */
 	void assignTransactionsToApps();
 
-	/*
+	/*!
 	 * Removes pointer to app from hash table of apps that are not for sale and changes app's forSale value to true
 	 *
 	 * @param app
@@ -303,7 +318,7 @@ public:
 	 */
 	bool sellApp(App* app);
 
-	/*
+	/*!
 	 * Inserts pointer to app in hash table of apps that are not for sale and changes app's forSale value to false
 	 *
 	 * @param app
@@ -312,7 +327,7 @@ public:
 	 */
 	bool removeSaleApp(App* app);
 
-	/*
+	/*!
 	 * Returns vector of pointers to apps that are not for sale and that are published by the parameter developer
 	 *
 	 * @param dev
@@ -322,7 +337,7 @@ public:
 	 */
 	vector<App*> getUnsoldAppsByDeveloper(Developer *dev);
 
-	/*
+	/*!
 	 * Returns vector of pointers to all apps that are for sale
 	 *
 	 * @return
@@ -330,7 +345,7 @@ public:
 	 */
 	vector<App*> getAppsForSale();
 
-	/*
+	/*!
 	 * Returns vector of pointers to all apps that are for sale from the apps present in the parameter vector
 	 *
 	 * @param
@@ -341,7 +356,7 @@ public:
 	 */
 	vector<App*> getAppsForSaleFromVector(vector<App*> apps);
 
-	/*
+	/*!
 	 * Returns vector of pointers to apps that are not for sale and that are published by the developer with the parameter id
 	 *
 	 * @param id
@@ -351,7 +366,7 @@ public:
 	 */
 	vector<App*> getDeveloperAppsForSale(int id);
 
-	/*
+	/*!
 	 * If vector has a pointer to an app with the specified ID, this function returns true, otherwise it returns false
 	 *
 	 * @param apps
@@ -363,7 +378,7 @@ public:
 	 * 				boolean value
 	 */
 	bool isIDinAppVector(vector<App*> apps, int id);
-	/*
+	/*!
 	 * Returns vector of pointers to all the clients in the appstore
 	 *
 	 * @return
@@ -371,7 +386,7 @@ public:
 	 */
 	vector<Client*> getClients();
 
-	/*
+	/*!
 	 * Sets vector of pointers to all the clients in the appstore as the parameter passed
 	 *
 	 * @param
@@ -379,17 +394,17 @@ public:
 	 */
 	void setClients(vector<Client*> clients);
 
-	/*
+	/*!
 	 * Saves all the clients in the appstore to a txt file
 	 */
 	void saveClients();
 
-	/*
+	/*!
 	 * Loads all the clients to the appstore from a txt file
 	 */
 	void loadClients();
 
-	/*
+	/*!
 	 * Returns vector of pointers to all the developers in the appstore
 	 *
 	 * @return
@@ -397,7 +412,7 @@ public:
 	 */
 	vector<Developer*> getDevelopers();
 
-	/*
+	/*!
 	 * Sets vector of pointers to all the developers in the appstore as the parameter passed
 	 *
 	 * @param
@@ -405,33 +420,33 @@ public:
 	 */
 	void setDevelopers(vector<Developer*> developers);
 
-	/*
+	/*!
 	 * Saves all the developers in the appstore to a txt file
 	 */
 	void saveDevelopers();
-	/*
+	/*!
 	 * Loads all the developers to the appstore from a txt file
 	 */
 	void loadDevelopers();
 
-	/*
+	/*!
 	 * Saves all the users in the appstore to a txt file
 	 */
 	void saveUsers();
-	/*
+	/*!
 	 * Loads all the users to the appstore from a txt file
 	 */
 	void loadUsers();
 
-	/*
+	/*!
 	 * Auxiliary function to loading functions, performs the linking between apps and developers
 	 */
 	void assignPublishedAppsToDevs();
-	/*
+	/*!
 	 * Auxiliary function to loading functions, performs the linking between transactions and clients
 	 */
 	void assignTransactionsToClients();
-	/*
+	/*!
 	 * Returns vector of pointers to all the transactions in the appstore
 	 *
 	 * @return
@@ -439,7 +454,7 @@ public:
 	 */
 	vector<Transaction*> getTransactions();
 
-	/*
+	/*!
 	 * Sets vector of pointers to all the transactions in the appstore as the parameter passed
 	 *
 	 * @param
@@ -447,80 +462,75 @@ public:
 	 */
 	void setTransactions(vector<Transaction *> transactions);
 
-	/*
+	/*!
 	 * Saves all the transactions in the appstore to a txt file
 	 */
 	void saveTransactions();
 
-	/*
+	/*!
 	 * Loads all the transactions to the appstore from a txt file
 	 */
 	void loadTransactions();
 
-
-
-	///MENUS///
-
-	/*
+	/*!
 	 * Menu that displays individual developers
 	 */
 	void ShowIndivDev();
-	/*
+	/*!
 	 * Menu that displays company developers
 	 */
 	void ShowCompDev();
 	void ShowAppsByName(int id);
 
-	//APPS//
-	/*
+	/*!
 	 * Menu that displays the top ten apps in the appstore
 	 */
 	void top10Apps();
-	/*
+	/*!
 	 * Menu that displays apps listed by name
 	 */
 	void AppsListName();
 
-	/*
+	/*!
 	 * Menu that displays apps listed by type
 	 */
 	void AppsListType();
 
-	/*
+	/*!
 	 * Menu that displays all apps
 	 */
 	void AllAppsList();
 
-	/*
+	/*!
 	 * Menu that displays all apps not for sale
 	 */
 	void AppsNotForSaleList();
 
-	/*
+	/*!
 	 * Menu that allows the rating of apps
 	 */
 	void RateApps();
 
-	/*
+	/*!
 	 * Menu that allows the addition of a new app
 	 */
 	App* AddApplicationMenu();
 
-	/*
+	/*!
 	 * Menu that allows the removal of an app
 	 */
 	void RemoveApplicationMenu();
 
-	/*
+	/*!
 	 * Menu that allows the removal of the sale of an app
 	 */
 	void RemoveSaleMenu();
 
-	/*
+	/*!
 	 * Menu that allows the activation of the sale of an app
 	 */
 	void StartSaleMenu();
-	/*
+	/*!
 	 * Menu that allows the management of an app
 	 *
 	 * @param app
@@ -528,39 +538,37 @@ public:
 	 */
 	void AppManagementMenu(App* app);
 
-	/*
+	/*!
 	 * Menu that allows the addition of a new developer
 	 */
 	void addDeveloperMenu();
 
-	/*
+	/*!
 	 * Menu that allows the approval of an app
 	 */
 	void ApproveNewApps();
 
-	//CLIENT//
-
-	/*
+	/*!
 	 * Menu that displays all clients
 	 */
 	void ClientsList();
 
-	/*
+	/*!
 	 * Menu that displays the apps purchased by a given client
 	 */
 	void PurchasedApps();
 
-	/*
+	/*!
 	 * Menu that allows the addition of a new client
 	 */
 	void AddClients();
 
-	/*
+	/*!
 	 * Menu that allows the removal of a client
 	 */
 	void RemoveClients();
 
-	/*
+	/*!
 	 * Menu that allows the management of a client
 	 *
 	 * @param client
@@ -568,64 +576,59 @@ public:
 	 */
 	void ClientManagementMenu(Client* client);
 
-	/*
+	/*!
 	 * Menu that allows the purchase of apps by a given client
 	 */
 	void BuyApp(Client* cli);
 
-
-	//DEV//
-
-	/*
+	/*!
 	 * Menu that displays all individual developers
 	 */
 	void IndividualDevList();
 
-	/*
+	/*!
 	 * Menu that displays all company developers
 	 */
 	void EnterpriseList();
 
-	/*
+	/*!
 	 * Menu that displays the apps created by a given developer
 	 */
 	void AppsCreated();
 
-	/*
+	/*!
 	 * Menu that displays the sales of the apps created by a given developer
 	 */
 	void SalesData();
 
-	/*
+	/*!
 	 * Menu that allows the addition of a new developer
 	 */
 	void AddDev();
 
-	/*
+	/*!
 	 * Menu that allows the removal of a developer
 	 */
 	void RemoveDev();
 
-	/*
+	/*!
 	 * Menu that displays all developers
 	 */
 	void ShowAllDev();
 
-
-	//TRANSACTIONS//
-	/*
+	/*!
 	 * Menu that displays all transactions of a given app
 	 */
 	void TransApps();
-	/*
+	/*!
 	 * Menu that displays all transactions of a given client
 	 */
 	void TransClients();
-	/*
+	/*!
 	 * Menu that displays all transactions of a given developer
 	 */
 	void TransDev();
-	/*
+	/*!
 	 * Menu that displays all transactions
 	 */
 	void ShowAllTransactions();

@@ -1,5 +1,14 @@
-// -*- Mode: c++; --*-
-
+/*!
+ * \file BST.h
+ *
+ * \author FEUP AEDA1415
+ * \author Sofia Reis
+ * \author Anais Dias
+ * \author Joao Viana
+ *
+ * \date Janeiro 2015
+ *
+ */
 #ifndef _BST_H_
 #define _BST_H_
 
@@ -80,8 +89,6 @@ class BST
   friend class BSTItrPost<Comparable>;
   friend class BSTItrLevel<Comparable>;
 };
-
-// Note that all "matching" is based on the < method.
 
 template <class Comparable>
 BST<Comparable>::BST( const Comparable & notFound ) :
