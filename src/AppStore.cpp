@@ -322,22 +322,18 @@ void AppStore::AppsListName() {
 	vector<App*> appsN;
 
 	cout << "\n Enter app name: ";
-	cin >> input;
+	cin.get();
+	getline(cin,name);
 
 	appsN=findAppsByName(input);
+
 	system("cls");
 	cout << "\n Apps List By NAME: " << endl;
+	cout << " ---------------------------------------------------------" << endl;
 
 	if(appsN.empty()) {
 		cout << "\n No apps with the requested name. Press any key to go back" <<endl;
-		cout << endl;
-		char y = 'y';
-		cout << "\n Go Back? (y)";
-		cin >> y;
-		if (y == 'y') {
-			system("cls");
-			return;
-		}
+		cin.get();
 	}
 	else{
 		for(unsigned int i=0; i<appsN.size();i++){
@@ -491,7 +487,7 @@ void AppStore::RateApps() {
 	cout << endl;
 
 	if(apps.empty()){
-		cout << "\n No apps. Press any key to go back" <<endl;
+		cout << "\n Message: No apps. Press any key to go back" <<endl;
 		cin.get();
 		cin.get();
 	}
@@ -815,7 +811,7 @@ void AppStore::AppManagementMenu(App* app){
 			app->addRating(rating);
 			appTree.remove(app);
 			appTree.insert(app);
-			cout << endl << "Rating added: " << rating << endl;
+			cout << endl << " Rating added: " << rating << endl;
 			break;
 		case '5':
 			removeApp(app);
@@ -831,14 +827,10 @@ void AppStore::AppManagementMenu(App* app){
 			break;
 		}
 		cout << endl;
-		char y = 'y';
-		cout << "\n Go Back? (y)";
-		cin >> y;
-		if (y == 'y') {
-			system("cls");
-			return;
-		}}
-
+		cout << " Press any key to leave.";
+		cin.get();
+		cin.get();
+	}
 	else if(this->getLoggedInUser()->getType()==2){
 		system("cls");
 		cout << "\n APP MENU: ID=" << app->getID() << endl;

@@ -53,7 +53,8 @@ void AppsMenu(AppStore as) {
 		break;
 	case '5':
 		system("cls");
-		as.RateApps();system("cls");
+		as.RateApps();
+		system("cls");
 		AppsMenu(as);
 		break;
 	case '6':
@@ -661,14 +662,17 @@ void Register(AppStore as)
 		}
 		else if(type!="developer"&&type!="client"){
 			system("cls");
-			cout << " Message: Invalid type!" << endl;
+			cout << " Message: Invalid type! Press any key to leave." << endl;
+			cin.get();
 			Register(as);
 			return;
 		}
 
 		if(as.findUserByUsername(username)!=NULL){
 			system("cls");
-			cout << " Message: Username already taken, choose a different one";
+			cout << " Message: Username already taken, choose a different one. Press any key to leave.";
+			cin.get();
+			cin.get();
 			Register(as);
 			return;
 		}
@@ -693,7 +697,8 @@ void Register(AppStore as)
 					cout << " ---------------------------------------------------------" << endl;
 
 					cout << "\n Name: ";
-					cin >> name;
+					cin.get();
+					getline(cin,name);
 					cout << "\n Adress: ";
 					cin.get();
 					getline(cin,address);
@@ -707,7 +712,8 @@ void Register(AppStore as)
 					as.saveUsers();
 					as.saveDevelopers();
 					system("cls");
-					cout << " Message: Registration successful!" << endl;
+					cout << " Message: Registration successful! Press any key to leave." << endl;
+					cin.get();
 					InitialMenu(as);
 					break;
 				case '2':
@@ -762,7 +768,8 @@ void Register(AppStore as)
 				user2 = new User(2,username,password,cli->getID());
 				as.addUser(user2);
 				system("cls");
-				cout << " Message: Registration successful!" << endl;
+				cout << " Message: Registration successful! Press any ke" << endl;
+				cin.get();
 				as.saveUsers();
 				as.saveClients();
 				InitialMenu(as);
@@ -854,7 +861,8 @@ void InitialMenu(AppStore as)
 }
 
 void Menu(AppStore as) {
-    AppStore store = AppStore();
+
+	AppStore store = AppStore();
 
     char choice;
 
@@ -870,29 +878,34 @@ void Menu(AppStore as) {
 
     switch (choice) {
 
-        case '1':	system("cls");
-            	AppsMenu(as);
-            	Menu(as);
-            	break;
+    case '1':
+    	system("cls");
+    	AppsMenu(as);
+    	Menu(as);
+    	break;
 
-        case '2':	system("cls");
-        		ClientMenu(as);
-        		Menu(as);
-        		break;
+    case '2':
+    	system("cls");
+    	ClientMenu(as);
+    	Menu(as);
+    	break;
 
-        case '3': system("cls");
-            	DeveloperMenu(as);
-            	Menu(as);
-            	break;
+    case '3':
+    	system("cls");
+    	DeveloperMenu(as);
+    	Menu(as);
+    	break;
 
-        case '4': system("cls");
-        		TransactionMenu(as);
-        		Menu(as);
-        		break;
+    case '4':
+    	system("cls");
+    	TransactionMenu(as);
+    	Menu(as);
+    	break;
 
-        case '0':	system("cls");
-            	ExitMenu(as);
-            	break;
+    case '0':
+    	system("cls");
+    	ExitMenu(as);
+    	break;
 
         default:
         	system("cls");
