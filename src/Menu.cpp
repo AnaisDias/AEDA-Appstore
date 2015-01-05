@@ -692,7 +692,7 @@ void Register(AppStore as)
 				cout << "   2 - Enterprise" << endl;
 
 				char type;
-				string name, address, company;
+				string name, address, company, nifinput, codeinput;
 				int nif, code;
 				cout << "\n Option: ";
 				cin >> type;
@@ -710,7 +710,8 @@ void Register(AppStore as)
 					cin.get();
 					getline(cin,address);
 					cout << endl << "\n NIF: ";
-					cin >> nif;
+					cin >> nifinput;
+					nif=atoi(nifinput.c_str());
 					Individual *ind;
 					ind = new Individual(name, address, nif);
 					as.addDeveloper(ind);
@@ -737,7 +738,8 @@ void Register(AppStore as)
 					cout << endl << "\n Company Name: ";
 					cin >> company;
 					cout << endl << "\n Code: ";
-					cin >> code;
+					cin >> codeinput;
+					code = atoi(codeinput.c_str());
 					Company *comp;
 					comp = new Company(company, code, name, address, nif);
 					as.addDeveloper(comp);
@@ -757,7 +759,7 @@ void Register(AppStore as)
 				}
 			}
 			else if(type=="client"){
-				string name;
+				string name, ageinput;
 				int age;
 				cout << "\n NEW CLIENT" << endl;
 				cout << " ---------------------------------------------------------" << endl;
@@ -768,7 +770,8 @@ void Register(AppStore as)
 				getline(cin, name);
 				cout << endl;
 				cout << " Age: ";
-				cin >> age;
+				cin >> ageinput;
+				age=atoi(ageinput.c_str());
 
 				Client *cli = new Client(name, age);
 				as.addClient(cli);
